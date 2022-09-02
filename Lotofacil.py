@@ -2,24 +2,25 @@
 Classe da Lotofacil
 """
 
-from random import randrange
+import secrets
 
 
 class Lotofacil:
 
-    def __init__(self, *args, dezenas=15):
+    def __init__(self, *args):
         """
         Cria um objeto do tipo Lotofacil.
         :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas padrao (15)
-        :param dezenas: Quantidade de dezenas da aposta (15-18)
         """
-        self.__dezenas = dezenas
-        if len(args) == 0:
+        self.__dezenas = len(args)
+        if self.__dezenas == 0:
+            self.__dezenas = 15
             self.__jogo = self.__surpresinha()
         elif len(args) < 15 or len(args) > 18:
-            raise ValueError('Os parametros de jogo devem ser inteiros entre 1 e 25')
+            raise ValueError('Os parametros de jogo devem ser inteiros entre 1 e 25, de 15 a 18 dezenas')
         else:
             self.__jogo = set(args)
+            self.__dezenas = len(args)
 
     def __repr__(self):
         l_exib = list(self.__jogo)
@@ -39,8 +40,7 @@ class Lotofacil:
         """
         retorno = set()
         while len(retorno) < self.__dezenas:
-            # resultado.add(secrets.choice(range(1, 61)))
-            retorno.add(randrange(1, 26, 1))
+            retorno.add(secrets.choice(range(1, 26, 1)))
         return set(retorno)
 
     @property
@@ -50,3 +50,5 @@ class Lotofacil:
 
 if __name__ == '__main__':
     print('Essa classe deve ser apenas instanciada internamente.')
+
+

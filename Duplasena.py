@@ -2,7 +2,7 @@
 Classe da Dupla Sena - Sao dois sorteios por jogo
 """
 
-from random import randrange
+import secrets
 
 
 class Duplasena:
@@ -40,7 +40,7 @@ class Duplasena:
         retorno = set()
         while len(retorno) < self.__dezenas:
             # resultado.add(secrets.choice(range(1, 51)))
-            retorno.add(randrange(1, 51, 1))
+            retorno.add(secrets.choice(range(1, 51, 1)))
         return set(retorno)
 
     @property

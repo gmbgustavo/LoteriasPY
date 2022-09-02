@@ -2,8 +2,7 @@
 Classe da Mega-Sena
 """
 
-from random import randrange
-
+import secrets
 
 class Megasena:
 
@@ -40,7 +39,7 @@ class Megasena:
         retorno = set()
         while len(retorno) < self.__dezenas:
             # resultado.add(secrets.choice(range(1, 61)))
-            retorno.add(randrange(1, 61, 1))
+            retorno.add(secrets.choice(range(1, 61, 1)))
         return set(retorno)
 
     @property

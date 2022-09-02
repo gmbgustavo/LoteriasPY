@@ -2,7 +2,7 @@
 Classe da Lotomania
 """
 
-from random import randrange
+import secrets
 
 
 class Lotomania:
@@ -38,7 +38,7 @@ class Lotomania:
         """
         retorno = set()
         while len(retorno) < self.__dezenas:
-            retorno.add(randrange(1, 101, 1))
+            retorno.add(secrets.choice(range(1, 101, 1)))
         return set(retorno)
 
     @property

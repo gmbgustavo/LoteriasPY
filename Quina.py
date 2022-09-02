@@ -2,7 +2,7 @@
 Classe da Quina
 """
 
-from random import randrange
+import secrets
 
 
 class Quina:
@@ -39,8 +39,7 @@ class Quina:
         """
         retorno = set()
         while len(retorno) < self.__dezenas:
-            # resultado.add(secrets.choice(range(1, 61)))
-            retorno.add(randrange(1, 81, 1))
+            retorno.add(secrets.choice(range(1, 81, 1)))
         return set(retorno)
 
     @property

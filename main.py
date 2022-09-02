@@ -9,16 +9,16 @@ from Lotofacil import Lotofacil
 from Lotomania import Lotomania
 from Diadesorte import Diadesorte
 import Sorteio
-from time import time
 import sys
 # import tela_principal
 
 
 if __name__ == '__main__':
     parametros = sys.argv
-    aposta1 = Megasena()   # Cria uma nova aposta (se vazio faz surpresinha)
+    aposta1 = Lotofacil(1, 3, 4, 6, 7, 8, 10, 11, 13, 15, 17, 19, 22, 23, 24, 25)   # (se vazio surpresinha)
     concursos = 1                                        # Quantidade de concursos, comecando com o primeiro
-    print(f'Sua aposta1: {aposta1}')                     # Apresenta a aposta ao usuario
+    print(f'Sua aposta: {aposta1}')                     # Apresenta a aposta ao usuario
+    print(f'Quantidade de dezenas: {len(aposta1)}')
     concurso_loteria = Sorteio.Sorteio(aposta1)          # Cria um objeto do tipo sorteio
     resultado_loteria = concurso_loteria.resultado       # Executa o sorteio e armazena na variavel
 
@@ -27,6 +27,6 @@ if __name__ == '__main__':
         concursos += 1                                      # Controla o numero de concursos
         print(f'\rConcursos {concursos:,}', end='')
 
-    print(f'\n\nForam necessarios {concursos:,} concursos. ')
-#   print(f'Media de tempo a cada 50 mil calculos foi de {round(tempo_medio_final, 2)} segundos')
+    print('\n_______________________________________________________')
+    print(f'Foram necessarios {concursos:,} concursos. ')
     print(f'Numeros sorteados: {resultado_loteria}')

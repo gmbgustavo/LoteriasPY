@@ -7,7 +7,6 @@ from Lotofacil import Lotofacil
 from Lotomania import Lotomania
 from Duplasena import Duplasena
 from Diadesorte import Diadesorte
-from random import randrange
 import secrets
 
 
@@ -36,26 +35,26 @@ class Sorteio:
     def __quina(self) -> set:
         self.__resultado.clear()
         while len(self.__resultado) < self.QUINA:
-            self.__resultado.add(randrange(1, 81, 1))
+            self.__resultado.add(secrets.choice(range(1, 81, 1)))
         return self.__resultado
 
     def __lotofacil(self) -> set:
         self.__resultado.clear()
         while len(self.__resultado) < self.LOTOFACIL:
-            self.__resultado.add(randrange(1, 26, 1))
+            self.__resultado.add(secrets.choice(range(1, 26, 1)))
         return self.__resultado
 
     def __diadesorte(self) -> set:
         self.__resultado.clear()
         while len(self.__resultado) < self.DIADESORTE:
-            self.__resultado.add(randrange(1, 32, 1))
-        self.__resultado.add(str(self.MESES)[randrange(0, 12, 1)])
+            self.__resultado.add(secrets.choice(range(1, 32, 1)))
+        self.__resultado.add(str(self.MESES)[secrets.choice(range(0, 12, 1))])
         return self.__resultado
 
     def __lotomania(self) -> set:
         self.__resultado.clear()
         while len(self.__resultado) < self.LOTOMANIA:
-            self.__resultado.add(randrange(1, 101, 1))
+            self.__resultado.add(secrets.choice(range(1, 101, 1)))
         return self.__resultado
 
     def __duplasena(self) -> set:
@@ -67,10 +66,10 @@ class Sorteio:
         self.__res_duplasena1.clear()
         self.__res_duplasena2.clear()
         while len(self.__res_duplasena1) < self.DUPLASENA:     # Primeiro sorteio
-            self.__res_duplasena1.add(randrange(1, 51, 1))
+            self.__res_duplasena1.add(secrets.choice(range(1, 51, 1)))
 
         while len(self.__res_duplasena2) < self.DUPLASENA:     # Segundo sorteio
-            self.__res_duplasena2.add(randrange(1, 51, 1))
+            self.__res_duplasena2.add(secrets.choice(range(1, 51, 1)))
 
         for i in self.__res_duplasena1:
             self.__resultado.add(i)           # Adiciona o primeiro sorteio ao set

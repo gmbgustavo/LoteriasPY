@@ -3,7 +3,7 @@ Classe do Dia de sorte - 7 numeros de 1 a 31 e um mes
 """
 
 
-from random import randrange
+import secrets
 
 
 class Diadesorte:
@@ -44,8 +44,8 @@ class Diadesorte:
         """
         retorno = set()
         while len(retorno) < self.__dezenas:
-            retorno.add(randrange(1, 32, 1))
-        retorno.add(self.__MESES[randrange(0, 12, 1)])
+            retorno.add(secrets.choice(range(1, 32, 1)))
+        retorno.add(self.__MESES[secrets.choice(range(0, 12, 1))])
         return set(retorno)
 
     @property
