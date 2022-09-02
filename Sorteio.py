@@ -8,6 +8,7 @@ from Lotomania import Lotomania
 from Duplasena import Duplasena
 from Diadesorte import Diadesorte
 from random import randrange
+import secrets
 
 
 class Sorteio:
@@ -29,8 +30,7 @@ class Sorteio:
     def __megasena(self) -> set:
         self.__resultado.clear()
         while len(self.__resultado) < self.SENA:
-            # resultado.add(secrets.choice(range(1, 61)))
-            self.__resultado.add(randrange(1, 61, 1))
+            self.__resultado.add(secrets.choice(range(1, 61)))
         return self.__resultado
 
     def __quina(self) -> set:

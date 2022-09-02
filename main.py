@@ -16,7 +16,7 @@ import sys
 
 if __name__ == '__main__':
     parametros = sys.argv
-    aposta1 = Lotofacil()   # Cria uma nova aposta (se vazio faz surpresinha)
+    aposta1 = Megasena()   # Cria uma nova aposta (se vazio faz surpresinha)
     concursos = 1                                        # Quantidade de concursos, comecando com o primeiro
     print(f'Sua aposta1: {aposta1}')                     # Apresenta a aposta ao usuario
     concurso_loteria = Sorteio.Sorteio(aposta1)          # Cria um objeto do tipo sorteio
