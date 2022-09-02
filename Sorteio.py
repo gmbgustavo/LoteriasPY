@@ -20,7 +20,7 @@ class Sorteio:
     DIADESORTE = 8
     MESES = ('jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez')
 
-    def __init__(self, modalidade):
+    def __init__(self, modalidade, *args, **kwargs):
         self.__modalidade = modalidade
         self.__resultado = set()
         self.__res_duplasena1 = set()
