@@ -4,6 +4,7 @@ Classe da Mega-Sena
 
 import secrets
 
+
 class Megasena:
 
     def __init__(self, *args, dezenas=6):
