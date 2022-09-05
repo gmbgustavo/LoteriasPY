@@ -68,14 +68,10 @@ class Gerador:
     def __len__(self):
         return self.__dezenas
 
-    @property
-    def jogo(self):
-        return set(self.__jogo)
-
 
 if __name__ == '__main__':
     jogo = Gerador(modalidade='Lotofacil',
-                   dezenas=16,
+                   dezenas=15,
                    fixados=[2, 5, 9, 12, 14, 18, 21],
                    quantidade=5)
     print(f'Tamanho do jogo {len(jogo)}')

@@ -34,10 +34,14 @@ class Lotofacil:
         Retorna um conjunto(set) com numeros inteiros entre 1 e 25
         :return: set
         """
-        retorno = fixos
+        retorno = set(fixos)
         while len(retorno) < self.__dezenas:
             retorno.add(secrets.choice(range(1, 26, 1)))
         return set(retorno)
+
+    @property
+    def jogo(self):
+        return set(self.__jogo)
 
 
 if __name__ == '__main__':
