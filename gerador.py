@@ -26,6 +26,7 @@ class Gerador:
         :param modalidade: Nome do jogo em string
         :param dezenas: quantidade de dezenas para apostar (observar minimos e maximos)
         :param fixados: dezenas que obrigatoriamente estarao no jogo
+        :param quantidade: numero de apostas para gerar
         """
         self.__jogo = set()
         self.__modalidade = modalidade
@@ -45,11 +46,9 @@ class Gerador:
             pass
         elif self.__modalidade == 'Lotofacil':
             for i in range(1, self.__quantidade + 1):
-                self.__jogo.clear()
-                self.__jogo = set(self.__fixados)
-                while len(self.__jogo) < LOTOFACIL:
-                    self.__jogo.add(secrets.choice(range(1, 26, 1)))
-                self.__sugestoes.append(list(self.__jogo))
+                lf = Lotofacil(*self.__fixados, dezenas=self.__dezenas)
+                self.__sugestoes.append(list(lf.jogo))
+                del lf
         elif self.__modalidade == 'Duplasena':
             pass
 
