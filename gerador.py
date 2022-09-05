@@ -21,12 +21,18 @@ MESES = ('jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', '
 
 class Gerador:
 
-    def __init__(self, modalidade: str, dezenas: int, fixados: list):
+    def __init__(self, modalidade: str, dezenas: int, fixados: list, quantidade=1):
+        """
+        :param modalidade: Nome do jogo em string
+        :param dezenas: quantidade de dezenas para apostar (observar minimos e maximos)
+        :param fixados: dezenas que obrigatoriamente estarao no jogo
+        """
         self.__jogo = set()
-        self.__jogo.clear()
         self.__modalidade = modalidade
         self.__fixados = set(fixados)
         self.__dezenas = dezenas
+        self.__quantidade = quantidade
+        self.__sugestoes = []
 
     def gerajogo(self):
         if self.__modalidade == 'Quina':
@@ -38,25 +44,41 @@ class Gerador:
         elif self.__modalidade == 'Lotomania':
             pass
         elif self.__modalidade == 'Lotofacil':
-            print('Modalidade = Lotofacil')
-            self.__jogo = set(self.__fixados)
-            while len(self.__jogo) < LOTOFACIL:
-                self.__jogo.add(secrets.choice(range(1, 26, 1)))
-            return self.__jogo
+            for i in range(1, self.__quantidade + 1):
+                self.__jogo.clear()
+                self.__jogo = set(self.__fixados)
+                while len(self.__jogo) < LOTOFACIL:
+                    self.__jogo.add(secrets.choice(range(1, 26, 1)))
+                self.__sugestoes.append(list(self.__jogo))
         elif self.__modalidade == 'Duplasena':
             pass
 
+    def sugestoes(self):
+        for aposta in self.__sugestoes:
+            for dezena in aposta:
+                print(f'{str(dezena).zfill(2)} ', end='')
+            print('\n')
+        return None
+
     def __repr__(self):
-        l_exib = list(self.__jogo)
+        l_exib = self.__sugestoes
         l_exib.sort()
         return str(l_exib)
 
     def __len__(self):
         return self.__dezenas
 
+    @property
+    def jogo(self):
+        return set(self.__jogo)
+
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Lotofacil', dezenas=15, fixados=[])
-    jogo.gerajogo()
-    print(jogo)
+    jogo = Gerador(modalidade='Lotofacil',
+                   dezenas=16,
+                   fixados=[2, 5, 9, 12, 14, 18, 21],
+                   quantidade=5)
     print(f'Tamanho do jogo {len(jogo)}')
+    jogo.gerajogo()
+    jogo.sugestoes()
+
