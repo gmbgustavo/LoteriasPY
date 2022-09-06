@@ -41,19 +41,29 @@ class Gerador:
                 lf = Quina(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
         elif self.__modalidade == 'Duplasena':
-            pass
+            for i in range(1, self.__quantidade + 1):
+                lf = Duplasena(*self.__fixados, dezenas=self.__dezenas)
+                self.__sugestoes.append(list(lf.jogo))
         elif self.__modalidade == 'Megasena':
-            pass
+            for i in range(1, self.__quantidade + 1):
+                lf = Megasena(*self.__fixados, dezenas=self.__dezenas)
+                self.__sugestoes.append(list(lf.jogo))
         elif self.__modalidade == 'Diadesorte':
-            pass
+            for i in range(1, self.__quantidade + 1):
+                lf = Diadesorte(*self.__fixados, dezenas=self.__dezenas)
+                self.__sugestoes.append(list(lf.jogo))
         elif self.__modalidade == 'Lotomania':
-            pass
+            for i in range(1, self.__quantidade + 1):
+                lf = Lotomania(*self.__fixados)
+                self.__sugestoes.append(list(lf.jogo))
         elif self.__modalidade == 'Lotofacil':
             for i in range(1, self.__quantidade + 1):
                 lf = Lotofacil(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
         elif self.__modalidade == 'Duplasena':
-            pass
+            for i in range(1, self.__quantidade + 1):
+                lf = Duplasena(*self.__fixados, dezenas=self.__dezenas)
+                self.__sugestoes.append(list(lf.jogo))
         return self.__sugestoes
 
     def sugestoes(self):
@@ -73,9 +83,9 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Quina',
-                   dezenas=5,
-                   fixados=[2, 5, 9],
+    jogo = Gerador(modalidade='Lotofacil',
+                   dezenas=15,
+                   fixados=[5, 9, 18],
                    quantidade=5)
     print(f'Tamanho do jogo {len(jogo)}')
     jogo.gerajogo()
