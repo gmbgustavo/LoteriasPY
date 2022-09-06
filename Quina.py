@@ -16,10 +16,10 @@ class Quina:
         self.__dezenas = dezenas
         if len(args) == 0:
             self.__jogo = self.__surpresinha()
-        elif len(args) < 5 or len(args) > 15:
+        elif len(args) > 15:
             raise AttributeError('Os parametros de jogo devem ser inteiros entre 5 e 15')
         else:
-            self.__jogo = set(args)
+            self.__jogo = self.__surpresinha(set(args))
 
     def __repr__(self):
         l_exib = list(self.__jogo)
@@ -32,12 +32,12 @@ class Quina:
     def __len__(self):
         return self.__dezenas
 
-    def __surpresinha(self):
+    def __surpresinha(self, fixos=()):
         """
         Retorna um conjunto(set) com numeros inteiros entre 1 e 60
         :return: set
         """
-        retorno = set()
+        retorno = set(fixos)
         while len(retorno) < self.__dezenas:
             retorno.add(secrets.choice(range(1, 81, 1)))
         return set(retorno)

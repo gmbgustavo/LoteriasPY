@@ -17,6 +17,8 @@ class Lotofacil:
             self.__jogo = self.__surpresinha()
         elif len(args) < 15:
             self.__jogo = self.__surpresinha(set(args))
+        elif len(args) > 20:
+            raise AttributeError('Máximo 20 parametros.')
 
     def __repr__(self):
         l_exib = list(self.__jogo)

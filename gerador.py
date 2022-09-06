@@ -37,6 +37,10 @@ class Gerador:
 
     def gerajogo(self):
         if self.__modalidade == 'Quina':
+            for i in range(1, self.__quantidade + 1):
+                lf = Quina(*self.__fixados, dezenas=self.__dezenas)
+                self.__sugestoes.append(list(lf.jogo))
+        elif self.__modalidade == 'Duplasena':
             pass
         elif self.__modalidade == 'Megasena':
             pass
@@ -48,9 +52,9 @@ class Gerador:
             for i in range(1, self.__quantidade + 1):
                 lf = Lotofacil(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
-                del lf
         elif self.__modalidade == 'Duplasena':
             pass
+        return self.__sugestoes
 
     def sugestoes(self):
         for aposta in self.__sugestoes:
@@ -69,9 +73,9 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Lotofacil',
-                   dezenas=15,
-                   fixados=[2, 5, 9, 12, 14, 18, 21],
+    jogo = Gerador(modalidade='Quina',
+                   dezenas=5,
+                   fixados=[2, 5, 9],
                    quantidade=5)
     print(f'Tamanho do jogo {len(jogo)}')
     jogo.gerajogo()
