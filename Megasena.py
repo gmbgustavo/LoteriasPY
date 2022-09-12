@@ -4,6 +4,9 @@ Classe da Mega-Sena
 
 import secrets
 
+MAXBET = 15
+RANGEBET = range(1, 61)
+
 
 class Megasena:
 
@@ -13,11 +16,14 @@ class Megasena:
         :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas(padrao=6)
         :param dezenas: Quantidade de dezenas da aposta (6-15)
         """
+        assert len(args) <= MAXBET
         self.__dezenas = dezenas
-        if len(args) > 15:
-            raise AttributeError('Aposta máxima 15 dezenas.')
-        else:
+        if len(args) > 0 and self.__checkargs(args):
             self.__jogo = self.__surpresinha(set(args))
+        if len(args) == 0:
+            self.__jogo = self.__surpresinha()
+        else:
+            raise AttributeError('Megasena aceita numeros entre 01 e 60 somente.')
 
     def __repr__(self):
         l_exib = list(self.__jogo)
@@ -30,12 +36,19 @@ class Megasena:
     def __len__(self):
         return self.__dezenas
 
+    @staticmethod
+    def __checkargs(numeros):
+        for i in numeros:
+            if i not in RANGEBET:
+                return False
+        return True
+
     def __surpresinha(self, fixos=()):
         """
         Retorna um conjunto(set) com numeros inteiros entre 1 e 60
         :return: set
         """
-        count = 60
+        count = len(RANGEBET)
         retorno = set(fixos)
         numeros = [x for x in range(1, count + 1)]
         while len(retorno) < self.__dezenas:

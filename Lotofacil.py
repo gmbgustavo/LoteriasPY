@@ -4,6 +4,9 @@ Classe da Lotofacil
 
 import secrets
 
+MAXBET = 18
+RANGEBET = range(1, 26)
+
 
 class Lotofacil:
 
@@ -12,13 +15,14 @@ class Lotofacil:
         Cria um objeto do tipo Lotofacil.
         :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas padrao (15)
         """
+        assert len(args) <= MAXBET
         self.__dezenas = dezenas
+        if len(args) > 0 and self.__checkargs(args):
+            self.__jogo = self.__surpresinha(set(args))
         if len(args) == 0:
             self.__jogo = self.__surpresinha()
-        elif len(args) < 15:
-            self.__jogo = self.__surpresinha(set(args))
-        elif len(args) > 20:
-            raise AttributeError('Máximo 20 parametros.')
+        else:
+            raise AttributeError('Megasena aceita numeros entre 01 e 60 somente.')
 
     def __repr__(self):
         l_exib = list(self.__jogo)
@@ -47,6 +51,13 @@ class Lotofacil:
     @property
     def jogo(self):
         return set(self.__jogo)
+
+    @staticmethod
+    def __checkargs(numeros):
+        for i in numeros:
+            if i > 25 or i <= 0:
+                return False
+        return True
 
 
 if __name__ == '__main__':
