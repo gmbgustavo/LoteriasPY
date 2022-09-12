@@ -37,8 +37,11 @@ class Lotomania:
         :return: set
         """
         retorno = set()
+        numeros = [x for x in range(1, 101)]
+        count = 100
         while len(retorno) < self.__dezenas:
-            retorno.add(secrets.choice(range(1, 101, 1)))
+            retorno.add(numeros.pop(secrets.choice(range(0, count, 1))))
+            count -= 1
         return set(retorno)
 
     @property

@@ -37,9 +37,12 @@ class Megasena:
         Retorna um conjunto(set) com numeros inteiros entre 1 e 60
         :return: set
         """
-        retorno = set(fixos)
+        retorno = set()
+        numeros = [x for x in range(1, 101)]
+        count = 100
         while len(retorno) < self.__dezenas:
-            retorno.add(secrets.choice(range(1, 61, 1)))
+            retorno.add(numeros.pop(secrets.choice(range(0, count, 1))))
+            count -= 1
         return set(retorno)
 
     @property
