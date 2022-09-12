@@ -20,7 +20,7 @@ class Sorteio:
     DIADESORTE = 8
     MESES = ('jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez')
 
-    def __init__(self, modalidade, *args):
+    def __init__(self, modalidade):
         self.__modalidade = modalidade
         self.__resultado = set()
         self.__res_duplasena1 = set()
@@ -28,8 +28,8 @@ class Sorteio:
 
     def __megasena(self) -> set:
         self.__resultado.clear()
-        numeros = [x for x in range(1, 61)]
-        count = self.MEGASENA
+        count = 60
+        numeros = [x for x in range(1, count + 1)]
         while len(self.__resultado) < self.MEGASENA:
             self.__resultado.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
@@ -37,8 +37,8 @@ class Sorteio:
 
     def __quina(self) -> set:
         self.__resultado.clear()
-        numeros = [x for x in range(1, 81)]
-        count = self.QUINA
+        count = 80
+        numeros = [x for x in range(1, count + 1)]
         while len(self.__resultado) < self.QUINA:
             self.__resultado.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
@@ -47,7 +47,7 @@ class Sorteio:
     def __lotofacil(self) -> set:
         count = 25
         self.__resultado.clear()
-        numeros = [x for x in range(1, 26)]
+        numeros = [x for x in range(1, count + 1)]
         while len(self.__resultado) < self.LOTOFACIL:
             self.__resultado.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
@@ -55,8 +55,8 @@ class Sorteio:
 
     def __diadesorte(self) -> set:
         self.__resultado.clear()
-        numeros = [x for x in range(1, 32)]
         count = 31
+        numeros = [x for x in range(1, 3, count + 1)]
         while len(self.__resultado) < self.MEGASENA:
             self.__resultado.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
@@ -66,7 +66,7 @@ class Sorteio:
     def __lotomania(self) -> set:
         count = 100
         self.__resultado.clear()
-        numeros = [x for x in range(1, 101)]
+        numeros = [x for x in range(1, count + 1)]
         while len(self.__resultado) < self.LOTOMANIA:
             self.__resultado.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
@@ -80,11 +80,12 @@ class Sorteio:
         self.__resultado.clear()
         self.__res_duplasena1.clear()
         self.__res_duplasena2.clear()
+        count = 50
         while len(self.__res_duplasena1) < self.DUPLASENA:     # Primeiro sorteio
-            self.__res_duplasena1.add(secrets.choice(range(1, 51, 1)))
+            self.__res_duplasena1.add(secrets.choice(range(1, count + 1, 1)))
 
         while len(self.__res_duplasena2) < self.DUPLASENA:     # Segundo sorteio
-            self.__res_duplasena2.add(secrets.choice(range(1, 51, 1)))
+            self.__res_duplasena2.add(secrets.choice(range(1, count + 1, 1)))
 
         for i in self.__res_duplasena1:
             self.__resultado.add(i)           # Adiciona o primeiro sorteio ao set

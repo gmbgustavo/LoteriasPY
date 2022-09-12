@@ -14,9 +14,7 @@ class Quina:
         :param dezenas: Quantidade de dezenas da aposta (5-15)
         """
         self.__dezenas = dezenas
-        if len(args) == 0:
-            self.__jogo = self.__surpresinha()
-        elif len(args) > 15:
+        if len(args) > 15:
             raise AttributeError('Os parametros de jogo devem ser inteiros entre 5 e 15')
         else:
             self.__jogo = self.__surpresinha(set(args))
@@ -37,9 +35,12 @@ class Quina:
         Retorna um conjunto(set) com numeros inteiros entre 1 e 60
         :return: set
         """
+        count = 80
         retorno = set(fixos)
+        numeros = [x for x in range(1, count + 1)]
         while len(retorno) < self.__dezenas:
-            retorno.add(secrets.choice(range(1, 81, 1)))
+            retorno.add(numeros.pop(secrets.choice(range(0, count, 1))))
+            count -= 1
         return set(retorno)
 
     @property

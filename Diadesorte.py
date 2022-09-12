@@ -20,11 +20,11 @@ class Diadesorte:
         self.__mes = mes
         if len(args) == 0:
             self.__jogo = self.__surpresinha()
-        elif len(args) < 7 or len(args) > 15:
-            raise AttributeError('Os parametros de jogo devem ser inteiros entre 7 e 15 finalizando com um mes')
+        elif len(args) > 15:
+            raise AttributeError('Quantidade de dezenas acima do permitido para a modalidade')
         else:
-            self.__dezenas = len(args)
-            self.__jogo = set(args)
+            self.__dezenas = dezenas
+            self.__jogo = self.__surpresinha(set(args))
             self.__jogo.add(mes)
 
     def __repr__(self):
@@ -37,15 +37,17 @@ class Diadesorte:
     def __len__(self):
         return self.__dezenas
 
-    def __surpresinha(self):
+    def __surpresinha(self, fixos=()):
         """
         Retorna um conjunto(set) com numeros inteiros entre 1 e 31
         :return: set
         """
-        retorno = set()
+        count = 31
+        retorno = set(fixos)
+        numeros = [x for x in range(1, count + 1)]
         while len(retorno) < self.__dezenas:
-            retorno.add(secrets.choice(range(1, 32, 1)))
-        retorno.add(self.__MESES[secrets.choice(range(0, 12, 1))])
+            retorno.add(numeros.pop(secrets.choice(range(0, count, 1))))
+            count -= 1
         return set(retorno)
 
     @property

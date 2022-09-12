@@ -10,14 +10,6 @@ from Lotomania import Lotomania
 from Duplasena import Duplasena
 from Diadesorte import Diadesorte
 
-SENA = 6
-QUINA = 5
-LOTOFACIL = 15
-LOTOMANIA = 20
-DUPLASENA = 6
-DIADESORTE = 8
-MESES = ('jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez')
-
 
 class Gerador:
 
@@ -67,7 +59,10 @@ class Gerador:
         return self.__sugestoes
 
     def sugestoes(self):
+        if len(self.__sugestoes) < 1:
+            raise AssertionError('Você deve gerar o jogo primeiro. Use o método gerajogo()')
         for aposta in self.__sugestoes:
+            aposta.sort()
             for dezena in aposta:
                 print(f'{str(dezena).zfill(2)} ', end='')
             print('\n')
@@ -83,11 +78,12 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Lotofacil',
-                   dezenas=15,
-                   fixados=[5, 9, 18],
+    jogo = Gerador(modalidade='Megasena',
+                   dezenas=6,
+                   fixados=[5],
                    quantidade=5)
     print(f'Tamanho do jogo {len(jogo)}')
     jogo.gerajogo()
     jogo.sugestoes()
+
 
