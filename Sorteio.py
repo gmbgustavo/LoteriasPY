@@ -17,67 +17,67 @@ class Sorteio:
     LOTOFACIL = 15
     LOTOMANIA = 20
     DUPLASENA = 6
-    DIADESORTE = 8
+    DIADESORTE = 7
     MESES = ('jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez')
 
     def __init__(self, modalidade):
         self.__modalidade = modalidade
-        self.__resultado = set()
+        self.__sorteado = set()
         self.__res_duplasena1 = set()
         self.__res_duplasena2 = set()
 
     def __megasena(self) -> set:
-        self.__resultado.clear()
+        self.__sorteado.clear()
         count = 60
         numeros = [x for x in range(1, count + 1)]
-        while len(self.__resultado) < self.MEGASENA:
-            self.__resultado.add(numeros.pop(secrets.choice(range(0, count))))
+        while len(self.__sorteado) < self.MEGASENA:
+            self.__sorteado.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
-        return self.__resultado
+        return self.__sorteado
 
     def __quina(self) -> set:
-        self.__resultado.clear()
+        self.__sorteado.clear()
         count = 80
         numeros = [x for x in range(1, count + 1)]
-        while len(self.__resultado) < self.QUINA:
-            self.__resultado.add(numeros.pop(secrets.choice(range(0, count))))
+        while len(self.__sorteado) < self.QUINA:
+            self.__sorteado.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
-        return self.__resultado
+        return self.__sorteado
 
     def __lotofacil(self) -> set:
         count = 25
-        self.__resultado.clear()
+        self.__sorteado.clear()
         numeros = [x for x in range(1, count + 1)]
-        while len(self.__resultado) < self.LOTOFACIL:
-            self.__resultado.add(numeros.pop(secrets.choice(range(0, count))))
+        while len(self.__sorteado) < self.LOTOFACIL:
+            self.__sorteado.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
-        return self.__resultado
+        return self.__sorteado
 
     def __diadesorte(self) -> set:
-        self.__resultado.clear()
         count = 31
-        numeros = [x for x in range(1, 3, count + 1)]
-        while len(self.__resultado) < self.MEGASENA:
-            self.__resultado.add(numeros.pop(secrets.choice(range(0, count))))
+        self.__sorteado.clear()
+        numeros = [x for x in range(1, count + 1)]
+        while len(self.__sorteado) < self.DIADESORTE:
+            self.__sorteado.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
-        self.__resultado.add(str(self.MESES)[secrets.choice(range(0, 12, 1))])
-        return self.__resultado
+        self.__sorteado.add(self.MESES[secrets.choice(range(0, len(self.MESES)))])
+        return set(self.__sorteado)
 
     def __lotomania(self) -> set:
         count = 100
-        self.__resultado.clear()
+        self.__sorteado.clear()
         numeros = [x for x in range(1, count + 1)]
-        while len(self.__resultado) < self.LOTOMANIA:
-            self.__resultado.add(numeros.pop(secrets.choice(range(0, count))))
+        while len(self.__sorteado) < self.LOTOMANIA:
+            self.__sorteado.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
-        return self.__resultado
+        return set(self.__sorteado)
 
     def __duplasena(self) -> set:
         """
         Executa o sorteio da Dupla sena (Dois sets de seis numeros)
         :return: Um set com a uniao dos dos sorteis, ignorando dezenas repetidas
         """
-        self.__resultado.clear()
+        self.__sorteado.clear()
         self.__res_duplasena1.clear()
         self.__res_duplasena2.clear()
         count = 50
@@ -88,14 +88,18 @@ class Sorteio:
             self.__res_duplasena2.add(secrets.choice(range(1, count + 1, 1)))
 
         for i in self.__res_duplasena1:
-            self.__resultado.add(i)           # Adiciona o primeiro sorteio ao set
+            self.__sorteado.add(i)           # Adiciona o primeiro sorteio ao set
         for j in self.__res_duplasena2:
-            self.__resultado.add(j)          # Adiciona o segundo sorteio ao set(remove repetidos)
-        return self.__resultado
+            self.__sorteado.add(j)          # Adiciona o segundo sorteio ao set(remove repetidos)
+        return self.__sorteado
 
     @property    # Propriedade para exibir os sorteios da Dupla sena de forma separada.
     def sorteio_duplasena(self):
         return [self.__res_duplasena1, self.__res_duplasena2]
+
+    @property
+    def modalidade(self):
+        return self.__modalidade
 
     @property    # Propriedade para saber a quantidade de acertos necessarios de cada modalidad
     def sorteio_len(self):
@@ -129,7 +133,8 @@ class Sorteio:
         return None
 
     def conferir(self, jogo: set) -> int:
-        return len(jogo.intersection(self.__resultado))
+        a = len(jogo.intersection(self.__sorteado))
+        return a
 
 
 if __name__ == '__main__':

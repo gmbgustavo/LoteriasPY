@@ -5,27 +5,29 @@ Classe do Dia de sorte - 7 numeros de 1 a 31 e um mes
 
 import secrets
 
+MAXBET = 15
+MINBET = 7
+MINNUM = 1
+MAXNUM = 31
+RANGEBET = range(MINNUM, MAXNUM + 1)
+MESES = ('jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez')
+
 
 class Diadesorte:
 
-    __MESES = ('jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez')
-
-    def __init__(self, *args, mes='', dezenas=7):
+    def __init__(self, *args, mes=0, dezenas=7):
         """
         Cria um objeto do tipo Dia de sorte.
         :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas(padrao=8)
         :param dezenas: Quantidade de dezenas da aposta (7-15)
         """
+        assert len(args) <= MAXBET, f'Esperado no máximo {MAXBET} dezenas. (Passadas {len(args)})'
+        assert MINBET <= dezenas <= MAXBET and isinstance(dezenas, int), \
+            f'Parametro dezenas deve ser inteiro entre {MINBET} e {MAXBET}. (Passadas {dezenas})'
+        assert self.__checkargs(args), f'Dia de Sorte usa números inteiros entre 0{MINNUM} e {MAXNUM}'
         self.__dezenas = dezenas
         self.__mes = mes
-        if len(args) == 0:
-            self.__jogo = self.__surpresinha()
-        elif len(args) > 15:
-            raise AttributeError('Quantidade de dezenas acima do permitido para a modalidade')
-        else:
-            self.__dezenas = dezenas
-            self.__jogo = self.__surpresinha(set(args))
-            self.__jogo.add(mes)
+        self.__jogo = self.__surpresinha(set(args))
 
     def __repr__(self):
         l_exib = list(self.__jogo)
@@ -42,13 +44,26 @@ class Diadesorte:
         Retorna um conjunto(set) com numeros inteiros entre 1 e 31
         :return: set
         """
-        count = 31
+        count = len(RANGEBET)
         retorno = set(fixos)
         numeros = [x for x in range(1, count + 1)]
         while len(retorno) < self.__dezenas:
-            retorno.add(numeros.pop(secrets.choice(range(0, count, 1))))
+            retorno.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
+        if self.__mes == 0:
+            self.__mes = (MESES[secrets.choice(range(0, len(MESES)))])
+        retorno.add(self.__mes)
         return set(retorno)
+
+    @staticmethod
+    def __checkargs(numeros):
+        if len(numeros) == 0:
+            return True
+        else:
+            for i in numeros:
+                if i not in RANGEBET:
+                    return False
+            return True
 
     @property
     def jogo(self):
@@ -56,7 +71,7 @@ class Diadesorte:
 
     @property
     def meses(self):
-        return self.__MESES
+        return self.MESES
 
 
 if __name__ == '__main__':

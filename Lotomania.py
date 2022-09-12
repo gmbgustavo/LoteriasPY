@@ -4,6 +4,11 @@ Classe da Lotomania
 
 import secrets
 
+BET = 50
+MINNUM = 1
+MAXNUM = 100
+RANGEBET = range(MINNUM, MAXNUM + 1)
+
 
 class Lotomania:
 
@@ -12,11 +17,8 @@ class Lotomania:
         Cria um objeto do tipo Lotofacil.
         :param args: Se vazio, cria um jogo surpresinha com a 50 dezenas
         """
-        self.__dezenas = 50
-        if len(args) > 50:
-            raise AttributeError('Os parametros de jogo devem ser 50 inteiros')
-        else:
-            self.__jogo = self.__surpresinha(set(args))
+        assert self.__checkargs(args), f'Lotofácil usa números inteiros entre 0{MINNUM} e {MAXNUM}'
+        self.__jogo = self.__surpresinha(set(args))
 
     def __repr__(self):
         l_exib = list(self.__jogo)
@@ -27,20 +29,31 @@ class Lotomania:
         yield set(self.__jogo)
 
     def __len__(self):
-        return self.__dezenas
+        return BET
 
+    @staticmethod
     def __surpresinha(self, fixos=()):
         """
         Retorna um conjunto(set) com numeros inteiros entre 1 e 100
         :return: set
         """
-        count = 100
+        count = len(RANGEBET)
         retorno = set(fixos)
         numeros = [x for x in range(1, count + 1)]
-        while len(retorno) < self.__dezenas:
-            retorno.add(numeros.pop(secrets.choice(range(0, count, 1))))
+        while len(retorno) < BET:
+            retorno.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
         return set(retorno)
+
+    @staticmethod
+    def __checkargs(numeros):
+        if len(numeros) == 0:
+            return True
+        else:
+            for i in numeros:
+                if i not in RANGEBET:
+                    return False
+            return True
 
     @property
     def jogo(self):
