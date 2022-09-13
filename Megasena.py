@@ -21,7 +21,7 @@ class Megasena:
         """
         assert len(args) <= MAXBET, f'Esperado no máximo {MAXBET} dezenas. (Passadas {len(args)})'
         assert MINBET <= dezenas <= MAXBET and isinstance(dezenas, int), \
-            f'Parametro dezenas deve ser inteiro entre {MINBET} e {MAXBET}. (Passadas {dezenas})'
+            f'Parametro dezenas deve ser inteiro entre {MINBET} e {MAXBET}. (Foi informado {dezenas})'
         assert self.__checkargs(args), f'Lotofácil usa números inteiros entre 0{MINNUM} e {MAXNUM}'
         self.__dezenas = dezenas
         self.__jogo = self.__surpresinha(set(args))

@@ -59,8 +59,7 @@ class Gerador:
         return self.__sugestoes
 
     def sugestoes(self):
-        if len(self.__sugestoes) < 1:
-            raise AssertionError('Você deve gerar o jogo primeiro. Use o método gerajogo()')
+        assert len(self.__sugestoes) >= 1, 'Você deve gerar o jogo primeiro. Use o método gerajogo()'
         for aposta in self.__sugestoes:
             aposta.sort()
             for dezena in aposta:
