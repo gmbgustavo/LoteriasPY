@@ -15,7 +15,7 @@ class Gerador:
 
     def __init__(self, modalidade: str, dezenas: int, fixados: list, quantidade=1):
         """
-        :param modalidade: Nome do jogo em string
+        :param modalidade: Nome do jogo em string. (Quina, Megansena, Lotofacil, Lotomania, Diadesorte, Duplasena)
         :param dezenas: quantidade de dezenas para apostar (observar minimos e maximos)
         :param fixados: dezenas que obrigatoriamente estarao no jogo
         :param quantidade: numero de apostas para gerar

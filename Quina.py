@@ -13,7 +13,7 @@ RANGEBET = range(MINNUM, MAXNUM + 1)
 
 class Quina:
 
-    def __init__(self, *args, dezenas=5):
+    def __init__(self, *args, dezenas=MINBET):
         """
         Cria um objeto do tipo Quina.
         :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas(padrao=5)

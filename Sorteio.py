@@ -129,7 +129,9 @@ class Sorteio:
         elif isinstance(self.__modalidade, Duplasena):
             return self.__duplasena()
         elif isinstance(self.__modalidade, Diadesorte):
-            return self.__diadesorte()
+            l_exib = list(self.__diadesorte())
+            l_exib.sort(key=lambda item: str(item))
+            return l_exib
         return None
 
     def conferir(self, jogo: set) -> int:

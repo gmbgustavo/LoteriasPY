@@ -14,7 +14,7 @@ MESES = ('jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', '
 
 class Diadesorte:
 
-    def __init__(self, *args, mes=0, dezenas=7):
+    def __init__(self, *args, mes=0, dezenas=MINBET):
         """
         Cria um objeto do tipo Dia de sorte.
         :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas(padrao=8)
