@@ -2,7 +2,6 @@
 Classe do Dia de sorte - 7 numeros de 1 a 31 e um mes
 """
 
-
 import secrets
 
 MAXBET = 15
@@ -20,17 +19,21 @@ class Diadesorte:
         Cria um objeto do tipo Dia de sorte.
         :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas(padrao=8)
         :param dezenas: Quantidade de dezenas da aposta (7-15)
+        :param mes: Um inteiro de 1 a 12 representando o mes do ano
         """
         assert len(args) <= MAXBET, f'Esperado no máximo {MAXBET} dezenas. (Passadas {len(args)})'
         assert MINBET <= dezenas <= MAXBET and isinstance(dezenas, int), \
             f'Parametro dezenas deve ser inteiro entre {MINBET} e {MAXBET}. (Passadas {dezenas})'
         assert self.__checkargs(args), f'Dia de Sorte usa números inteiros entre 0{MINNUM} e {MAXNUM}'
+        assert isinstance(mes, int) and 0 <= mes <= 12, \
+            f'O mes deve ser escolhido explicitamente usando mes= e um numero de 1 a 12. (0 ou vazio para surpresinha)'
         self.__dezenas = dezenas
         self.__mes = mes
         self.__jogo = self.__surpresinha(set(args))
 
     def __repr__(self):
         l_exib = list(self.__jogo)
+        l_exib.sort(key=lambda item: str(item))
         return str(l_exib)
 
     def __iter__(self):
@@ -51,8 +54,10 @@ class Diadesorte:
             retorno.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
         if self.__mes == 0:
-            self.__mes = (MESES[secrets.choice(range(0, len(MESES)))])
-        retorno.add(self.__mes)
+            self.__mes = secrets.choice(range(0, len(MESES)))
+            retorno.add(MESES[self.__mes])
+        else:
+            retorno.add(MESES[self.__mes - 1])
         return set(retorno)
 
     @staticmethod
@@ -71,7 +76,7 @@ class Diadesorte:
 
     @property
     def meses(self):
-        return self.MESES
+        return MESES
 
 
 if __name__ == '__main__':
