@@ -11,6 +11,7 @@ from Duplasena import Duplasena
 from Diadesorte import Diadesorte
 
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Diadesorte', 'Duplasena']
+MAXJOGOS = 50
 
 
 class Gerador:
@@ -23,7 +24,9 @@ class Gerador:
         :param quantidade: numero de apostas para gerar
         """
         assert modalidade in MODALIDADES, \
-            f'Modalidades inválida: Válidas apenas {MODALIDADES}. Informado {modalidade}.'
+            f'Modalidade inválida: Válidas apenas {MODALIDADES}. Informado {modalidade}.'
+        assert 1 <= quantidade <= 50 and isinstance(quantidade, int), \
+            f'Quantidades de jogos deve ser entre 1 e {MAXJOGOS}'
         self.__jogo = set()
         self.__modalidade = modalidade
         self.__fixados = set(fixados)
@@ -45,7 +48,7 @@ class Gerador:
                 lf = Megasena(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
         elif self.__modalidade == 'Diadesorte':
-            assert 15 >= self.__dezenas >= 7, 'Diadesorte entre 7 e 15 dezenas'
+            assert 15 >= self.__dezenas >= 7, f'Modalidade {self.__modalidade} deve ter entre 7 e 15 dezenas.'
             for i in range(1, self.__quantidade + 1):
                 lf = Diadesorte(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
@@ -67,7 +70,7 @@ class Gerador:
         assert len(self.__sugestoes) >= 1, 'Você deve gerar o jogo primeiro. Use o método gerajogo()'
         self.__sugestoes.sort(key=lambda item: str(item))
         for aposta in self.__sugestoes:
-            aposta.sort(key=lambda item: str(item))
+            aposta.sort()
             for dezena in aposta:
                 print(f'{str(dezena).zfill(2)} ', end='')
             print('\n')
@@ -83,9 +86,9 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Diadesorte',
-                   dezenas=7,
-                   fixados=[1, 5],
+    jogo = Gerador(modalidade='Lotofacil',
+                   dezenas=15,
+                   fixados=[1, 5, 6, 15, 22],
                    quantidade=5)
     print(f'Tamanho do jogo {len(jogo)}')
     jogo.gerajogo()
