@@ -10,16 +10,20 @@ from Lotomania import Lotomania
 from Duplasena import Duplasena
 from Diadesorte import Diadesorte
 
+MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Diadesorte', 'Duplasena']
+
 
 class Gerador:
 
     def __init__(self, modalidade: str, dezenas: int, fixados: list, quantidade=1):
         """
-        :param modalidade: Nome do jogo em string. (Quina, Megansena, Lotofacil, Lotomania, Diadesorte, Duplasena)
+        :param modalidade: Nome do jogo em string. (Quina, Megasena, Lotofacil, Lotomania, Diadesorte, Duplasena)
         :param dezenas: quantidade de dezenas para apostar (observar minimos e maximos)
         :param fixados: dezenas que obrigatoriamente estarao no jogo
         :param quantidade: numero de apostas para gerar
         """
+        assert modalidade in MODALIDADES, \
+            f'Modalidades inválida: Válidas apenas {MODALIDADES}. Informado {modalidade}.'
         self.__jogo = set()
         self.__modalidade = modalidade
         self.__fixados = set(fixados)
@@ -41,6 +45,7 @@ class Gerador:
                 lf = Megasena(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
         elif self.__modalidade == 'Diadesorte':
+            assert 15 >= self.__dezenas >= 7, 'Diadesorte entre 7 e 15 dezenas'
             for i in range(1, self.__quantidade + 1):
                 lf = Diadesorte(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
@@ -60,16 +65,17 @@ class Gerador:
 
     def sugestoes(self):
         assert len(self.__sugestoes) >= 1, 'Você deve gerar o jogo primeiro. Use o método gerajogo()'
+        self.__sugestoes.sort(key=lambda item: str(item))
         for aposta in self.__sugestoes:
-            aposta.sort()
+            aposta.sort(key=lambda item: str(item))
             for dezena in aposta:
                 print(f'{str(dezena).zfill(2)} ', end='')
             print('\n')
         return None
 
     def __repr__(self):
-        l_exib = self.__sugestoes
-        l_exib.sort()
+        l_exib = list(self.__sugestoes)
+        l_exib.sort(key=lambda item: str(item))
         return str(l_exib)
 
     def __len__(self):
@@ -77,9 +83,9 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Lotofacil',
-                   dezenas=15,
-                   fixados=[],
+    jogo = Gerador(modalidade='Diadesorte',
+                   dezenas=7,
+                   fixados=[1, 5],
                    quantidade=5)
     print(f'Tamanho do jogo {len(jogo)}')
     jogo.gerajogo()

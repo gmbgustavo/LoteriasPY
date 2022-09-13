@@ -18,7 +18,7 @@ class Lotomania:
         :param args: Se vazio, cria um jogo surpresinha com a 50 dezenas
         """
         assert self.__checkargs(args), f'Lotofácil usa números inteiros entre 0{MINNUM} e {MAXNUM}'
-        self.__jogo = self.__surpresinha(set(args))
+        self.__jogo = self.__surpresinha(args)
 
     def __repr__(self):
         l_exib = list(self.__jogo)
@@ -32,9 +32,10 @@ class Lotomania:
         return BET
 
     @staticmethod
-    def __surpresinha(self, fixos=()):
+    def __surpresinha(fixos=()):
         """
         Retorna um conjunto(set) com numeros inteiros entre 1 e 100
+        :param fixos: Numeros pre estabelecidos
         :return: set
         """
         count = len(RANGEBET)
