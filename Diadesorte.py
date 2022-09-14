@@ -4,27 +4,27 @@ Classe do Dia de sorte - 7 numeros de 1 a 31 e um mes
 
 import secrets
 
-MAXBET = 15
-MINBET = 7
-MINNUM = 1
-MAXNUM = 31
-RANGEBET = range(MINNUM, MAXNUM + 1)
+MAX_BET = 15
+MIN_BET = 7
+MIN_NUM = 1
+MAX_NUM = 31
+RANGEBET = range(MIN_NUM, MAX_NUM + 1)
 MESES = ('jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez')
 
 
 class Diadesorte:
 
-    def __init__(self, *args, mes=0, dezenas=MINBET):
+    def __init__(self, *args, mes=0, dezenas=MIN_BET):
         """
         Cria um objeto do tipo Dia de sorte.
         :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas(padrao=8)
         :param dezenas: Quantidade de dezenas da aposta (7-15)
         :param mes: Um inteiro de 1 a 12 representando o mes do ano
         """
-        assert len(args) <= MAXBET, f'Esperado no máximo {MAXBET} dezenas. (Passadas {len(args)})'
-        assert MINBET <= dezenas <= MAXBET and isinstance(dezenas, int), \
-            f'Parametro dezenas deve ser inteiro entre {MINBET} e {MAXBET}. (Passadas {dezenas})'
-        assert self.__checkargs(args), f'Dia de Sorte usa números inteiros entre 0{MINNUM} e {MAXNUM}'
+        assert len(args) <= MAX_BET, f'Esperado no máximo {MAX_BET} dezenas. (Passadas {len(args)})'
+        assert MIN_BET <= dezenas <= MAX_BET and isinstance(dezenas, int), \
+            f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}. (Passadas {dezenas})'
+        assert self.__checkargs(args), f'Dia de Sorte usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         assert isinstance(mes, int) and 0 <= mes <= 12, \
             f'O mes deve ser escolhido explicitamente usando mes= e um numero de 1 a 12. (0 ou vazio para surpresinha)'
         self.__dezenas = dezenas

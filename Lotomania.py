@@ -5,9 +5,9 @@ Classe da Lotomania
 import secrets
 
 BET = 50
-MINNUM = 1
-MAXNUM = 100
-RANGEBET = range(MINNUM, MAXNUM + 1)
+MIN_NUM = 1
+MAX_NUM = 100
+RANGEBET = range(MIN_NUM, MAX_NUM + 1)
 
 
 class Lotomania:
@@ -17,7 +17,7 @@ class Lotomania:
         Cria um objeto do tipo Lotofacil.
         :param args: Se vazio, cria um jogo surpresinha com a 50 dezenas
         """
-        assert self.__checkargs(args), f'Lotofácil usa números inteiros entre 0{MINNUM} e {MAXNUM}'
+        assert self.__checkargs(args), f'Lotofácil usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         self.__jogo = self.__surpresinha(args)
 
     def __repr__(self):

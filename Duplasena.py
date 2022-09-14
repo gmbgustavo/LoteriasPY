@@ -4,22 +4,28 @@ Classe da Dupla Sena - Sao dois sorteios por jogo
 
 import secrets
 
+MIN_BET = 6
+MAX_BET = 15
+MIN_NUM = 1
+MAX_NUM = 50
+RANGEBET = range(MIN_NUM, MAX_NUM + 1)
+
 
 class Duplasena:
 
-    def __init__(self, *args, dezenas=6):
+    def __init__(self, *args, dezenas=MIN_BET):
         """
         Cria um objeto do tipo Duplasena.
         :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas(padrao=6)
         :param dezenas: Quantidade de dezenas da aposta (6-15)
         """
+        assert len(args) <= MAX_BET, f'Esperado no máximo {MAX_BET} dezenas. (Passadas {len(args)})'
+        assert MIN_BET <= dezenas <= MAX_BET and isinstance(dezenas, int), \
+            f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}. (Passadas {dezenas})'
+        assert self.__checkargs(args), f'Duplasena aceita números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
+
         self.__dezenas = dezenas
-        if len(args) == 0:
-            self.__jogo = self.__surpresinha()
-        elif len(args) < 6 or len(args) > 15:
-            raise AttributeError('Os parametros de jogo devem ser inteiros entre 6 e 15')
-        else:
-            self.__jogo = set(args)
+        self.__jogo = self.__surpresinha(set(args))
 
     def __repr__(self):
         l_exib = list(self.__jogo)
@@ -32,16 +38,28 @@ class Duplasena:
     def __len__(self):
         return self.__dezenas
 
-    def __surpresinha(self):
+    def __surpresinha(self, fixos=()):
         """
         Retorna um conjunto(set) com numeros inteiros entre 1 e 50
         :return: set
         """
-        retorno = set()
+        count = len(RANGEBET)
+        retorno = set(fixos)  # Apenas no caso de gerador
+        numeros = [x for x in range(1, count + 1)]
         while len(retorno) < self.__dezenas:
-            # resultado.add(secrets.choice(range(1, 51)))
-            retorno.add(secrets.choice(range(1, 51, 1)))
+            retorno.add(numeros.pop(secrets.choice(range(0, count))))
+            count -= 1
         return set(retorno)
+
+    @staticmethod
+    def __checkargs(numeros):
+        if len(numeros) == 0:
+            return True
+        else:
+            for i in numeros:
+                if i not in RANGEBET:
+                    return False
+            return True
 
     @property
     def jogo(self):

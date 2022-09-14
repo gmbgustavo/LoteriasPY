@@ -4,25 +4,25 @@ Classe da Lotofacil
 
 import secrets
 
-MAXBET = 20
-MINBET = 15
-MINNUM = 1
-MAXNUM = 25
-RANGEBET = range(MINNUM, MAXNUM + 1)
+MAX_BET = 20
+MIN_BET = 15
+MIN_NUM = 1
+MAX_NUM = 25
+RANGEBET = range(MIN_NUM, MAX_NUM + 1)
 
 
 class Lotofacil:
 
-    def __init__(self, *args, dezenas=MINBET):
+    def __init__(self, *args, dezenas=MIN_BET):
         f"""
         Cria um objeto do tipo Lotofacil.
-        :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas padrao ({MINBET})
+        :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas padrao ({MIN_BET})
         :param dezenas: quantidade de dezenas a serem preenchidas
         """
-        assert len(args) <= MAXBET, f'Esperado no máximo {MAXBET} dezenas. (Passadas {len(args)})'
-        assert MINBET <= dezenas <= MAXBET and isinstance(dezenas, int), \
-            f'Parametro dezenas deve ser inteiro entre {MINBET} e {MAXBET}. (Passadas {dezenas})'
-        assert self.__checkargs(args), f'Lotofácil usa números inteiros entre 0{MINNUM} e {MAXNUM}'
+        assert len(args) <= MAX_BET, f'Esperado no máximo {MAX_BET} dezenas. (Passadas {len(args)})'
+        assert MIN_BET <= dezenas <= MAX_BET and isinstance(dezenas, int), \
+            f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}. (Passadas {dezenas})'
+        assert self.__checkargs(args), f'Lotofácil usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         self.__dezenas = dezenas
         self.__jogo = self.__surpresinha(set(args))
 
