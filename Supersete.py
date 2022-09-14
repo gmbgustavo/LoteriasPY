@@ -1,7 +1,7 @@
 """
 Classe da Super Sete
-Devem ser passados os números em ordem das colunas
-Para marcar mais de um numero por coluna, forneça uma tupla ao inves de um inteiro
+Para apostar deve ser passado um dicionario com a chave sendo o numero da coluna (int)
+e os valores uma tupla, de tamanho 1 a 3, com cada uma contendo numeros de 0 a 9
 """
 
 import secrets
@@ -16,35 +16,24 @@ MAX_BET = 21
 
 class Supersete:
 
-    def __init__(self, *args, num_col=MIN_NUM_COL, dezenas=MIN_BET):
+    def __init__(self, aposta: dict, num_col=MIN_NUM_COL, dezenas=MIN_BET):
         assert MIN_NUM_COL <= num_col <= MAX_NUM_COL and isinstance(num_col, int), \
             f'Minimo {MIN_NUM_COL}, máximo {MAX_NUM_COL} numeros por coluna. (Fornecido {num_col})'
         self.__num_col = num_col
         self.__dezenas = dezenas
-        self.__jogada = args
-        self.__jogo = COLUNAS
-        self.__distribuir(self.__jogada)
+        self.__jogo = aposta
+        self.__distribuir(self.__jogo)
 
-    def __distribuir(self, numeros: tuple):
+    def __distribuir(self, numeros: dict):
         for coluna in COLUNAS.keys():
-            self.__jogo[coluna] = numeros[coluna - 1]
+            self.__jogo[coluna] = numeros[coluna]
         print(self.__jogo)
 
-    def __surpresinha(self, fixos=()):
-        """
-        Retorna um conjunto(set) com numeros inteiros entre 1 e 50
-        :return: set
-        """
-        count = len(RANGEBET)
-        retorno = set(fixos)  # Apenas no caso de gerador
-        numeros = [x for x in range(1, count + 1)]
-        while len(retorno) < self.__:
-            retorno.add(numeros.pop(secrets.choice(range(0, count))))
-            count -= 1
-        return set(retorno)
+    def __checkargs(self, aposta, dezenas):
+        pass
 
 
 if __name__ == '__main__':
     # print('Essa classe deve ser apenas instanciada internamente.')
 
-    a = Supersete((5, 0), 9, 0, 6, 9, 7, 2)
+    a = Supersete({1: (0,), 2: (5,), 3: (9,), 4: (8,), 5: (0,), 6: (7,), 7: (3,)})
