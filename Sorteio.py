@@ -124,7 +124,7 @@ class Sorteio:
         elif isinstance(self.__modalidade, Duplasena):
             return self.DUPLASENA
         elif isinstance(self.__modalidade, Diadesorte):
-            return self.DIADESORTE
+            return self.DIADESORTE + 1    # Inclui o mes
         return None
 
     def resultado(self):

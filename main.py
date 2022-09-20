@@ -15,7 +15,7 @@ import sys
 
 if __name__ == '__main__':
     parametros = sys.argv
-    aposta1 = Duplasena(1, 5, 6, 15, 22, 28)   # (surpresinha automatica para faltantes)
+    aposta1 = Diadesorte(1, 5, 6, 15, 22, 28, mes=1)   # (surpresinha automatica para faltantes)
     concursos = 1                                        # Quantidade de concursos, comecando com o primeiro
     print(f'Sua aposta: {aposta1}')                     # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')
