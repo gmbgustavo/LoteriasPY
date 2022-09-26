@@ -145,8 +145,8 @@ class Sorteio:
         return None
 
     def conferir(self, jogo: set) -> int:
-        a = len(jogo.intersection(self.__sorteado))
-        return a
+        pontos = len(jogo.intersection(self.__sorteado))
+        return pontos
 
 
 if __name__ == '__main__':

@@ -9,8 +9,9 @@ from Lotofacil import Lotofacil
 from Lotomania import Lotomania
 from Duplasena import Duplasena
 from Diadesorte import Diadesorte
+from Supersete import Supersete
 
-MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Diadesorte', 'Duplasena']
+MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Diadesorte', 'Duplasena', 'Supersete']
 MAXJOGOS = 50
 
 
@@ -64,13 +65,18 @@ class Gerador:
             for i in range(1, self.__quantidade + 1):
                 lf = Duplasena(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
+        elif self.__modalidade == 'Supersete':
+            pass
         return self.__sugestoes
 
     def sugestoes(self):
         assert len(self.__sugestoes) >= 1, 'Você deve gerar o jogo primeiro. Use o método gerajogo()'
         self.__sugestoes.sort(key=lambda item: str(item))
         for aposta in self.__sugestoes:
-            aposta.sort()
+            if self.__modalidade == 'Diadesorte':
+                aposta.sort(key=lambda item: str(item))
+            else:
+                aposta.sort()
             for dezena in aposta:
                 print(f'{str(dezena).zfill(2)} ', end='')
             print('\n')
@@ -86,9 +92,9 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Lotofacil',
-                   dezenas=15,
-                   fixados=[1, 5, 6, 15, 22],
+    jogo = Gerador(modalidade='Megasena',
+                   dezenas=6,
+                   fixados=[],
                    quantidade=5)
     print(f'Tamanho do jogo {len(jogo)}')
     jogo.gerajogo()

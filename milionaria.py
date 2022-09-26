@@ -1,19 +1,21 @@
 """
-Classe da Mega-Sena
+Classe da +Milionária
 """
 
 import secrets
 
-MAX_BET = 15
+MAX_BET = 12
 MIN_BET = 6
 MIN_NUM = 1
-MAX_NUM = 60
+MAX_NUM = 50
+MIN_TREVOS = 2
+MAX_TREVOS = 3
 RANGEBET = range(MIN_NUM, MAX_NUM + 1)
 
 
 class Megasena:
 
-    def __init__(self, *args, dezenas=MIN_BET):
+    def __init__(self, *args, dezenas=MIN_BET, trevos=(0, 0)):
         """
         Cria um objeto do tipo Megasena.
         :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas(padrao=6)
@@ -22,8 +24,10 @@ class Megasena:
         assert len(args) <= MAX_BET, f'Esperado no máximo {MAX_BET} dezenas. (Passadas {len(args)})'
         assert MIN_BET <= dezenas <= MAX_BET and isinstance(dezenas, int), \
             f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}. (Foi informado {dezenas})'
-        assert self.__checkargs(args), f'Megasena usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
+        assert self.__checkargs(args), f'+Milionária usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
+        assert MIN_TREVOS <= len(trevos) <= MAX_TREVOS, f'Trevos de 2 a 6 numeros entree {MIN_BET} e {MAX_BET}'
         self.__dezenas = dezenas
+        self.__trevos = trevos
         self.__jogo = self.__surpresinha(set(args))
 
     def __repr__(self):
@@ -35,7 +39,7 @@ class Megasena:
         yield set(self.__jogo)
 
     def __len__(self):
-        return self.__dezenas
+        return self.__dezenas + len(self.__trevos)
 
     @staticmethod
     def __checkargs(numeros):
@@ -49,7 +53,7 @@ class Megasena:
 
     def __surpresinha(self, fixos=()):
         """
-        Retorna um conjunto(set) com numeros inteiros entre 1 e 60
+        Retorna um conjunto(set) com numeros inteiros entre 1 e 50
         :return: set
         """
         count = len(RANGEBET)
@@ -58,6 +62,7 @@ class Megasena:
         while len(retorno) < self.__dezenas:
             retorno.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
+        retorno.add(self.__trevos)
         return set(retorno)
 
     def sorteio(self):
