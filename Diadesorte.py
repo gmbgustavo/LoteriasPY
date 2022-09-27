@@ -27,6 +27,8 @@ class Diadesorte:
         assert self.__checkargs(args), f'Dia de Sorte usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         assert isinstance(mes, int) and 0 <= mes <= 12, \
             f'O mes deve ser escolhido explicitamente usando mes= e um numero de 1 a 12. (0 para surpresinha)'
+        if dezenas != 0:
+            assert len(args) <= dezenas, f'Numero de dezenas incompativel com o argumento "dezenas"'
         if dezenas == 0 and len(args) <= MIN_BET:
             self.__dezenas = MIN_BET
         elif dezenas == 0 and len(args) > MIN_BET:
