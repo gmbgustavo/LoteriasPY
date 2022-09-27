@@ -14,20 +14,25 @@ MESES = ('jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', '
 
 class Diadesorte:
 
-    def __init__(self, *args, mes=0, dezenas=MIN_BET):
+    def __init__(self, *args, mes=0, dezenas=0):
         """
         Cria um objeto do tipo Dia de sorte.
         :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas(padrao=8)
         :param dezenas: Quantidade de dezenas da aposta (7-15)
-        :param mes: Um inteiro de 1 a 12 representando o mes do ano
+        :param mes: Um inteiro de 1 a 12 representando o mes do ano. 0 para surpresinha.
         """
         assert len(args) <= MAX_BET, f'Esperado no máximo {MAX_BET} dezenas. (Passadas {len(args)})'
-        assert MIN_BET <= dezenas <= MAX_BET and isinstance(dezenas, int), \
+        assert (MIN_BET <= dezenas <= MAX_BET and isinstance(dezenas, int)) or dezenas == 0, \
             f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}. (Passadas {dezenas})'
         assert self.__checkargs(args), f'Dia de Sorte usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         assert isinstance(mes, int) and 0 <= mes <= 12, \
-            f'O mes deve ser escolhido explicitamente usando mes= e um numero de 1 a 12. (0 ou vazio para surpresinha)'
-        self.__dezenas = dezenas
+            f'O mes deve ser escolhido explicitamente usando mes= e um numero de 1 a 12. (0 para surpresinha)'
+        if dezenas == 0 and len(args) <= MIN_BET:
+            self.__dezenas = MIN_BET
+        elif dezenas == 0 and len(args) > MIN_BET:
+            self.__dezenas = len(args)
+        else:
+            self.__dezenas = dezenas
         self.__mes = mes
         self.__jogo = self.__surpresinha(set(args))
 

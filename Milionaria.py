@@ -10,10 +10,11 @@ MIN_NUM = 1
 MAX_NUM = 50
 MIN_TREVOS = 2
 MAX_TREVOS = 3
+RANGE_TREVO = range(1, 7)
 RANGEBET = range(MIN_NUM, MAX_NUM + 1)
 
 
-class Megasena:
+class Milionaria:
 
     def __init__(self, *args, dezenas=MIN_BET, trevos=(0, 0)):
         """
@@ -25,7 +26,7 @@ class Megasena:
         assert MIN_BET <= dezenas <= MAX_BET and isinstance(dezenas, int), \
             f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}. (Foi informado {dezenas})'
         assert self.__checkargs(args), f'+Milionária usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
-        assert MIN_TREVOS <= len(trevos) <= MAX_TREVOS, f'Trevos de 2 a 6 numeros entree {MIN_BET} e {MAX_BET}'
+        assert MIN_TREVOS <= len(trevos) <= MAX_TREVOS, f'Trevos de 2 a 6 numeros entre {MIN_BET} e {MAX_BET}'
         self.__dezenas = dezenas
         self.__trevos = trevos
         self.__jogo = self.__surpresinha(set(args))
