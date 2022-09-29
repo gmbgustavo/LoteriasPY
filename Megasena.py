@@ -13,7 +13,7 @@ RANGEBET = range(MIN_NUM, MAX_NUM + 1)
 
 class Megasena:
 
-    def __init__(self, *args, dezenas=MIN_BET):
+    def __init__(self, *args, dezenas):
         """
         Cria um objeto do tipo Megasena.
         :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas(padrao=6)
@@ -22,6 +22,7 @@ class Megasena:
         assert len(args) <= MAX_BET, f'Esperado no máximo {MAX_BET} dezenas. (Passadas {len(args)})'
         assert MIN_BET <= dezenas <= MAX_BET and isinstance(dezenas, int), \
             f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}. (Foi informado {dezenas})'
+        assert len(args) <= dezenas, f'Quantidade de números informados incompativel com o argumento "dezenas"'
         assert self.__checkargs(args), f'Megasena usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         self.__dezenas = dezenas
         self.__jogo = self.__surpresinha(set(args))

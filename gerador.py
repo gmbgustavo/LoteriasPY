@@ -90,11 +90,10 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Diadesorte',
-                   dezenas=15,
-                   fixados=[1, 13, 22],
-                   quantidade=6)
+    jogo = Gerador(modalidade='Megasena',
+                   dezenas=7,
+                   fixados=[],
+                   quantidade=10)
     print(f'Tamanho do jogo {len(jogo)}')
     jogo.gerajogo()
     jogo.sugestoes()
-    # TODO: Chegar jogos iguais
