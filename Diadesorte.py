@@ -50,10 +50,8 @@ class Diadesorte:
         """
         retorno = set(fixos)
         numeros = [x for x in range(1, len(RANGEBET) + 1) if x not in retorno]    # Generator desconsidera os fixos
-        count = len(numeros)
         while len(retorno) < self.__dezenas:
-            retorno.add(numeros.pop(secrets.choice(range(0, count))))
-            count -= 1
+            retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
         if self.__mes == 0:
             self.__mes = secrets.choice(range(0, len(MESES)))
             retorno.add(MESES[self.__mes])

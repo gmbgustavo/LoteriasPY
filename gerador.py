@@ -2,7 +2,6 @@
 Gerador de apostas
 """
 
-import secrets
 from Quina import Quina
 from Megasena import Megasena
 from Lotofacil import Lotofacil
@@ -41,6 +40,7 @@ class Gerador:
             for i in range(1, self.__quantidade + 1):
                 lf = Quina(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
+                del lf
         elif self.__modalidade == 'Duplasena':
             for i in range(1, self.__quantidade + 1):
                 lf = Duplasena(*self.__fixados, dezenas=self.__dezenas)
@@ -50,7 +50,6 @@ class Gerador:
                 lf = Megasena(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
         elif self.__modalidade == 'Diadesorte':
-            assert 15 >= self.__dezenas >= 7, f'Modalidade {self.__modalidade} deve ter entre 7 e 15 dezenas.'
             for i in range(1, self.__quantidade + 1):
                 lf = Diadesorte(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
@@ -92,8 +91,9 @@ class Gerador:
 if __name__ == '__main__':
     jogo = Gerador(modalidade='Quina',
                    dezenas=5,
-                   fixados=[1, 5, 6],
+                   fixados=[1],
                    quantidade=50)
     print(f'Tamanho do jogo {len(jogo)}')
+    print(f'\nGerando, aguarde...')
     jogo.gerajogo()
     jogo.sugestoes()

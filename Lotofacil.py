@@ -45,10 +45,8 @@ class Lotofacil:
         """
         retorno = set(fixos)
         numeros = [x for x in range(1, len(RANGEBET) + 1) if x not in retorno]    # Generator desconsidera os fixos
-        count = len(numeros)
         while len(retorno) < self.__dezenas:
-            retorno.add(numeros.pop(secrets.choice(range(0, count))))
-            count -= 1
+            retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
         return set(retorno)
 
     @property

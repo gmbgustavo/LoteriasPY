@@ -3,6 +3,7 @@ Classe da Quina
 """
 
 import secrets
+import time
 
 MAX_BET = 15
 MIN_BET = 5
@@ -39,16 +40,14 @@ class Quina:
         return self.__dezenas
 
     def __surpresinha(self, fixos=()):
-        """
-        Retorna um conjunto(set) com numeros inteiros entre 1 e 60
+        f"""
+        Retorna um conjunto(set) com numeros inteiros entre 0{MIN_NUM} e {MAX_NUM}
         :return: set
         """
         retorno = set(fixos)
         numeros = [x for x in range(1, len(RANGEBET) + 1) if x not in retorno]    # Generator desconsidera os fixos
-        count = len(numeros)
         while len(retorno) < self.__dezenas:
-            retorno.add(numeros.pop(secrets.choice(range(0, count))))
-            count -= 1
+            retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
         return set(retorno)
 
     @property
