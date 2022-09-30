@@ -3,6 +3,7 @@ Classe do Dia de sorte - 7 numeros de 1 a 31 e um mes
 """
 
 import secrets
+import time
 
 MAX_BET = 15
 MIN_BET = 7
@@ -52,6 +53,7 @@ class Diadesorte:
         numeros = [x for x in range(1, len(RANGEBET) + 1) if x not in retorno]    # Generator desconsidera os fixos
         while len(retorno) < self.__dezenas:
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
+            time.sleep(0.1)    # Aumenta a aleatoriedade
         if self.__mes == 0:
             self.__mes = secrets.choice(range(0, len(MESES)))
             retorno.add(MESES[self.__mes])

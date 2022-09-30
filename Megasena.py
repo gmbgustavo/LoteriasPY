@@ -3,6 +3,7 @@ Classe da Mega-Sena
 """
 
 import secrets
+import time
 
 MAX_BET = 15
 MIN_BET = 6
@@ -57,6 +58,7 @@ class Megasena:
         numeros = [x for x in range(1, len(RANGEBET) + 1) if x not in retorno]    # Generator desconsidera os fixos
         while len(retorno) < self.__dezenas:
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
+            time.sleep(0.1)    # Aumenta a aleatoriedade
         return set(retorno)
 
     def sorteio(self):

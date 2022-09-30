@@ -3,6 +3,7 @@ Classe da Lotofacil
 """
 
 import secrets
+import time
 
 MAX_BET = 20
 MIN_BET = 15
@@ -47,6 +48,7 @@ class Lotofacil:
         numeros = [x for x in range(1, len(RANGEBET) + 1) if x not in retorno]    # Generator desconsidera os fixos
         while len(retorno) < self.__dezenas:
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
+            time.sleep(0.1)    # Aumenta a aleatoriedade
         return set(retorno)
 
     @property

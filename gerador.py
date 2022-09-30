@@ -12,7 +12,7 @@ from Supersete import Supersete
 
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania',
                'Diadesorte', 'Duplasena', 'Supersete', 'Milionaria']
-MAXJOGOS = 50
+MAXJOGOS = 25
 
 
 class Gerador:
@@ -26,7 +26,7 @@ class Gerador:
         """
         assert modalidade in MODALIDADES, \
             f'Modalidade inválida: Válidas apenas {MODALIDADES}. Informado {modalidade}.'
-        assert 1 <= quantidade <= 50 and isinstance(quantidade, int), \
+        assert 1 <= quantidade <= MAXJOGOS and isinstance(quantidade, int), \
             f'Quantidades de jogos deve ser entre 1 e {MAXJOGOS}'
         self.__jogo = set()
         self.__modalidade = modalidade
@@ -89,11 +89,11 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Quina',
-                   dezenas=5,
-                   fixados=[1],
-                   quantidade=50)
+    jogo = Gerador(modalidade='Megasena',
+                   dezenas=6,
+                   fixados=[1, 28],
+                   quantidade=10)
     print(f'Tamanho do jogo {len(jogo)}')
-    print(f'\nGerando, aguarde...')
+    print(f'Gerando em aproximadamente 10 segundos...')
     jogo.gerajogo()
     jogo.sugestoes()

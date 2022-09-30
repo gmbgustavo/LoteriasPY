@@ -3,6 +3,7 @@ Classe da Lotomania
 """
 
 import secrets
+import time
 
 BET = 50
 MIN_NUM = 1
@@ -42,6 +43,7 @@ class Lotomania:
         numeros = [x for x in range(1, len(RANGEBET) + 1) if x not in retorno]    # Generator desconsidera os fixos
         while len(retorno) < BET:
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
+            time.sleep(0.1)    # Aumenta a aleatoriedade
         return set(retorno)
 
     @staticmethod
