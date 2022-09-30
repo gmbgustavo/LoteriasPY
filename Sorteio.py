@@ -7,6 +7,8 @@ from Lotofacil import Lotofacil
 from Lotomania import Lotomania
 from Duplasena import Duplasena
 from Diadesorte import Diadesorte
+from Supersete import Supersete
+from Milionaria import Milionaria
 import secrets
 
 
@@ -24,6 +26,7 @@ class Sorteio:
     MAX_DUPLASENA = 50
     DIADESORTE = 7
     MAX_DIADESORTE = 31
+    SUPERSETE = 7
     MESES = ('jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez')
 
     def __init__(self, modalidade):
@@ -125,6 +128,8 @@ class Sorteio:
             return self.DUPLASENA
         elif isinstance(self.__modalidade, Diadesorte):
             return self.DIADESORTE + 1    # Inclui o mes
+        elif isinstance(self.__modalidade, Supersete):
+            return self.SUPERSETE    # Inclui o mes
         return None
 
     def resultado(self):

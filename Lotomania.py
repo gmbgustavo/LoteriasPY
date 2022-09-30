@@ -38,9 +38,9 @@ class Lotomania:
         :param fixos: Numeros pre estabelecidos
         :return: set
         """
-        count = len(RANGEBET)
         retorno = set(fixos)
-        numeros = [x for x in range(1, count + 1)]
+        numeros = [x for x in range(1, len(RANGEBET) + 1) if x not in retorno]    # Generator desconsidera os fixos
+        count = len(numeros)
         while len(retorno) < BET:
             retorno.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1

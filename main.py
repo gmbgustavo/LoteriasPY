@@ -9,11 +9,10 @@ from Lotofacil import Lotofacil
 from Lotomania import Lotomania
 from Diadesorte import Diadesorte
 import Sorteio
-import sys
 
 
 if __name__ == '__main__':
-    aposta1 = Diadesorte(dezenas=11, mes=11)   # (surpresinha automatica para faltantes)
+    aposta1 = Megasena(1, 5, 6, 15, 22, 28, dezenas=6)   # (surpresinha automatica para faltantes)
     concursos = 1                                        # Quantidade de concursos, comecando com o primeiro
     print(f'Sua aposta: {aposta1}')                     # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')

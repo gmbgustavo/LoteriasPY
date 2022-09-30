@@ -43,9 +43,9 @@ class Lotofacil:
         Retorna um conjunto(set) com numeros inteiros entre 1 e 25
         :return: set
         """
-        count = len(RANGEBET)
-        retorno = set(fixos)  # Apenas no caso de gerador
-        numeros = [x for x in range(1, count + 1)]
+        retorno = set(fixos)
+        numeros = [x for x in range(1, len(RANGEBET) + 1) if x not in retorno]    # Generator desconsidera os fixos
+        count = len(numeros)
         while len(retorno) < self.__dezenas:
             retorno.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
