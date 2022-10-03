@@ -45,7 +45,7 @@ class Lotofacil:
         :return: set
         """
         retorno = set(fixos)
-        numeros = [x for x in range(1, len(RANGEBET) + 1) if x not in retorno]    # Generator desconsidera os fixos
+        numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsider fixos
         while len(retorno) < self.__dezenas:
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
             time.sleep(0.1)    # Aumenta a aleatoriedade

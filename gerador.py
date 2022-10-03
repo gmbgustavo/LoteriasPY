@@ -12,7 +12,7 @@ from Supersete import Supersete
 
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania',
                'Diadesorte', 'Duplasena', 'Supersete', 'Milionaria']
-MAXJOGOS = 25
+MAXJOGOS = 20
 
 
 class Gerador:
@@ -66,7 +66,9 @@ class Gerador:
                 lf = Duplasena(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
         elif self.__modalidade == 'Supersete':
-            pass
+            for i in range (1, self.__quantidade + 1):
+                lf = Supersete(*self.__fixados, dezenas=self.__dezenas)
+                self.__sugestoes.append(list(lf.jogo))
         return self.__sugestoes
 
     def sugestoes(self):
@@ -90,10 +92,10 @@ class Gerador:
 
 if __name__ == '__main__':
     jogo = Gerador(modalidade='Megasena',
-                   dezenas=6,
-                   fixados=[1, 28],
+                   dezenas=7,
+                   fixados=[],
                    quantidade=10)
     print(f'Tamanho do jogo {len(jogo)}')
-    print(f'Gerando em aproximadamente 10 segundos...')
+    print(f'Gerando em aproximadamente 6 segundos...')
     jogo.gerajogo()
     jogo.sugestoes()
