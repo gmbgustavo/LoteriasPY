@@ -6,6 +6,7 @@ e os valores uma tupla, de tamanho 1 a 3, com cada uma contendo numeros de 0 a 9
 
 import secrets
 import time
+import numpy as np
 
 MAX_NUM_COL = 3
 MIN_NUM_COL = 1
@@ -14,15 +15,7 @@ MAX_NUM = 9
 MIN_BET = 7
 MAX_BET = 7
 RANGEBET = range(MIN_NUM, MAX_NUM + 1)
-
-JOGO = {'C1': (),
-        'C2': (),
-        'C3': (),
-        'C4': (),
-        'C5': (),
-        'C6': (),
-        'C7': (),
-        }
+JOGO = np.zeros((3, 7), dtype=int)    # Linha, coluna
 
 
 class Supersete:

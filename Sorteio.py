@@ -117,7 +117,7 @@ class Sorteio:
         elif isinstance(self.__modalidade, Diadesorte):
             return self.DIADESORTE + 1    # Inclui o mes
         elif isinstance(self.__modalidade, Supersete):
-            return self.SUPERSETE    # Inclui o mes
+            return self.SUPERSETE
         return None
 
     def resultado(self):
