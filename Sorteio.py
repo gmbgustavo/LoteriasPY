@@ -27,7 +27,7 @@ class Sorteio:
     DIADESORTE = 7
     MAX_DIADESORTE = 31
     SUPERSETE = 7
-    MESES = ('jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez')
+    MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
 
     def __init__(self, modalidade):
         self.__modalidade = modalidade
@@ -63,7 +63,6 @@ class Sorteio:
         numeros = [x for x in range(1, self.MAX_DIADESORTE + 1)]
         while len(self.__sorteado) < self.DIADESORTE:
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
-        self.__sorteado.add(self.MESES[secrets.choice(range(0, len(self.MESES)))])
         return set(self.__sorteado)
 
     def __lotomania(self) -> set:
@@ -115,7 +114,7 @@ class Sorteio:
         elif isinstance(self.__modalidade, Duplasena):
             return self.DUPLASENA
         elif isinstance(self.__modalidade, Diadesorte):
-            return self.DIADESORTE + 1    # Inclui o mes
+            return self.DIADESORTE    # Inclui o mes
         elif isinstance(self.__modalidade, Supersete):
             return self.SUPERSETE
         return None
@@ -133,6 +132,7 @@ class Sorteio:
             return self.__duplasena()
         elif isinstance(self.__modalidade, Diadesorte):
             l_exib = list(self.__diadesorte())
+            l_exib.append(self.MESES[secrets.randbelow(len(self.MESES))])
             l_exib.sort(key=lambda item: str(item))
             return l_exib
         return None

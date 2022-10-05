@@ -12,28 +12,31 @@ from Supersete import Supersete
 
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania',
                'Diadesorte', 'Duplasena', 'Supersete', 'Milionaria']
-MAXJOGOS = 20
+
+MAXJOGOS = 10    # Maximo 10 jogos para não extrapolar um tempo razoável na geração
 
 
 class Gerador:
 
-    def __init__(self, modalidade: str, dezenas: int, fixados: list, quantidade=1):
+    def __init__(self, modalidade: str, dezenas: int, fixados: list, quantidade=1, mes=0):
         """
         :param modalidade: Nome do jogo em string. (Quina, Megasena, Lotofacil, Lotomania, Diadesorte, Duplasena)
         :param dezenas: quantidade de dezenas para apostar (observar minimos e maximos)
         :param fixados: dezenas que obrigatoriamente estarao no jogo
         :param quantidade: numero de apostas para gerar
+        :param mes: mes fixo a ser apostado (apenas diadesorte)
         """
         assert modalidade in MODALIDADES, \
             f'Modalidade inválida: Válidas apenas {MODALIDADES}. Informado {modalidade}.'
         assert 1 <= quantidade <= MAXJOGOS and isinstance(quantidade, int), \
-            f'Quantidades de jogos deve ser entre 1 e {MAXJOGOS}'
+            f'Quantidades de jogos deve ser um número inteiro entre 1 e {MAXJOGOS}'
         self.__jogo = set()
         self.__modalidade = modalidade
         self.__fixados = set(fixados)
         self.__dezenas = dezenas
         self.__quantidade = quantidade
         self.__sugestoes = []
+        self.__mes = mes    # Usado apenas no Diadesorte
 
     def gerajogo(self):
         if self.__modalidade == 'Quina':
@@ -51,7 +54,7 @@ class Gerador:
                 self.__sugestoes.append(list(lf.jogo))
         elif self.__modalidade == 'Diadesorte':
             for i in range(1, self.__quantidade + 1):
-                lf = Diadesorte(*self.__fixados, dezenas=self.__dezenas)
+                lf = Diadesorte(*self.__fixados, dezenas=self.__dezenas, mes=self.__mes)
                 self.__sugestoes.append(list(lf.jogo))
         elif self.__modalidade == 'Lotomania':
             for i in range(1, self.__quantidade + 1):
@@ -66,7 +69,7 @@ class Gerador:
                 lf = Duplasena(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
         elif self.__modalidade == 'Supersete':
-            for i in range (1, self.__quantidade + 1):
+            for i in range(1, self.__quantidade + 1):
                 lf = Supersete(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
         return self.__sugestoes
@@ -75,7 +78,7 @@ class Gerador:
         assert len(self.__sugestoes) >= 1, 'Você deve gerar o jogo primeiro. Use o método gerajogo()'
         self.__sugestoes.sort(key=lambda item: str(item))
         for aposta in self.__sugestoes:
-            aposta.sort(key=lambda ele: (0, int(ele)) if isinstance(ele, int) else (1, ele))
+            aposta.sort(key=lambda item: (0, int(item)) if isinstance(item, int) else (1, item))
             for dezena in aposta:
                 print(f'{str(dezena).zfill(2)} ', end='')
             print('\n')
