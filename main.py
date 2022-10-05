@@ -12,7 +12,7 @@ import Sorteio
 
 
 if __name__ == '__main__':
-    aposta1 = Diadesorte(1, 5, 6, 15, 22, 28, dezenas=10)   # (surpresinha automatica para faltantes)
+    aposta1 = Diadesorte(1, 5, 6, 15, 22, 28, dezenas=7)   # (surpresinha automatica para faltantes)
     concursos = 1                                        # Quantidade de concursos, comecando com o primeiro
     print(f'Sua aposta: {aposta1}')                     # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')

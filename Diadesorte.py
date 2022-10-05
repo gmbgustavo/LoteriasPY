@@ -1,5 +1,7 @@
 """
 Classe do Dia de sorte - 7 numeros de 1 a 31 e um mes
+Para fins de sorteio consideram-se apenas os números, conforme regras da Caixa
+o mês é apenas para exibição e comparação pois é um prêmio pequeno independente dos números.
 """
 
 import secrets
