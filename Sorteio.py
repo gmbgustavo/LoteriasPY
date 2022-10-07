@@ -27,9 +27,14 @@ class Sorteio:
     DIADESORTE = 7
     MAX_DIADESORTE = 31
     SUPERSETE = 7
+    MILIONARIA = 6
     MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
+    MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania',
+                   'Diadesorte', 'Duplasena', 'Supersete', 'Milionaria']
 
-    def __init__(self, modalidade):
+    def __init__(self, modalidade: str):
+        assert modalidade in MODALIDADES, \
+            f'Modalidade inválida: Válidas apenas {MODALIDADES}. Informado {modalidade}.'
         self.__modalidade = modalidade
         self.__sorteado = set()
         self.__res_duplasena1 = set()
@@ -103,38 +108,45 @@ class Sorteio:
 
     @property    # Propriedade para saber a quantidade de acertos necessarios de cada modalidad
     def sorteio_len(self):
-        if isinstance(self.__modalidade, Quina):
+        if self.__modalidade == 'Quina':
             return self.QUINA
-        elif isinstance(self.__modalidade, Megasena):
+        elif self.__modalidade == 'Megasena':
             return self.MEGASENA
-        elif isinstance(self.__modalidade, Lotofacil):
+        elif self.__modalidade == 'Lotofacil':
             return self.LOTOFACIL
-        elif isinstance(self.__modalidade, Lotomania):
+        elif self.__modalidade == 'Lotomania':
             return self.LOTOMANIA
-        elif isinstance(self.__modalidade, Duplasena):
+        elif self.__modalidade == 'Duplasena':
             return self.DUPLASENA
-        elif isinstance(self.__modalidade, Diadesorte):
-            return self.DIADESORTE    # Inclui o mes
-        elif isinstance(self.__modalidade, Supersete):
+        elif self.__modalidade == 'Diadesorte':
+            return self.DIADESORTE
+        elif self.__modalidade == 'Supersete':
             return self.SUPERSETE
-        return None
+        elif self.__modalidade == 'Milionaria':
+            return self.MILIONARIA
+        else:
+            return AssertionError('Modalidade não implementada.')
 
     def sortear(self):
-        if isinstance(self.__modalidade, Quina):
+        if self.__modalidade == 'Quina':
             return self.__quina()
-        elif isinstance(self.__modalidade, Megasena):
+        elif self.__modalidade == 'Megasena':
             return self.__megasena()
-        elif isinstance(self.__modalidade, Lotofacil):
+        elif self.__modalidade == 'Lotofacil':
             return self.__lotofacil()
-        elif isinstance(self.__modalidade, Lotomania):
+        elif self.__modalidade == 'Lotomania':
             return self.__lotomania()
-        elif isinstance(self.__modalidade, Duplasena):
+        elif self.__modalidade == 'Duplasena':
             return self.__duplasena()
-        elif isinstance(self.__modalidade, Diadesorte):
+        elif self.__modalidade == 'Diadesorte':
             l_exib = list(self.__diadesorte())
             l_exib.append(self.MESES[secrets.randbelow(len(self.MESES))])
             l_exib.sort(key=lambda item: str(item))
             return l_exib
+        elif self.__modalidade == 'Supersete':
+            return NotImplementedError('Ainda não fiz essa.')
+        elif self.__modalidade == 'Milionaria'
+            return NotImplementedError('Ainda não fiz essa.')
         return AttributeError('Objeto não reconhecida como um jogo válido')
 
     def conferir(self, *args) -> int:

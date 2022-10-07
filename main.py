@@ -22,8 +22,8 @@ if __name__ == '__main__':
     concurso_loteria = Sorteio.Sorteio(aposta1)          # Cria um objeto do tipo sorteio
     resultado_loteria = concurso_loteria.sortear()       # Executa o sorteio e armazena na variavel
 
-    # Para chamar o método conferir da classe Sorteio, um objeto Sorteio deve ter sido instanciado previamente
-    # Antes da conferencia, deve ser executado um sorteio pelo método sortear()
+    # Para chamar o método conferir da classe Sorteio, um objeto Sorteio deve ter sido instanciado previamente,
+    # executando o método sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade jogo do ojbeto de aposta, Megasena, Quina...
     while concurso_loteria.conferir(aposta1.jogo) < concurso_loteria.sorteio_len:
         resultado_loteria = concurso_loteria.sortear()    # Novo sorteio
