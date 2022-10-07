@@ -119,7 +119,7 @@ class Sorteio:
             return self.SUPERSETE
         return None
 
-    def resultado(self):
+    def sortear(self):
         if isinstance(self.__modalidade, Quina):
             return self.__quina()
         elif isinstance(self.__modalidade, Megasena):
@@ -135,10 +135,13 @@ class Sorteio:
             l_exib.append(self.MESES[secrets.randbelow(len(self.MESES))])
             l_exib.sort(key=lambda item: str(item))
             return l_exib
-        return None
+        return AttributeError('Objeto não reconhecida como um jogo válido')
 
-    def conferir(self, jogo: set) -> int:
-        pontos = len(jogo.intersection(self.__sorteado))
+    def conferir(self, *args) -> int:
+        assert args is not None, f'É necessário informar um jogo para conferir'
+        apostas = args
+        for jogo in apostas:
+            pontos = len(jogo.intersection(self.__sorteado))
         return pontos
 
 
