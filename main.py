@@ -19,7 +19,7 @@ if __name__ == '__main__':
     concursos = 1                                        # Quantidade de concursos, comecando com o primeiro
     print(f'Suas apostas: \n{aposta1}, \n{aposta2}, \n{aposta3}')                     # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')
-    concurso_loteria = Sorteio.Sorteio(aposta1)          # Cria um objeto do tipo sorteio
+    concurso_loteria = Sorteio.Sorteio('Quina')          # Cria um objeto do tipo sorteio
     resultado_loteria = concurso_loteria.sortear()       # Executa o sorteio e armazena na variavel
 
     # Para chamar o método conferir da classe Sorteio, um objeto Sorteio deve ter sido instanciado previamente,

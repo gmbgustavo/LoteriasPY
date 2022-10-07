@@ -11,9 +11,11 @@ from Supersete import Supersete
 from Milionaria import Milionaria
 import secrets
 
+MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania',
+               'Diadesorte', 'Duplasena', 'Supersete', 'Milionaria']
+
 
 class Sorteio:
-
     MEGASENA = 6
     MAX_MEGASENA = 60
     QUINA = 5
@@ -29,8 +31,6 @@ class Sorteio:
     SUPERSETE = 7
     MILIONARIA = 6
     MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
-    MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania',
-                   'Diadesorte', 'Duplasena', 'Supersete', 'Milionaria']
 
     def __init__(self, modalidade: str):
         assert modalidade in MODALIDADES, \
@@ -145,7 +145,7 @@ class Sorteio:
             return l_exib
         elif self.__modalidade == 'Supersete':
             return NotImplementedError('Ainda não fiz essa.')
-        elif self.__modalidade == 'Milionaria'
+        elif self.__modalidade == 'Milionaria':
             return NotImplementedError('Ainda não fiz essa.')
         return AttributeError('Objeto não reconhecida como um jogo válido')
 
