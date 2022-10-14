@@ -12,15 +12,16 @@ import Sorteio
 
 
 if __name__ == '__main__':
-    aposta1 = Megasena(1, 5, 6, 15, 22, 28, dezenas=6)   # (surpresinha automatica para faltantes)
-    aposta2 = Megasena(dezenas=6)
-    aposta3 = Megasena(dezenas=6)
-    aposta4 = Megasena(dezenas=6)
+    modalidade = 'Lotofacil'
+    aposta1 = Lotofacil(1, 5, 6, 15, 22, 25, dezenas=15)   # (surpresinha automatica para faltantes)
+    aposta2 = Lotofacil(dezenas=15)
+    aposta3 = Lotofacil(dezenas=15)
+    aposta4 = Lotofacil(dezenas=15)
     volante = [aposta1.jogo, aposta2.jogo, aposta3.jogo, aposta4.jogo]
     concursos = 1                                        # Quantidade de concursos, comecando com o primeiro
     print(f'Suas apostas: \n{aposta1}, \n{aposta2}, \n{aposta3}, \n{aposta4}')    # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')
-    concurso_loteria = Sorteio.Sorteio('Megasena')          # Cria um objeto do tipo sorteio
+    concurso_loteria = Sorteio.Sorteio(modalidade)          # Cria um objeto do tipo sorteio
     resultado_loteria = concurso_loteria.sortear()       # Executa o sorteio e armazena na variavel
 
     # Para chamar o método conferir da classe Sorteio, um objeto Sorteio deve ter sido instanciado previamente,
