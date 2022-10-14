@@ -150,10 +150,11 @@ class Sorteio:
             return NotImplementedError('Ainda não fiz essa.')
         return AttributeError('Objeto não reconhecida como um jogo válido')
 
-    def conferir(self, *args) -> int:
+    def conferir(self, *args) -> list:
         assert args is not None, f'É necessário informar um jogo para conferir'
+        pontos = []
         for jogo in args:
-            pontos = len(jogo.intersection(self.__sorteado))
+            pontos.append(len(jogo.intersection(self.__sorteado)))
         return pontos
 
 
