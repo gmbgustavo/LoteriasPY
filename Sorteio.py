@@ -88,6 +88,7 @@ class Sorteio:
         numeros = [x for x in range(1, self.MAX_DUPLASENA + 1)]
         while len(self.__res_duplasena1) < self.DUPLASENA:
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
+        del numeros
 
         numeros = [x for x in range(1, self.MAX_DUPLASENA + 1)]
         while len(self.__res_duplasena2) < self.DUPLASENA:
@@ -151,8 +152,7 @@ class Sorteio:
 
     def conferir(self, *args) -> int:
         assert args is not None, f'É necessário informar um jogo para conferir'
-        apostas = args
-        for jogo in apostas:
+        for jogo in args:
             pontos = len(jogo.intersection(self.__sorteado))
         return pontos
 
