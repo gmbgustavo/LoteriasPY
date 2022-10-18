@@ -48,30 +48,37 @@ class Gerador:
             for i in range(1, self.__quantidade + 1):
                 lf = Duplasena(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
+                del lf
         elif self.__modalidade == 'Megasena':
             for i in range(1, self.__quantidade + 1):
                 lf = Megasena(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
+                del lf
         elif self.__modalidade == 'Diadesorte':
             for i in range(1, self.__quantidade + 1):
                 lf = Diadesorte(*self.__fixados, dezenas=self.__dezenas, mes=self.__mes)
                 self.__sugestoes.append(list(lf.jogo))
+                del lf
         elif self.__modalidade == 'Lotomania':
             for i in range(1, self.__quantidade + 1):
                 lf = Lotomania(*self.__fixados)
                 self.__sugestoes.append(list(lf.jogo))
+                del lf
         elif self.__modalidade == 'Lotofacil':
             for i in range(1, self.__quantidade + 1):
                 lf = Lotofacil(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
+                del lf
         elif self.__modalidade == 'Duplasena':
             for i in range(1, self.__quantidade + 1):
                 lf = Duplasena(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
+                del lf
         elif self.__modalidade == 'Supersete':
             for i in range(1, self.__quantidade + 1):
                 lf = Supersete(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
+                del lf
         return self.__sugestoes
 
     def sugestoes(self):
@@ -94,10 +101,10 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Lotofacil',
-                   dezenas=15,
+    jogo = Gerador(modalidade='Megasena',
+                   dezenas=7,
                    fixados=[],
-                   quantidade=5)
+                   quantidade=10)
     print(f'Tamanho do jogo {len(jogo)}')
     print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...')
     jogo.gerajogo()
