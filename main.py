@@ -17,9 +17,10 @@ if __name__ == '__main__':
     aposta2 = Lotofacil(dezenas=15)
     aposta3 = Lotofacil(dezenas=15)
     aposta4 = Lotofacil(dezenas=15)
-    volante = [aposta1.jogo, aposta2.jogo, aposta3.jogo, aposta4.jogo]
+    aposta5 = Lotofacil(dezenas=15)
+    volante = [aposta1.jogo, aposta2.jogo, aposta3.jogo, aposta4.jogo, aposta5.jogo]
     concursos = 1                                        # Quantidade de concursos, comecando com o primeiro
-    print(f'Suas apostas: \n{aposta1}, \n{aposta2}, \n{aposta3}, \n{aposta4}')    # Apresenta a aposta ao usuario
+    print(f'Suas apostas: {volante}')    # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')
     concurso_loteria = Sorteio.Sorteio(modalidade)          # Cria um objeto do tipo sorteio
     resultado_loteria = concurso_loteria.sortear()       # Executa o sorteio e armazena na variavel
