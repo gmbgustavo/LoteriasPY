@@ -9,8 +9,9 @@ from Lotomania import Lotomania
 from Duplasena import Duplasena
 from Diadesorte import Diadesorte
 from Supersete import Supersete
+from Timemania import Timemania
 
-MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania',
+MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania',
                'Diadesorte', 'Duplasena', 'Supersete', 'Milionaria']
 
 MAXJOGOS = 10    # Maximo 10 jogos para não extrapolar um tempo razoável na geração
@@ -79,6 +80,11 @@ class Gerador:
                 lf = Supersete(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
                 del lf
+        elif self.__modalidade == 'Timemania':
+            for i in range(1, self.__quantidade + 1):
+                lf = Timemania(*self.__fixados)
+                self.__sugestoes.append(list(lf.jogo))
+                del lf
         return self.__sugestoes
 
     def sugestoes(self):
@@ -101,10 +107,10 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Megasena',
-                   dezenas=7,
+    jogo = Gerador(modalidade='Timemania',
+                   dezenas=10,
                    fixados=[],
-                   quantidade=10)
+                   quantidade=1)
     print(f'Tamanho do jogo {len(jogo)}')
     print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...')
     jogo.gerajogo()
