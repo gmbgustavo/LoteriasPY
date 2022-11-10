@@ -46,7 +46,6 @@ class Gerador:
                 lf = Quina(*self.__fixados, dezenas=self.__dezenas)
                 self.__sugestoes.append(list(lf.jogo))
                 del lf
-                time.sleep(0.1)
         elif self.__modalidade == 'Duplasena':
             for i in range(1, self.__quantidade + 1):
                 lf = Duplasena(*self.__fixados, dezenas=self.__dezenas)
@@ -109,10 +108,10 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Megasena',
-                   dezenas=7,
+    jogo = Gerador(modalidade='Lotofacil',
+                   dezenas=15,
                    fixados=[],
-                   quantidade=10)
+                   quantidade=2)
     print(f'Tamanho do jogo {len(jogo)}')
     print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...')
     jogo.gerajogo()
