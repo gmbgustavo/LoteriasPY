@@ -10,7 +10,8 @@ from Duplasena import Duplasena
 from Diadesorte import Diadesorte
 from Supersete import Supersete
 from Timemania import Timemania
-import time
+from Milionaria import Milionaria
+
 
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania',
                'Diadesorte', 'Duplasena', 'Supersete', 'Milionaria']
@@ -20,7 +21,7 @@ MAXJOGOS = 10    # Maximo 10 jogos para não extrapolar um tempo razoável na ge
 
 class Gerador:
 
-    def __init__(self, modalidade: str, dezenas: int, fixados: list, quantidade=1, mes=0):
+    def __init__(self, modalidade: str, dezenas: int, fixados: list, quantidade=1, mes=0, num_trevos=2):
         """
         :param modalidade: Nome do jogo em string. (Quina, Megasena, Lotofacil, Lotomania, Diadesorte, Duplasena)
         :param dezenas: quantidade de dezenas para apostar (observar minimos e maximos)
@@ -39,6 +40,7 @@ class Gerador:
         self.__quantidade = quantidade
         self.__sugestoes = []
         self.__mes = mes    # Usado apenas no Diadesorte
+        self.__num_trevos = num_trevos    # Usado apenas na +Milionária
 
     def gerajogo(self):
         if self.__modalidade == 'Quina':
@@ -86,6 +88,11 @@ class Gerador:
                 lf = Timemania(*self.__fixados)
                 self.__sugestoes.append(list(lf.jogo))
                 del lf
+        elif self.__modalidade == 'Milionaria':
+            for i in range(1, self.__quantidade + 1):
+                lf = Milionaria(*self.__fixados, dezenas=self.__dezenas, num_trevos=2, trevos=())
+                self.__sugestoes.append(list(lf.jogo))
+                del lf
         return self.__sugestoes
 
     def sugestoes(self):
@@ -108,8 +115,8 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Lotofacil',
-                   dezenas=15,
+    jogo = Gerador(modalidade='Milionaria',
+                   dezenas=6,
                    fixados=[],
                    quantidade=2)
     print(f'Tamanho do jogo {len(jogo)}')

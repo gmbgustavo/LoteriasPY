@@ -16,7 +16,7 @@ RANGEBET = range(MIN_NUM, MAX_NUM + 1)
 
 class Milionaria:
 
-    def __init__(self, *args, dezenas=MIN_BET, num_trevos=2, trevos:tuple):
+    def __init__(self, *args, dezenas=MIN_BET, num_trevos=2, trevos: tuple):
         """
         Cria um objeto do tipo +Milionaria.
         :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas(padrao=6)
@@ -64,14 +64,15 @@ class Milionaria:
         while len(retorno) < self.__dezenas:
             retorno.add(numeros.pop(secrets.choice(range(0, count))))
             count -= 1
+
         # Escolhe os trevos
-        count_t = len(trevos)
+        count_t = len(RANGE_TREVO)
         retorno_t = set(trevos)
-        numeros = [x for x in range(1, count_t + 1)]
-        while len(trevos) < self.__num_trevos:
-            retorno_t.add(numeros.pop(secrets.choice(range(0, count_t))))
+        numeros_t = [x for x in range(1, count_t + 1)]
+        while len(retorno_t) < self.__num_trevos:
+            retorno_t.add(numeros_t.pop(secrets.choice(range(0, count_t))))
             count_t -= 1
-        retorno.add(retorno_t)
+        retorno.add(tuple(retorno_t))
         return set(retorno)
 
     def sorteio(self):
