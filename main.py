@@ -12,9 +12,9 @@ import Sorteio
 
 
 if __name__ == '__main__':
-    modalidade = 'Lotofacil'
-    aposta1 = Lotofacil(1, 5, 6, 15, 22, 25, dezenas=15)   # (surpresinha automatica para faltantes)
-    aposta2 = Lotofacil(2, 7, 10, 21, dezenas=15)
+    modalidade = 'Quina'
+    aposta1 = Quina(1, 5, 6, 15, 22, 28, dezenas=6)   # (surpresinha automatica para faltantes)
+    aposta2 = Quina(2, 7, 10, 21, dezenas=5)
     volante = [aposta1.jogo, aposta2.jogo]
     concursos = 1                                        # Quantidade de concursos, comecando com o primeiro
     print(f'Suas apostas: {volante}')    # Apresenta a aposta ao usuario

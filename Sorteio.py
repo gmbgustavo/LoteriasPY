@@ -30,6 +30,9 @@ class Sorteio:
     MAX_DIADESORTE = 31
     SUPERSETE = 7
     MILIONARIA = 6
+    MAX_MILIONARIA = 50
+    MILIONARIA_TREVOS = 2
+    MAX_TREVOS = 6
     MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
 
     def __init__(self, modalidade: str):
@@ -39,6 +42,7 @@ class Sorteio:
         self.__sorteado = set()
         self.__res_duplasena1 = set()
         self.__res_duplasena2 = set()
+        self.__trevos = set()
 
     def __megasena(self) -> set:
         self.__sorteado.clear()
@@ -69,6 +73,16 @@ class Sorteio:
         while len(self.__sorteado) < self.DIADESORTE:
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return set(self.__sorteado)
+
+    def __milionaria(self) -> tuple:
+        self.__sorteado.clear()
+        numeros = [x for x in range(1, self.MAX_MILIONARIA + 1)]
+        trevos = [x for x in range(1, self.MAX_TREVOS + 1)]
+        while len(self.__sorteado) < self.MILIONARIA:
+            self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
+        while len(self.__trevos) < self.MILIONARIA_TREVOS:
+            self.__trevos.add(trevos.pop(secrets.randbelow(len(trevos))))
+        return set(self.__sorteado), self.__trevos
 
     def __lotomania(self) -> set:
         self.__sorteado.clear()
@@ -147,7 +161,7 @@ class Sorteio:
         elif self.__modalidade == 'Supersete':
             return NotImplementedError('Ainda não fiz essa.')
         elif self.__modalidade == 'Milionaria':
-            return NotImplementedError('Ainda não fiz essa.')
+            return self.__milionaria()
         return AttributeError('Objeto não reconhecida como um jogo válido')
 
     def conferir(self, *args) -> list:

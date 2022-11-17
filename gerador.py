@@ -118,7 +118,7 @@ if __name__ == '__main__':
     jogo = Gerador(modalidade='Milionaria',
                    dezenas=6,
                    fixados=[],
-                   quantidade=2)
+                   quantidade=3)
     print(f'Tamanho do jogo {len(jogo)}')
     print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...')
     jogo.gerajogo()
