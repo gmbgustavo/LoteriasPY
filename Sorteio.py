@@ -168,7 +168,7 @@ class Sorteio:
         assert args is not None, f'É necessário informar um jogo para conferir'
         pontos = []
         for jogo in args:
-            pontos.append(len(jogo.intersection(self.__sorteado)))
+            pontos.append(self.__sorteado.issubset(jogo))
         return pontos
 
 

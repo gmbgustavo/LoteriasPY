@@ -115,10 +115,10 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Milionaria',
+    jogo = Gerador(modalidade='Megasena',
                    dezenas=6,
                    fixados=[],
-                   quantidade=3)
+                   quantidade=2)
     print(f'Tamanho do jogo {len(jogo)}')
     print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...')
     jogo.gerajogo()
