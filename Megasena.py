@@ -1,7 +1,6 @@
 """
 Classe da Mega-Sena
 """
-
 import secrets
 import time
 

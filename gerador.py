@@ -2,97 +2,66 @@
 Gerador de apostas
 """
 
-from Quina import Quina
-from Megasena import Megasena
-from Lotofacil import Lotofacil
-from Lotomania import Lotomania
-from Duplasena import Duplasena
-from Diadesorte import Diadesorte
-from Supersete import Supersete
-from Timemania import Timemania
-from Milionaria import Milionaria
+import inspect
+from Quina import *
+from Megasena import *
+from Lotofacil import *
+from Lotomania import *
+from Duplasena import *
+from Diadesorte import *
+from Supersete import *
+from Timemania import *
+from Milionaria import *
 
 
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania',
                'Diadesorte', 'Duplasena', 'Supersete', 'Milionaria']
 
-MAXJOGOS = 10    # Maximo 10 jogos para não extrapolar um tempo razoável na geração
+MAX_JOGOS = 10    # Maximo 10 jogos para não extrapolar um tempo razoável na geração
 
 
 class Gerador:
 
-    def __init__(self, modalidade: str, dezenas: int, fixados: list, quantidade=1, mes=0, num_trevos=2):
+    def __init__(self, modalidade: str, dezenas: int, fixados: list, quantidade=1):
         """
         :param modalidade: Nome do jogo em string. (Quina, Megasena, Lotofacil, Lotomania, Diadesorte, Duplasena)
         :param dezenas: quantidade de dezenas para apostar (observar minimos e maximos)
         :param fixados: dezenas que obrigatoriamente estarao no jogo
         :param quantidade: numero de apostas para gerar
-        :param mes: mes fixo a ser apostado (apenas diadesorte)
         """
         assert modalidade in MODALIDADES, \
             f'Modalidade inválida: Válidas apenas {MODALIDADES}. Informado {modalidade}.'
-        assert 1 <= quantidade <= MAXJOGOS and isinstance(quantidade, int), \
-            f'Quantidades de jogos deve ser um número inteiro entre 1 e {MAXJOGOS}'
+        assert 1 <= quantidade <= MAX_JOGOS and isinstance(quantidade, int), \
+            f'Quantidades de jogos deve ser um número inteiro entre 1 e {MAX_JOGOS}'
         self.__jogo = set()
         self.__modalidade = modalidade
         self.__fixados = set(fixados)
         self.__dezenas = dezenas
         self.__quantidade = quantidade
         self.__sugestoes = []
-        self.__mes = mes    # Usado apenas no Diadesorte
-        self.__num_trevos = num_trevos    # Usado apenas na +Milionária
 
     def gerajogo(self):
-        if self.__modalidade == 'Quina':
-            for i in range(1, self.__quantidade + 1):
-                lf = Quina(*self.__fixados, dezenas=self.__dezenas)
-                self.__sugestoes.append(list(lf.jogo))
-                del lf
-        elif self.__modalidade == 'Duplasena':
-            for i in range(1, self.__quantidade + 1):
-                lf = Duplasena(*self.__fixados, dezenas=self.__dezenas)
-                self.__sugestoes.append(list(lf.jogo))
-                del lf
-        elif self.__modalidade == 'Megasena':
-            for i in range(1, self.__quantidade + 1):
-                lf = Megasena(*self.__fixados, dezenas=self.__dezenas)
-                self.__sugestoes.append(list(lf.jogo))
-                del lf
-        elif self.__modalidade == 'Diadesorte':
-            for i in range(1, self.__quantidade + 1):
-                lf = Diadesorte(*self.__fixados, dezenas=self.__dezenas, mes=self.__mes)
-                self.__sugestoes.append(list(lf.jogo))
-                del lf
-        elif self.__modalidade == 'Lotomania':
-            for i in range(1, self.__quantidade + 1):
-                lf = Lotomania(*self.__fixados)
-                self.__sugestoes.append(list(lf.jogo))
-                del lf
-        elif self.__modalidade == 'Lotofacil':
-            for i in range(1, self.__quantidade + 1):
-                lf = Lotofacil(*self.__fixados, dezenas=self.__dezenas)
-                self.__sugestoes.append(list(lf.jogo))
-                del lf
-        elif self.__modalidade == 'Duplasena':
-            for i in range(1, self.__quantidade + 1):
-                lf = Duplasena(*self.__fixados, dezenas=self.__dezenas)
-                self.__sugestoes.append(list(lf.jogo))
-                del lf
-        elif self.__modalidade == 'Supersete':
-            for i in range(1, self.__quantidade + 1):
-                lf = Supersete(*self.__fixados, dezenas=self.__dezenas)
-                self.__sugestoes.append(list(lf.jogo))
-                del lf
-        elif self.__modalidade == 'Timemania':
-            for i in range(1, self.__quantidade + 1):
-                lf = Timemania(*self.__fixados)
-                self.__sugestoes.append(list(lf.jogo))
-                del lf
-        elif self.__modalidade == 'Milionaria':
-            for i in range(1, self.__quantidade + 1):
-                lf = Milionaria(*self.__fixados, dezenas=self.__dezenas, num_trevos=2, trevos=())
-                self.__sugestoes.append(list(lf.jogo))
-                del lf
+        modalidades = {
+            'Quina': Quina,
+            'Duplasena': Duplasena,
+            'Megasena': Megasena,
+            'Diadesorte': Diadesorte,
+            'Lotomania': Lotomania,
+            'Lotofacil': Lotofacil,
+            'Supersete': Supersete,
+            'Timemania': Timemania,
+            'Milionaria': Milionaria
+        }
+
+        for i in range(1, self.__quantidade + 1):
+            lf = modalidades[self.__modalidade](
+                *self.__fixados,
+                dezenas=self.__dezenas if 'dezenas' in inspect.signature(
+                    modalidades[self.__modalidade]).parameters else None
+            )
+            self.__sugestoes.append(list(lf.jogo))
+            del lf
+
         return self.__sugestoes
 
     def sugestoes(self):
@@ -103,7 +72,6 @@ class Gerador:
             for dezena in aposta:
                 print(f'{str(dezena).zfill(2)} ', end='')
             print('\n')
-        return None
 
     def __repr__(self):
         l_exib = list(self.__sugestoes)
@@ -116,9 +84,9 @@ class Gerador:
 
 if __name__ == '__main__':
     jogo = Gerador(modalidade='Megasena',
-                   dezenas=6,
+                   dezenas=7,
                    fixados=[],
-                   quantidade=2)
+                   quantidade=5)
     print(f'Tamanho do jogo {len(jogo)}')
     print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...')
     jogo.gerajogo()
