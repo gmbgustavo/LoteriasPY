@@ -9,8 +9,8 @@ import Sorteio
 
 if __name__ == '__main__':
     modalidade = 'Megasena'
-    aposta1 = Megasena(1, 5, 6, 15, 22, 28, dezenas=6)   # (surpresinha automatica para faltantes)
-    aposta2 = Megasena(dezenas=6)  # (surpresinha automatica para faltantes)
+    aposta1 = Megasena(1, 5, 6, 15, 22, 28, dezenas=8)   # (surpresinha automatica para faltantes)
+    aposta2 = Megasena(dezenas=8)  # (surpresinha automatica para faltantes)
     volante = [aposta1.jogo, aposta2.jogo]
     concursos = 1                                        # Quantidade de concursos, comecando com o primeiro
     print(f'Suas apostas: {volante}')    # Apresenta a aposta ao usuario
@@ -25,8 +25,8 @@ if __name__ == '__main__':
         resultado_loteria = concurso_loteria.sortear()    # Novo sorteio
         concursos += 1                                      # Controla o numero de concursos
         print(f'\rConcursos {concursos:,}', end='')
-    resultado_loteria = list(resultado_loteria)
-    resultado_loteria.sort(key=lambda elem: (0, int(elem)) if isinstance(elem, int) else (1, elem))
+    resultado_loteria = sorted(list(resultado_loteria),
+                               key=lambda elem: (0, int(elem)) if isinstance(elem, int) else (1, elem))
 
     print('\n_______________________________________________________')
     print(f'Foram necessarios {concursos:,} concursos. ')
