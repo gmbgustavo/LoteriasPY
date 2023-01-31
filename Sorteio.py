@@ -143,26 +143,26 @@ class Sorteio:
             return AssertionError('Modalidade não implementada.')
 
     def sortear(self):
-        if self.__modalidade == 'Quina':
-            return self.__quina()
-        elif self.__modalidade == 'Megasena':
-            return self.__megasena()
-        elif self.__modalidade == 'Lotofacil':
-            return self.__lotofacil()
-        elif self.__modalidade == 'Lotomania':
-            return self.__lotomania()
-        elif self.__modalidade == 'Duplasena':
-            return self.__duplasena()
-        elif self.__modalidade == 'Diadesorte':
-            l_exib = list(self.__diadesorte())
-            l_exib.append(self.MESES[secrets.randbelow(len(self.MESES))])
-            l_exib.sort(key=lambda item: str(item))
-            return l_exib
-        elif self.__modalidade == 'Supersete':
-            return NotImplementedError('Ainda não fiz essa.')
-        elif self.__modalidade == 'Milionaria':
-            return self.__milionaria()
-        return AttributeError('Objeto não reconhecida como um jogo válido')
+        methods = {
+            'Quina': self.__quina,
+            'Megasena': self.__megasena,
+            'Lotofacil': self.__lotofacil,
+            'Lotomania': self.__lotomania,
+            'Duplasena': self.__duplasena,
+            'Diadesorte': self.__diadesorte,
+            'Supersete': lambda: NotImplementedError("Ainda não fiz essa."),
+            'Milionaria': self.__milionaria,
+        }
+        method = methods.get(self.__modalidade)
+        if method:
+            result = method()
+            if self.__modalidade == 'Diadesorte':
+                l_exib = list(result)
+                l_exib.append(self.MESES[secrets.randbelow(len(self.MESES))])
+                l_exib.sort(key=lambda item: str(item))
+                return l_exib
+            return result
+        return AttributeError("Objeto não reconhecida como um jogo válido")
 
     def conferir(self, *args) -> list:
         assert args is not None, f'É necessário informar um jogo para conferir'
@@ -173,4 +173,4 @@ class Sorteio:
 
 
 if __name__ == '__main__':
-    print('Essa classe deve ser apenas instanciada internamente.')
+    print('Essa classe não deve ser usada diretamente.')
