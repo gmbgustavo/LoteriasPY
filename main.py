@@ -19,7 +19,7 @@ if __name__ == '__main__':
     resultado_loteria = concurso_loteria.sortear()       # Executa o sorteio e armazena na variavel
 
     # Para chamar o método conferir da classe Sorteio, um objeto Sorteio deve ter sido instanciado previamente,
-    # executando o método sortear()
+    # executando o método sortear()e
     # Deve ser informado o parametro ao metodo conferir() a propriedade jogo do ojbeto de aposta, Megasena, Quina...
     while True not in concurso_loteria.conferir(*volante):
         resultado_loteria = concurso_loteria.sortear()    # Novo sorteio

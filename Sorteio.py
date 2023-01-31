@@ -42,7 +42,6 @@ class Sorteio:
         self.__sorteado = set()
         self.__res_duplasena1 = set()
         self.__res_duplasena2 = set()
-        self.__trevos = set()
 
     def __megasena(self) -> set:
         self.__sorteado.clear()
@@ -74,15 +73,13 @@ class Sorteio:
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return set(self.__sorteado)
 
-    def __milionaria(self) -> tuple:
+    def __milionaria(self) -> set:
         self.__sorteado.clear()
         numeros = [x for x in range(1, self.MAX_MILIONARIA + 1)]
         trevos = [x for x in range(1, self.MAX_TREVOS + 1)]
         while len(self.__sorteado) < self.MILIONARIA:
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
-        while len(self.__trevos) < self.MILIONARIA_TREVOS:
-            self.__trevos.add(trevos.pop(secrets.randbelow(len(trevos))))
-        return set(self.__sorteado), self.__trevos
+        return self.__sorteado
 
     def __lotomania(self) -> set:
         self.__sorteado.clear()
@@ -123,24 +120,16 @@ class Sorteio:
 
     @property    # Propriedade para saber a quantidade de acertos necessarios de cada modalidad
     def sorteio_len(self):
-        if self.__modalidade == 'Quina':
-            return self.QUINA
-        elif self.__modalidade == 'Megasena':
-            return self.MEGASENA
-        elif self.__modalidade == 'Lotofacil':
-            return self.LOTOFACIL
-        elif self.__modalidade == 'Lotomania':
-            return self.LOTOMANIA
-        elif self.__modalidade == 'Duplasena':
-            return self.DUPLASENA
-        elif self.__modalidade == 'Diadesorte':
-            return self.DIADESORTE
-        elif self.__modalidade == 'Supersete':
-            return self.SUPERSETE
-        elif self.__modalidade == 'Milionaria':
-            return self.MILIONARIA
-        else:
-            return AssertionError('Modalidade não implementada.')
+        return {
+            'Quina': self.QUINA,
+            'Megasena': self.MEGASENA,
+            'Lotofacil': self.LOTOFACIL,
+            'Lotomania': self.LOTOMANIA,
+            'Duplasena': self.DUPLASENA,
+            'Diadesorte': self.DIADESORTE,
+            'Supersete': self.SUPERSETE,
+            'Milionaria': self.MILIONARIA
+        }.get(self.__modalidade, AssertionError('Modalidade não implementada.'))
 
     def sortear(self):
         methods = {
