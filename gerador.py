@@ -83,8 +83,8 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Quina',
-                   dezenas=5,
+    jogo = Gerador(modalidade='Lotofacil',
+                   dezenas=15,
                    fixados=[],
                    quantidade=3)
     print(f'Tamanho do jogo {len(jogo)}')
