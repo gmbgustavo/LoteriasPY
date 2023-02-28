@@ -24,9 +24,9 @@ class Megasena:
             f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}. (Foi informado {dezenas})'
         assert len(args) <= dezenas, f'Quantidade de números informados incompativel com o argumento "dezenas"'
         assert self.__checkargs(args), f'Megasena usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
+        self.__gira_globo = secrets.SystemRandom()
         self.__dezenas = dezenas
         self.__jogo = self.__surpresinha(set(args))
-        self.__gira_globo = secrets.SystemRandom()
 
     def __repr__(self):
         l_exib = list(self.__jogo)

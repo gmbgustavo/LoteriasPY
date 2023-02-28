@@ -33,8 +33,8 @@ class Diadesorte:
         assert len(args) <= dezenas, f'Quantidade de números informados incompativel com o argumento "dezenas"'
         self.__dezenas = dezenas
         self.__mes = mes
-        self.__jogo = self.__surpresinha(set(args))
         self.__gira_globo = secrets.SystemRandom()
+        self.__jogo = self.__surpresinha(set(args))
 
     def __repr__(self):
         l_exib = list(self.__jogo)

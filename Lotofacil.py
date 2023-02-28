@@ -25,9 +25,9 @@ class Lotofacil:
             f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}. (Passadas {dezenas})'
         assert self.__checkargs(args), f'Lotofácil usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         assert len(args) <= dezenas, f'Quantidade de números informados incompativel com o argumento "dezenas"'
+        self.__gira_globo = secrets.SystemRandom()
         self.__dezenas = dezenas
         self.__jogo = self.__surpresinha(set(args))
-        self.__gira_globo = secrets.SystemRandom()
 
     def __repr__(self):
         l_exib = list(self.__jogo)

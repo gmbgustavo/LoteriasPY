@@ -3,13 +3,15 @@ Modulo principal
 """
 
 from Megasena import Megasena
+from Diadesorte import Diadesorte
+from Lotofacil import Lotofacil
 
 import Sorteio
 
 
 if __name__ == '__main__':
-    modalidade = 'Megasena'
-    aposta1 = Megasena(1, 5, 6, 15, 22, 28, dezenas=6)   # (surpresinha automatica para faltantes)
+    modalidade = 'Diadesorte'
+    aposta1 = Diadesorte(1, 5, 6, 15, 22, 28, dezenas=7, mes=1)   # (surpresinha automatica para faltantes)
     volante = [aposta1.jogo]
     concursos = 1                                        # Quantidade de concursos, comecando com o primeiro
     print(f'Suas apostas: {volante}')    # Apresenta a aposta ao usuario
@@ -18,7 +20,7 @@ if __name__ == '__main__':
     resultado_loteria = concurso_loteria.sortear()       # Executa o sorteio e armazena na variavel
 
     # Para chamar o método conferir da classe Sorteio, um objeto Sorteio deve ter sido instanciado previamente,
-    # executando o método sortear()e
+    # executando o método sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade jogo do ojbeto de aposta, Megasena, Quina...
     while True not in concurso_loteria.conferir(*volante):
         resultado_loteria = concurso_loteria.sortear()    # Novo sorteio
