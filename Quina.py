@@ -9,7 +9,7 @@ MAX_BET = 15
 MIN_BET = 5
 MIN_NUM = 1
 MAX_NUM = 80
-RANGEBET = range(MIN_NUM, MAX_NUM + 1)
+RANGE_BET = range(MIN_NUM, MAX_NUM + 1)
 
 
 class Quina:
@@ -45,7 +45,7 @@ class Quina:
         :return: set
         """
         retorno = set(fixos)
-        numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsidera os fixos
+        numeros = [x for x in RANGE_BET if x not in retorno]    # Generator desconsidera os fixos
         while len(retorno) < self.__dezenas:
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
             time.sleep(0.1)    # Aumenta a aleatoriedade
@@ -61,7 +61,7 @@ class Quina:
             return True
         else:
             for i in numeros:
-                if i not in RANGEBET:
+                if i not in RANGE_BET:
                     return False
             return True
 

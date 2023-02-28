@@ -20,6 +20,7 @@ class Lotomania:
         """
         assert self.__checkargs(args), f'Lotomania usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         self.__jogo = self.__surpresinha(args)
+        self.__gira_globo = secrets.SystemRandom()
 
     def __repr__(self):
         l_exib = list(self.__jogo)

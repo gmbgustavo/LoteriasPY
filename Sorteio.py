@@ -1,14 +1,7 @@
 """
 Sorteia e retorna as dezenas de uma loteria especificada
 """
-from Quina import Quina
-from Megasena import Megasena
-from Lotofacil import Lotofacil
-from Lotomania import Lotomania
-from Duplasena import Duplasena
-from Diadesorte import Diadesorte
-from Supersete import Supersete
-from Milionaria import Milionaria
+
 import secrets
 
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania',
@@ -31,8 +24,6 @@ class Sorteio:
     SUPERSETE = 7
     MILIONARIA = 6
     MAX_MILIONARIA = 50
-    MILIONARIA_TREVOS = 2
-    MAX_TREVOS = 6
     MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
 
     def __init__(self, modalidade: str):
@@ -42,11 +33,13 @@ class Sorteio:
         self.__sorteado = set()
         self.__res_duplasena1 = set()
         self.__res_duplasena2 = set()
+        self.__gira_globo = secrets.SystemRandom()    # Simula o 'embaralhamento' num globo com as bolas
 
     def __megasena(self) -> set:
         self.__sorteado.clear()
         numeros = [x for x in range(1, self.MAX_MEGASENA + 1)]
         while len(self.__sorteado) < self.MEGASENA:
+            self.__gira_globo.shuffle(numeros)
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return self.__sorteado
 
@@ -55,6 +48,7 @@ class Sorteio:
         count = self.MAX_QUINA
         numeros = [x for x in range(1, self.MAX_QUINA + 1)]
         while len(self.__sorteado) < self.QUINA:
+            self.__gira_globo.shuffle(numeros)
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
             count -= 1
         return self.__sorteado
@@ -63,6 +57,7 @@ class Sorteio:
         self.__sorteado.clear()
         numeros = [x for x in range(1, self.MAX_LOTOFACIL + 1)]
         while len(self.__sorteado) < self.LOTOFACIL:
+            self.__gira_globo.shuffle(numeros)
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return self.__sorteado
 
@@ -70,14 +65,15 @@ class Sorteio:
         self.__sorteado.clear()
         numeros = [x for x in range(1, self.MAX_DIADESORTE + 1)]
         while len(self.__sorteado) < self.DIADESORTE:
+            self.__gira_globo.shuffle(numeros)
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return set(self.__sorteado)
 
     def __milionaria(self) -> set:
         self.__sorteado.clear()
         numeros = [x for x in range(1, self.MAX_MILIONARIA + 1)]
-        trevos = [x for x in range(1, self.MAX_TREVOS + 1)]
         while len(self.__sorteado) < self.MILIONARIA:
+            self.__gira_globo.shuffle(numeros)
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return self.__sorteado
 
@@ -85,6 +81,7 @@ class Sorteio:
         self.__sorteado.clear()
         numeros = [x for x in range(1, self.MAX_LOTOMANIA + 1)]
         while len(self.__sorteado) < self.LOTOMANIA:
+            self.__gira_globo.shuffle(numeros)
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return set(self.__sorteado)
 
@@ -98,11 +95,13 @@ class Sorteio:
         self.__res_duplasena2.clear()
         numeros = [x for x in range(1, self.MAX_DUPLASENA + 1)]
         while len(self.__res_duplasena1) < self.DUPLASENA:
+            self.__gira_globo.shuffle(numeros)
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         del numeros
 
         numeros = [x for x in range(1, self.MAX_DUPLASENA + 1)]
         while len(self.__res_duplasena2) < self.DUPLASENA:
+            self.__gira_globo.shuffle(numeros)
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         for i in self.__res_duplasena1:
             self.__sorteado.add(i)           # Adiciona o primeiro sorteio ao set

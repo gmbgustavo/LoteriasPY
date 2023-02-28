@@ -27,6 +27,7 @@ class Lotofacil:
         assert len(args) <= dezenas, f'Quantidade de números informados incompativel com o argumento "dezenas"'
         self.__dezenas = dezenas
         self.__jogo = self.__surpresinha(set(args))
+        self.__gira_globo = secrets.SystemRandom()
 
     def __repr__(self):
         l_exib = list(self.__jogo)
@@ -47,6 +48,7 @@ class Lotofacil:
         retorno = set(fixos)
         numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsider fixos
         while len(retorno) < self.__dezenas:
+            self.__gira_globo.shuffle(numeros)
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
             time.sleep(0.1)    # Aumenta a aleatoriedade
         return set(retorno)

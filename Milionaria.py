@@ -3,6 +3,7 @@ Classe da +Milionária
 """
 
 import secrets
+import time
 
 MAX_BET = 12
 MIN_BET = 6
@@ -55,17 +56,16 @@ class Milionaria:
 
     def __surpresinha(self, trevos=(), fixos=()):
         """
-        Retorna um conjunto(set) com numeros inteiros entre 1 e 50
+        Retorna um conjunto(set) com numeros inteiros entre 1 e 50 mais dois trevos
         :return: set
         """
-        count = len(RANGEBET)
+        # Sorteio dos 6 numeros principais
         retorno = set(fixos)
-        numeros = [x for x in range(1, count + 1)]
+        numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsidera fixos
         while len(retorno) < self.__dezenas:
-            retorno.add(numeros.pop(secrets.choice(range(0, count))))
-            count -= 1
-
-        # Escolhe os trevos
+            retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
+            time.sleep(0.2)    # Aumenta a aleatoriedade
+        # Sorteio dos trevos
         count_t = len(RANGE_TREVO)
         retorno_t = set(trevos)
         numeros_t = [x for x in range(1, count_t + 1)]

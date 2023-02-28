@@ -26,6 +26,7 @@ class Megasena:
         assert self.__checkargs(args), f'Megasena usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         self.__dezenas = dezenas
         self.__jogo = self.__surpresinha(set(args))
+        self.__gira_globo = secrets.SystemRandom()
 
     def __repr__(self):
         l_exib = list(self.__jogo)
@@ -56,8 +57,9 @@ class Megasena:
         retorno = set(fixos)
         numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsidera fixos
         while len(retorno) < self.__dezenas:
+            self.__gira_globo.shuffle(numeros)
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
-            time.sleep(0.1)    # Aumenta a aleatoriedade
+            time.sleep(0.2)    # Aumenta a aleatoriedade
         return set(retorno)
 
     def sorteio(self):
