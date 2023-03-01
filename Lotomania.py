@@ -33,8 +33,7 @@ class Lotomania:
     def __len__(self):
         return BET
 
-    @staticmethod
-    def __surpresinha(fixos=()):
+    def __surpresinha(self, fixos=()):
         """
         Retorna um conjunto(set) com numeros inteiros entre 1 e 100
         :param fixos: Numeros pre estabelecidos
@@ -43,8 +42,9 @@ class Lotomania:
         retorno = set(fixos)
         numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsidera os fixos
         while len(retorno) < BET:
+            self.__gira_globo.shuffle(numeros)
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
-            time.sleep(0.1)    # Aumenta a aleatoriedade
+            time.sleep(0.2)    # Aumenta a aleatoriedade
         return set(retorno)
 
     @staticmethod

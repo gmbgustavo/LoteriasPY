@@ -61,6 +61,7 @@ class Gerador:
             )
             self.__sugestoes.append(list(lf.jogo))
             del lf
+            time.sleep(0.1)
 
         return self.__sugestoes
 
@@ -81,13 +82,17 @@ class Gerador:
     def __len__(self):
         return self.__dezenas
 
+    @property
+    def get_name(self):
+        return self.__modalidade
+
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Diadesorte',
-                   dezenas=7,
+    jogo = Gerador(modalidade='Duplasena',
+                   dezenas=8,
                    fixados=[],
                    quantidade=3)
-    print(f'Tamanho do jogo {len(jogo)}')
+    print(f'Jogo a gerar: {jogo.get_name} com {len(jogo)} dezenas.')
     print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...')
     jogo.gerajogo()
     jogo.sugestoes()

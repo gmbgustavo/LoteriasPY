@@ -25,6 +25,7 @@ class Duplasena:
             f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}. (Passadas {dezenas})'
         assert self.__checkargs(args), f'Duplasena aceita números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         assert len(args) <= dezenas, f'Quantidade de números informados incompativel com o argumento "dezenas"'
+        self.__gira_globo = secrets.SystemRandom()
         self.__dezenas = dezenas
         self.__jogo = self.__surpresinha(set(args))
 
@@ -47,8 +48,10 @@ class Duplasena:
         retorno = set(fixos)
         numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsidera os fixos
         while len(retorno) < self.__dezenas:
+            self.__gira_globo.shuffle(numeros)
+            time.sleep(0.3)
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
-            time.sleep(0.1)    # Aumenta a aleatoriedade
+            time.sleep(0.25)    # Aumenta a aleatoriedade
         return set(retorno)
 
     @staticmethod
