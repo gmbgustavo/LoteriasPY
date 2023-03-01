@@ -85,7 +85,7 @@ class Sorteio:
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return set(self.__sorteado)
 
-    def __duplasena(self) -> set:
+    def __duplasena(self) -> list:
         """
         Executa o sorteio da Dupla sena (Dois sets de seis numeros)
         :return: Um set com a uniao dos dos sorteis, ignorando dezenas repetidas
@@ -96,18 +96,14 @@ class Sorteio:
         numeros = [x for x in range(1, self.MAX_DUPLASENA + 1)]
         while len(self.__res_duplasena1) < self.DUPLASENA:
             self.__gira_globo.shuffle(numeros)
-            self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
+            self.__res_duplasena1.add(numeros.pop(secrets.randbelow(len(numeros))))
         del numeros
 
         numeros = [x for x in range(1, self.MAX_DUPLASENA + 1)]
         while len(self.__res_duplasena2) < self.DUPLASENA:
             self.__gira_globo.shuffle(numeros)
-            self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
-        for i in self.__res_duplasena1:
-            self.__sorteado.add(i)           # Adiciona o primeiro sorteio ao set
-        for j in self.__res_duplasena2:
-            self.__sorteado.add(j)          # Adiciona o segundo sorteio ao set(remove repetidos)
-        return self.__sorteado
+            self.__res_duplasena2.add(numeros.pop(secrets.randbelow(len(numeros))))
+        return [self.__res_duplasena1, self.__res_duplasena2]
 
     @property    # Propriedade para exibir os sorteios da Dupla sena de forma separada.
     def sorteio_duplasena(self):
@@ -155,6 +151,11 @@ class Sorteio:
     def conferir(self, *args) -> list:
         assert args is not None, f'É necessário informar um jogo para conferir'
         pontos = []
+        if self.__modalidade == 'Duplasena':
+            for jogo in args:
+                pontos.append(self.__res_duplasena1.issubset(jogo))
+                pontos.append(self.__res_duplasena2.issubset(jogo))
+            return pontos
         for jogo in args:
             pontos.append(self.__sorteado.issubset(jogo))
         return pontos
