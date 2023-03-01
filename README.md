@@ -1,5 +1,6 @@
 # LoteriasPY
-Probabilidades de loterias
+
+## Probabilidades de loterias
 
 gerador.py - Gerador de sugestões para jogos das loterias da Caixa.
 

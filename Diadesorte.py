@@ -85,4 +85,4 @@ class Diadesorte:
 
 
 if __name__ == '__main__':
-    print('Essa classe deve ser apenas instanciada internamente.')
+    print('Essa classe não deve ser executada diretamente.')

@@ -10,9 +10,11 @@ import Sorteio
 
 
 if __name__ == '__main__':
-    modalidade = 'Diadesorte'
-    aposta1 = Diadesorte(1, 5, 6, 15, 22, 28, dezenas=7, mes=1)   # (surpresinha automatica para faltantes)
-    volante = [aposta1.jogo]
+    modalidade = 'Megasena'
+    aposta1 = Megasena(1, 5, 6, 15, 22, 28, dezenas=7)   # (surpresinha automatica para faltantes)
+    aposta3 = Megasena(dezenas=7)
+    aposta2 = Megasena(dezenas=7)
+    volante = [aposta1.jogo, aposta2.jogo, aposta3.jogo]
     concursos = 1                                        # Quantidade de concursos, comecando com o primeiro
     print(f'Suas apostas: {volante}')    # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')
