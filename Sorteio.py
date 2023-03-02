@@ -48,7 +48,7 @@ class Sorteio:
         count = self.MAX_QUINA
         numeros = [x for x in range(1, self.MAX_QUINA + 1)]
         while len(self.__sorteado) < self.QUINA:
-            # self.__gira_globo.shuffle(numeros)
+            self.__gira_globo.shuffle(numeros)
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
             count -= 1
         return self.__sorteado

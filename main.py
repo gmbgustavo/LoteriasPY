@@ -16,10 +16,10 @@ from Sorteio import *
 
 
 if __name__ == '__main__':
-    print(f'Criando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.\n')
-    print(f'\nInicialização de entropia...')
+    print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
+    print(f'Inicialização de entropia...\n')
     modalidade = 'Quina'
-    aposta1 = Quina(1, 5, 6, 15, 22, 28, dezenas=6)   # (surpresinha automatica para faltantes)
+    aposta1 = Quina(1, 5, 6, 15, 22, 28, dezenas=10)   # (surpresinha automatica para faltantes)
     aposta3 = Megasena(dezenas=7)
     aposta2 = Megasena(dezenas=7)
     volante = [aposta1.jogo]
