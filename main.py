@@ -19,9 +19,9 @@ if __name__ == '__main__':
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
     modalidade = 'Quina'
-    aposta1 = Quina(1, 5, 6, 15, 22, 28, dezenas=10)   # (surpresinha automatica para faltantes)
-    aposta3 = Megasena(dezenas=7)
-    aposta2 = Megasena(dezenas=7)
+    aposta1 = Duplasena(1, 5, 6, 15, 22, 28, dezenas=8)   # (surpresinha automatica para faltantes)
+    aposta3 = Duplasena(dezenas=8)
+    aposta2 = Duplasena(dezenas=8)
     volante = [aposta1.jogo]
     concursos = 1                                     # Quantidade de concursos, comecando com o primeiro
     print(f'Suas apostas: {volante}')                 # Apresenta a aposta ao usuario

@@ -29,6 +29,16 @@ class Duplasena:
         self.__dezenas = dezenas
         self.__jogo = self.__surpresinha(set(args))
 
+    @staticmethod
+    def __checkargs(numeros):
+        if len(numeros) == 0:
+            return True
+        else:
+            for i in numeros:
+                if i not in RANGEBET:
+                    return False
+            return True
+
     def __repr__(self):
         l_exib = list(self.__jogo)
         l_exib.sort()
@@ -53,16 +63,6 @@ class Duplasena:
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
             time.sleep(0.25)    # Aumenta a aleatoriedade
         return set(retorno)
-
-    @staticmethod
-    def __checkargs(numeros):
-        if len(numeros) == 0:
-            return True
-        else:
-            for i in numeros:
-                if i not in RANGEBET:
-                    return False
-            return True
 
     @property
     def jogo(self):

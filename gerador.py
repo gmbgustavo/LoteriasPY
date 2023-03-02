@@ -43,7 +43,7 @@ class Gerador:
     def gerajogo(self):
         modalidades = {
             'Quina': Quina,
-            'Duplasena': Lotofacil,
+            'Duplasena': Duplasena,
             'Megasena': Megasena,
             'Diadesorte': Diadesorte,
             'Lotomania': Lotomania,
@@ -91,8 +91,8 @@ if __name__ == '__main__':
     jogo = Gerador(modalidade='Duplasena',
                    dezenas=8,
                    fixados=[],
-                   quantidade=3)
+                   quantidade=1)
     print(f'Jogo a gerar: {jogo.get_name} com {len(jogo)} dezenas.')
-    print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...')
+    print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...\n')
     jogo.gerajogo()
     jogo.sugestoes()
