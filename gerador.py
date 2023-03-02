@@ -43,7 +43,7 @@ class Gerador:
     def gerajogo(self):
         modalidades = {
             'Quina': Quina,
-            'Duplasena': Duplasena,
+            'Duplasena': Lotofacil,
             'Megasena': Megasena,
             'Diadesorte': Diadesorte,
             'Lotomania': Lotomania,
