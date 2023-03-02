@@ -22,7 +22,7 @@ if __name__ == '__main__':
     aposta1 = Duplasena(1, 5, 6, 15, 22, 28, dezenas=8)   # (surpresinha automatica para faltantes)
     aposta3 = Duplasena(dezenas=8)
     aposta2 = Duplasena(dezenas=8)
-    volante = [aposta1.jogo]
+    volante = [aposta1.jogo, aposta2.jogo, aposta3.jogo]
     concursos = 1                                     # Quantidade de concursos, comecando com o primeiro
     print(f'Suas apostas: {volante}')                 # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')

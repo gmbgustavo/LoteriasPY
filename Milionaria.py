@@ -17,7 +17,7 @@ RANGEBET = range(MIN_NUM, MAX_NUM + 1)
 
 class Milionaria:
 
-    def __init__(self, *args, dezenas=MIN_BET, num_trevos=2, trevos: tuple):
+    def __init__(self, *args, dezenas=MIN_BET, num_trevos=2, trevos=(0, 0)):
         """
         Cria um objeto do tipo +Milionaria.
         :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas(padrao=6)
@@ -28,6 +28,7 @@ class Milionaria:
             f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}. (Foi informado {dezenas})'
         assert self.__checkargs(args), f'+Milionária usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         assert MIN_TREVOS <= num_trevos <= MAX_TREVOS, f'Devem ser escolhidos de 2 a 6 trevos.'
+        assert set(trevos).issubset(RANGE_TREVO), f'Trevos devem ser números de 1 a 6'
         self.__dezenas = dezenas
         self.__num_trevos = num_trevos
         self.__trevos = set(trevos)
@@ -66,12 +67,10 @@ class Milionaria:
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
             time.sleep(0.2)    # Aumenta a aleatoriedade
         # Sorteio dos trevos
-        count_t = len(RANGE_TREVO)
         retorno_t = set(trevos)
-        numeros_t = [x for x in range(1, count_t + 1)]
+        numeros_t = [t for t in RANGE_TREVO if t not in retorno_t]
         while len(retorno_t) < self.__num_trevos:
-            retorno_t.add(numeros_t.pop(secrets.choice(range(0, count_t))))
-            count_t -= 1
+            retorno_t.add(numeros.pop(secrets.randbelow(len(numeros_t))))
         retorno.add(tuple(retorno_t))
         return set(retorno)
 
