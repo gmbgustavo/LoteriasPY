@@ -20,7 +20,7 @@ if __name__ == '__main__':
     print(f'Inicialização de entropia...\n')
     modalidade = 'Megasena'
     aposta1 = Megasena(1, 5, 6, 15, 22, 28, dezenas=6)   # (surpresinha automatica para faltantes)
-    aposta2 = Megasena(dezenas=6)
+    aposta2 = Megasena(dezenas=8)
     volante = [aposta1.jogo, aposta2.jogo]
     concursos = 1                                     # Quantidade de concursos, comecando com o primeiro
     print(f'Suas apostas: {volante}')                 # Apresenta a aposta ao usuario

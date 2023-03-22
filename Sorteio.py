@@ -1,6 +1,7 @@
 """
 Sorteia e retorna as dezenas de uma loteria especificada
 """
+
 import inspect
 import secrets
 import random
@@ -39,8 +40,8 @@ class Sorteio:
     def __megasena(self) -> set:
         self.__sorteado.clear()
         numeros = [x for x in range(1, self.MAX_MEGASENA + 1)]
+        self.__gira_globo(numeros)
         while len(self.__sorteado) < self.MEGASENA:
-            self.__gira_globo(numeros)
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return self.__sorteado
 
@@ -48,8 +49,8 @@ class Sorteio:
         self.__sorteado.clear()
         count = self.MAX_QUINA
         numeros = [x for x in range(1, self.MAX_QUINA + 1)]
+        self.__gira_globo(numeros)
         while len(self.__sorteado) < self.QUINA:
-            self.__gira_globo(numeros)
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
             count -= 1
         return self.__sorteado
@@ -57,32 +58,32 @@ class Sorteio:
     def __lotofacil(self) -> set:
         self.__sorteado.clear()
         numeros = [x for x in range(1, self.MAX_LOTOFACIL + 1)]
+        self.__gira_globo(numeros)
         while len(self.__sorteado) < self.LOTOFACIL:
-            self.__gira_globo(numeros)
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return self.__sorteado
 
     def __diadesorte(self) -> set:
         self.__sorteado.clear()
         numeros = [x for x in range(1, self.MAX_DIADESORTE + 1)]
+        self.__gira_globo(numeros)
         while len(self.__sorteado) < self.DIADESORTE:
-            self.__gira_globo(numeros)
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return set(self.__sorteado)
 
     def __milionaria(self) -> set:
         self.__sorteado.clear()
         numeros = [x for x in range(1, self.MAX_MILIONARIA + 1)]
+        self.__gira_globo(numeros)
         while len(self.__sorteado) < self.MILIONARIA:
-            self.__gira_globo(numeros)
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return self.__sorteado
 
     def __lotomania(self) -> set:
         self.__sorteado.clear()
         numeros = [x for x in range(1, self.MAX_LOTOMANIA + 1)]
+        self.__gira_globo(numeros)
         while len(self.__sorteado) < self.LOTOMANIA:
-            self.__gira_globo(numeros)
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return set(self.__sorteado)
 
