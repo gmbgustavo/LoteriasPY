@@ -20,8 +20,7 @@ if __name__ == '__main__':
     print(f'Inicialização de entropia...\n')
     modalidade = 'Megasena'
     aposta1 = Megasena(1, 5, 6, 15, 22, 28, dezenas=6)   # (surpresinha automatica para faltantes)
-    aposta2 = Megasena(dezenas=8)
-    volante = [aposta1.jogo, aposta2.jogo]
+    volante = [aposta1.jogo]
     concursos = 1                                     # Quantidade de concursos, comecando com o primeiro
     print(f'Suas apostas: {volante}')                 # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')
@@ -30,7 +29,6 @@ if __name__ == '__main__':
 
     # Medição de desempenho
     start_time = time.time()
-    interval_time = start_time + 1  # measure for 1 second (loops per second)
 
     # Para chamar o método conferir da classe Sorteio, um objeto Sorteio deve ter sido instanciado previamente,
     # executando o método sortear()
@@ -50,5 +48,5 @@ if __name__ == '__main__':
     print('\n_______________________________________________________')
     print(f'Foram necessarios {concursos:,} concursos. ')
     print(f'Numeros sorteados: {resultado_loteria}')
-    print(f'\nIteracoes por segundo: {iterations_per_second:.2f}')
+    print(f'\nSorteios por segundo: {iterations_per_second:.2f}')
 
