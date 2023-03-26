@@ -2,7 +2,6 @@
 Sorteia e retorna as dezenas de uma loteria especificada
 """
 
-import inspect
 import secrets
 import random
 
