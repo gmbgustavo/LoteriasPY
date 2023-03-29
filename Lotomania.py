@@ -41,8 +41,8 @@ class Lotomania:
         """
         retorno = set(fixos)
         numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsidera os fixos
+        self.__gira_globo.shuffle(numeros)
         while len(retorno) < BET:
-            self.__gira_globo.shuffle(numeros)
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
             time.sleep(0.2)    # Aumenta a aleatoriedade
         return set(retorno)
