@@ -48,6 +48,9 @@ class Supersete:
     def jogo(self):
         return self.__jogo
 
+    def __len__(self):
+        return self.__dezenas
+
 
 if __name__ == '__main__':
     print('Essa classe deve ser apenas instanciada internamente.')

@@ -34,6 +34,7 @@ class Sorteio:
         self.__sorteado = set()
         self.__res_duplasena1 = set()
         self.__res_duplasena2 = set()
+        self.__res_supersete = list()
         self.__gira_globo = random.shuffle    # Simula o 'embaralhamento' num globo com as bolas
 
     def __megasena(self) -> set:
@@ -86,6 +87,12 @@ class Sorteio:
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return set(self.__sorteado)
 
+    def __supersete(self) -> list:
+        self.__res_supersete.clear()
+        for i in range(self.SUPERSETE):
+            self.__res_supersete.append(secrets.randbelow(9))
+        return self.__res_supersete
+
     def __duplasena(self) -> list:
         """
         Executa o sorteio da Dupla sena (Dois sets de seis numeros)
@@ -95,14 +102,14 @@ class Sorteio:
         self.__res_duplasena1.clear()
         self.__res_duplasena2.clear()
         numeros = [x for x in range(1, self.MAX_DUPLASENA + 1)]
+        self.__gira_globo(numeros)
         while len(self.__res_duplasena1) < self.DUPLASENA:
-            self.__gira_globo(numeros)
             self.__res_duplasena1.add(numeros.pop(secrets.randbelow(len(numeros))))
         del numeros
 
         numeros = [x for x in range(1, self.MAX_DUPLASENA + 1)]
+        self.__gira_globo(numeros)
         while len(self.__res_duplasena2) < self.DUPLASENA:
-            self.__gira_globo(numeros)
             self.__res_duplasena2.add(numeros.pop(secrets.randbelow(len(numeros))))
         return [self.__res_duplasena1, self.__res_duplasena2]
 
@@ -135,7 +142,7 @@ class Sorteio:
             'Lotomania': self.__lotomania,
             'Duplasena': self.__duplasena,
             'Diadesorte': self.__diadesorte,
-            'Supersete': lambda: NotImplementedError("Ainda não fiz essa."),
+            'Supersete': self.__supersete,
             'Milionaria': self.__milionaria,
         }
         method = methods.get(self.__modalidade)
@@ -157,6 +164,19 @@ class Sorteio:
                 pontos.append(self.__res_duplasena1.issubset(jogo))
                 pontos.append(self.__res_duplasena2.issubset(jogo))
             return pontos
+
+        if self.__modalidade == 'Supersete':
+            for jogo in args:
+                acertos = 0
+                for i in range(7):
+                    if self.__res_supersete[i] in jogo[i]:
+                        acertos += 1
+                if acertos == 7:
+                    pontos.append(True)
+                else:
+                    pontos.append(False)
+            return pontos
+
         for jogo in args:
             pontos.append(self.__sorteado.issubset(jogo))
         return pontos
