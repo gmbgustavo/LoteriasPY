@@ -12,7 +12,10 @@ from Diadesorte import *
 from Supersete import *
 from Timemania import *
 from Milionaria import *
+import locale
 
+# Configurações regionais
+locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania',
                'Diadesorte', 'Duplasena', 'Supersete', 'Milionaria']
@@ -61,7 +64,7 @@ class Gerador:
             )
             self.__sugestoes.append(list(lf.jogo))
             del lf
-            time.sleep(0.1)
+            time.sleep(0.15)
 
         return self.__sugestoes
 

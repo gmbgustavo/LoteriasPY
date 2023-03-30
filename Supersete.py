@@ -6,6 +6,7 @@ e os valores uma tupla, de tamanho 1 a 3, com cada uma contendo numeros de 0 a 9
 
 import secrets
 import random
+import time
 
 MIN_NUM = 0
 MAX_NUM = 9
@@ -33,6 +34,7 @@ class Supersete:
         :return: set
         """
         matriz = [[] for _ in range(7)]
+        time.sleep(0.1)
         for i in range(dezenas):
             coluna = i % 7
             if i < 7:

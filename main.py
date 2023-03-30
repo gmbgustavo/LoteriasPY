@@ -11,17 +11,19 @@ from Lotomania import *
 from Milionaria import *
 from Supersete import *
 from Timemania import *
-import time
 from Sorteio import *
+import time
+import locale
 
+# Configurações regionais
+locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
     modalidade = 'Supersete'
-    aposta1 = Supersete(dezenas=7)   # (surpresinha automatica para faltantes)
-    aposta2 = Supersete(dezenas=15)
-    volante = [aposta1.jogo, aposta2.jogo]
+    aposta1 = Supersete(dezenas=14)   # (surpresinha automatica para faltantes)
+    volante = [aposta1.jogo]
     concursos = 1                                     # Quantidade de concursos, comecando com o primeiro
     print(f'Suas apostas: {volante}')                 # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')
@@ -51,5 +53,5 @@ if __name__ == '__main__':
     print('\n_______________________________________________________')
     print(f'Foram necessarios {concursos:,} concursos. ')
     print(f'Numeros sorteados: {resultado_loteria}')
-    print(f'\nSorteios por segundo: {int(iterations_per_second)}', sep='.')
+    print(f'\nSorteios por segundo: {int(iterations_per_second):,}')
 
