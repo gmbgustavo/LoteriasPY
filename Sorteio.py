@@ -156,19 +156,19 @@ class Sorteio:
             return result
         return AttributeError("Objeto não reconhecida como um jogo válido")
 
-    def conferir(self, *args) -> list:
-        assert args is not None, f'É necessário informar um jogo para conferir'
+    def conferir(self, listadejogos) -> list:
+        assert listadejogos is not None, f'É necessário informar um jogo para conferir'
         pontos = []
         if self.__modalidade == 'Duplasena':
-            for jogo in args:
+            for jogo in listadejogos:
                 pontos.append(self.__res_duplasena1.issubset(jogo))
                 pontos.append(self.__res_duplasena2.issubset(jogo))
             return pontos
 
         if self.__modalidade == 'Supersete':
-            for jogo in args:
+            for jogo in listadejogos:
                 acertos = 0
-                for i in range(7):
+                for i in range(self.SUPERSETE):
                     if self.__res_supersete[i] in jogo[i]:
                         acertos += 1
                 if acertos == 7:
@@ -177,7 +177,7 @@ class Sorteio:
                     pontos.append(False)
             return pontos
 
-        for jogo in args:
+        for jogo in listadejogos:
             pontos.append(self.__sorteado.issubset(jogo))
         return pontos
 
