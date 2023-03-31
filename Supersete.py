@@ -33,15 +33,16 @@ class Supersete:
         Retorna uma matriz
         :return: set
         """
-        matriz = [[] for _ in range(7)]
+        matriz = [[] for _ in range(MIN_BET)]
         time.sleep(0.1)
         for i in range(dezenas):
+            time.sleep(0.1)
             coluna = i % 7
             if i < 7:
                 matriz[coluna].append(secrets.randbelow(MAX_NUM + 1))
             else:
                 coluna_count = [len(col) for col in matriz]
-                coluna_aleatoria = random.choice([col for col in range(7) if coluna_count[col] < 3])
+                coluna_aleatoria = random.choice([col for col in range(MIN_BET) if coluna_count[col] < 3])
                 # noinspection PyTypeChecker
                 matriz[coluna_aleatoria].append(secrets.randbelow(MAX_NUM + 1))
         return matriz
