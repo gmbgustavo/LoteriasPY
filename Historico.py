@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from keras.models import Sequential
 from keras.layers import LSTM, Dense
+from keras.models import load_model
 
 
 class Historico:
@@ -14,16 +15,17 @@ class Historico:
         self.model = None
         self.data_mean = None
         self.data_std = None
+        self.__datapresenter = None
 
     def load_data(self):
         df = pd.read_csv(self.arquivo)
-        # Extrai as colunas de números sorteados
+        # Extrai as colunas de números sorteados - Todas as linhas e da segunda coluna até o final
         data = df.iloc[:, 2:].values.astype(np.float32)
+        self.__datapresenter = df.head()
         # Normaliza os dados
         self.data_mean = data.mean(axis=0)
         self.data_std = data.std(axis=0)
         data = (data - self.data_mean) / self.data_std
-
         return data
 
     def dividir(self, sequence):
@@ -61,7 +63,18 @@ class Historico:
         score = self.model.evaluate(x_test, y_test, verbose=0)
         return score
 
+    def head(self):
+        print(self.__datapresenter)
+
+    def save_model(self, filename):
+        # Utilizar formato h5
+        self.model.save(filename)
+
 
 if __name__ == '__main__':
 
-    analise = Historico(arquivo='./dados/')
+    analise = Historico(arquivo='./dados/megasena.csv', n_features=6, memoria=100)
+    sorteios = analise.dividir(analise.load_data())
+    analise.criamodelo()
+    analise.head()
+
