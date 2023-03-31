@@ -63,4 +63,5 @@ class Historico:
 
 
 if __name__ == '__main__':
-    pass
+
+    analise = Historico(arquivo='./dados/')
