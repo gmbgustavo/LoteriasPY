@@ -103,11 +103,11 @@ class Historico:
 
 if __name__ == '__main__':
 
-    analise = Historico(arquivo='./dados/megasena.csv', n_features=6, memoria=80)
+    analise = Historico(arquivo='./dados/megasena.csv', n_features=6, memoria=60)
     data_x, data_y = analise.dividir(analise.load_data())
     analise.criamodelo()
     analise.head()
-    analise.treinar(data_x, data_y, epochs=500, batch_size=32)
+    analise.treinar(data_x, data_y, epochs=300, batch_size=32)
     analise.save_model('./checkpoint/teste.h5')
     print(f'Avaliação do modelo: {analise.evaluate(data_x, data_y):.2f}')
     analise.sugerir()
