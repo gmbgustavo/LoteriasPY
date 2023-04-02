@@ -1,2 +1,3 @@
 .idea
-./checkpoint/*
+./checkpoint/teste.h5
+.gitignore
