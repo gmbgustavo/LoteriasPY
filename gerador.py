@@ -70,8 +70,10 @@ class Gerador:
 
     def sugestoes(self):
         assert len(self.__sugestoes) >= 1, 'Você deve gerar o jogo primeiro. Use o método gerajogo()'
+        print(f'\nSugestões para {self.__modalidade}:')
+        print(f'-----------------------------------------------')
         self.__sugestoes.sort(key=lambda item: str(item))
-        if self.__modalidade != 'Supersete':
+        if self.__modalidade != 'Supersete':    # Supersete a ordem importa
             for aposta in self.__sugestoes:
                 aposta.sort(key=lambda item: (0, int(item)) if isinstance(item, int) else (1, item))
                 for dezena in aposta:
@@ -85,8 +87,6 @@ class Gerador:
                     count += 1
                     if count % 7 == 0:
                         print('\n')
-
-
 
     def __repr__(self):
         l_exib = list(self.__sugestoes)
@@ -102,8 +102,8 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Supersete',
-                   dezenas=7,
+    jogo = Gerador(modalidade='Duplasena',
+                   dezenas=6,
                    fixados=[],
                    quantidade=3)
     print(f'Jogo a gerar: {jogo.get_name} com {len(jogo)} dezenas.')
