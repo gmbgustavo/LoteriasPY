@@ -22,15 +22,10 @@ if __name__ == '__main__':
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
     modalidade = 'Supersete'
-    aposta1 = Supersete(dezenas=7)   # (surpresinha automatica para faltantes)
-    aposta2 = Supersete(dezenas=7)
-    aposta3 = Supersete(dezenas=7)
-    aposta4 = Supersete(dezenas=7)
-    aposta5 = Supersete(dezenas=7)
-    aposta6 = Supersete(dezenas=7)
-    volante = [aposta1.jogo, aposta2.jogo, aposta3.jogo, aposta4.jogo, aposta5.jogo, aposta6.jogo]
+    aposta1 = Supersete(dezenas=8)   # (surpresinha automatica para faltantes)
+    volante = [aposta1.jogo]
     concursos = 1                                     # Quantidade de concursos, comecando com o primeiro
-    print(f'Suas apostas: {volante[0:2]} e mais {len(volante) - 3}...')   # Apresenta a aposta ao usuario
+    print(f'Suas apostas: {volante[0:2]}')   # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')
     print(f'Modalidade: {modalidade}')
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio

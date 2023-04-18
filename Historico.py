@@ -50,7 +50,7 @@ class Historico:
     def criamodelo(self):
         # Constrói o modelo LSTM
         self.model = Sequential()
-        self.model.add(LSTM(50, activation='relu', input_shape=(self.memoria, self.n_features)))
+        self.model.add(LSTM(60, activation='relu', input_shape=(self.memoria, self.n_features)))
         self.model.add(Dense(self.n_features))
         self.model.compile(optimizer='adam', loss='mse')
         return None
@@ -103,11 +103,11 @@ class Historico:
 
 if __name__ == '__main__':
 
-    analise = Historico(arquivo='./dados/megasena.csv', n_features=6, memoria=60)
+    analise = Historico(arquivo='./dados/megasena.csv', n_features=6, memoria=55)
     data_x, data_y = analise.dividir(analise.load_data())
     analise.criamodelo()
     analise.head()
-    analise.treinar(data_x, data_y, epochs=300, batch_size=32)
+    analise.treinar(data_x, data_y, epochs=200, batch_size=32)
     analise.save_model('./checkpoint/teste.h5')
     print(f'Avaliação do modelo: {analise.evaluate(data_x, data_y):.2f}')
     analise.sugerir()
