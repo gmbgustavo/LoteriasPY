@@ -21,11 +21,11 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 if __name__ == '__main__':
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
-    modalidade = 'Supersete'
-    aposta1 = Supersete(dezenas=8)   # (surpresinha automatica para faltantes)
+    modalidade = 'Diadesorte'
+    aposta1 = Diadesorte(1, 5, 6, 15, 22, 28, dezenas=7)   # (surpresinha automatica para faltantes)
     volante = [aposta1.jogo]
     concursos = 1                                     # Quantidade de concursos, comecando com o primeiro
-    print(f'Suas apostas: {volante[0:2]}')   # Apresenta a aposta ao usuario
+    print(f'Suas apostas: {volante[0:2]} ...')   # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')
     print(f'Modalidade: {modalidade}')
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
