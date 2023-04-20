@@ -78,7 +78,9 @@ class Diadesorte:
 
     @property
     def jogo(self):
-        return set(self.__jogo)
+        l_exib = list(self.__jogo)
+        l_exib.sort(key=lambda ele: (0, int(ele)) if isinstance(ele, int) else (1, ele))
+        return l_exib
 
     @property
     def meses(self):
