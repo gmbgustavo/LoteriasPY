@@ -56,9 +56,9 @@ class Diadesorte:
         numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsidera os fixos
         self.__gira_globo.shuffle(numeros)
         while len(retorno) < self.__dezenas:
-            time.sleep(0.15)
+            time.sleep(0.1)
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
-            time.sleep(0.15)    # Aumenta a aleatoriedade
+            time.sleep(0.1)    # Aumenta a aleatoriedade
         if self.__mes == 0:
             self.__mes = secrets.choice(range(0, len(MESES)))
             retorno.add(MESES[self.__mes])
@@ -78,7 +78,9 @@ class Diadesorte:
 
     @property
     def jogo(self):
-        return set(self.__jogo)
+        l_exib = list(self.__jogo)
+        l_exib.sort(key=lambda ele: (0, int(ele)) if isinstance(ele, int) else (1, ele))
+        return l_exib
 
     @property
     def meses(self):
