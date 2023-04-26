@@ -107,7 +107,7 @@ if __name__ == '__main__':
     data_x, data_y = analise.dividir(analise.load_data())
     analise.criamodelo()
     analise.head()
-    analise.treinar(data_x, data_y, epochs=300, batch_size=32)
+    analise.treinar(data_x, data_y, epochs=200, batch_size=32)
     analise.save_model('./checkpoint/teste.h5')
     print(f'Avaliação do modelo: {analise.evaluate(data_x, data_y):.2f}')
     analise.sugerir()

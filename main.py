@@ -15,27 +15,42 @@ from Sorteio import *
 import time
 import locale
 
-# Configurações regionais
-locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+MODALIDADES = {
+    'Quina': Quina,
+    'Duplasena': Duplasena,
+    'Megasena': Megasena,
+    'Diadesorte': Diadesorte,
+    'Lotomania': Lotomania,
+    'Lotofacil': Lotofacil,
+    'Supersete': Supersete,
+    'Timemania': Timemania,
+    'Milionaria': Milionaria
+}
 
-if __name__ == '__main__':
+# Configurações iniciais
+locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+mod_select = ''
+volante = []
+
+
+def apostar(modalidade: str, bolas: tuple, dezenas: int, quantidade=1):
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
-    modalidade = 'Supersete'
-    aposta1 = Supersete(dezenas=7)   # (surpresinha automatica para faltantes)
-    aposta2 = Supersete(dezenas=7)
-    aposta3 = Supersete(dezenas=7)
-    aposta4 = Supersete(dezenas=7)
-    aposta5 = Supersete(dezenas=7)
-    aposta6 = Supersete(dezenas=7)
-    volante = [aposta1.jogo, aposta2.jogo, aposta3.jogo, aposta4.jogo, aposta5.jogo, aposta6.jogo]
-    concursos = 1                                     # Quantidade de concursos, comecando com o primeiro
-    print(f'Suas apostas: {volante[0:2]} e mais {len(volante) - 3}...')   # Apresenta a aposta ao usuario
+    super.mod_select = modalidade
+    super.
+    for q in range(0, quantidade):
+        aposta = MODALIDADES[modalidade](*bolas, dezenas=dezenas)  # (surpresinha para faltantes)
+        volante.append(aposta)
+
+
+def executar():
+    concursos = 1  # Quantidade de concursos, comecando com o primeiro
+    print(f'Suas apostas: {volante[0:2]}...')  # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')
     print(f'Modalidade: {modalidade}')
-    concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
+    concurso_loteria = Sorteio(modalidade)  # Cria um objeto do tipo sorteio
     time.sleep(1)
-    resultado_loteria = concurso_loteria.sortear()    # Executa o sorteio e armazena na variavel
+    resultado_loteria = concurso_loteria.sortear()  # Executa o sorteio e armazena na variavel
 
     # Medição de desempenho
     start_time = time.time()
@@ -44,8 +59,8 @@ if __name__ == '__main__':
     # executando o método sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade jogo do ojbeto de aposta, Megasena, Quina...
     while True not in concurso_loteria.conferir(volante):
-        resultado_loteria = concurso_loteria.sortear()    # Novo sorteio
-        concursos += 1                                    # Controla o numero de concursos
+        resultado_loteria = concurso_loteria.sortear()  # Novo sorteio
+        concursos += 1  # Controla o numero de concursos
         print(f'\rConcursos {concursos:,}', end='')
     if modalidade != 'Supersete':
         resultado_loteria = sorted(list(resultado_loteria),
@@ -54,6 +69,10 @@ if __name__ == '__main__':
     # Calcula a quantidade de iterações por segundo para fins de métricas de desempenho
     iterations_per_second = concursos / (time.time() - start_time)
 
+
+if __name__ == '__main__':
+    # Apostar - Modalidade, bolas, dezenas
+    apostar('Quina', )
     # Apresenta os resultados finais
     print('\n_______________________________________________________')
     print(f'Foram necessarios {concursos:,} concursos. ')
