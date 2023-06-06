@@ -105,7 +105,7 @@ if __name__ == '__main__':
     jogo = Gerador(modalidade='Diadesorte',
                    dezenas=7,
                    fixados=[],
-                   quantidade=1)
+                   quantidade=2)
     print(f'Jogo a gerar: {jogo.get_name} com {len(jogo)} dezenas.')
     print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...\n')
     jogo.gerajogo()

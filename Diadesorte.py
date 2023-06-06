@@ -56,7 +56,6 @@ class Diadesorte:
         numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsidera os fixos
         self.__gira_globo.shuffle(numeros)
         while len(retorno) < self.__dezenas:
-            time.sleep(0.1)
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
             time.sleep(0.1)    # Aumenta a aleatoriedade
         if self.__mes == 0:
