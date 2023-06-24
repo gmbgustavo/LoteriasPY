@@ -60,7 +60,7 @@ if __name__ == '__main__':
         concursos = 0
         del resultado_loteria
 
-    with open("dados/file.csv", "w") as arq_estatistica:
+    with open("dados/stats_concursos.csv", "w") as arq_estatistica:
         for i in analise.values():
             arq_estatistica.write(str(i))
             arq_estatistica.write(',\n')
