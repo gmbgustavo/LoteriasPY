@@ -11,6 +11,7 @@ from Lotomania import *
 from Milionaria import *
 from Supersete import *
 from Timemania import *
+from Salvadados import *
 from Sorteio import *
 import time
 import locale
@@ -22,14 +23,13 @@ if __name__ == '__main__':
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
     modalidade = 'Diadesorte'
-    aposta1 = Diadesorte(1, 5, 6, 15, 22, 28, dezenas=8)   # (surpresinha automatica para faltantes)
+    aposta1 = Diadesorte(1, 5, 6, 15, 22, 28, dezenas=11)   # (surpresinha automatica para faltantes)
     volante = [aposta1.jogo]
-    concursos = 1                                     # Quantidade de concursos, comecando com o primeiro
     print(f'Suas apostas: {volante[0:2]} ...')   # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')
     print(f'Modalidade: {modalidade}')
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
-    time.sleep(0.6)
+    time.sleep(0.5)
 
     # Medição de desempenho
     start_time = time.time()
@@ -37,8 +37,10 @@ if __name__ == '__main__':
     # Para chamar o método conferir da classe Sorteio, um objeto Sorteio deve ter sido instanciado previamente,
     # executando o método sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade jogo do ojbeto de aposta, Megasena, Quina...
-    analise = {}
-    for stat in range(10):
+    analise = {'modalidade': modalidade, 'dezenas': len(aposta1), 'concursos': 0}
+    for stat in range(100):
+        estatistica = Salvadados(dados=analise)
+        concursos = 1
         resultado_loteria = concurso_loteria.sortear()    # Primeiro sorteio
         while True not in concurso_loteria.conferir(volante):
             resultado_loteria = concurso_loteria.sortear()    # Novo sorteio
@@ -48,6 +50,7 @@ if __name__ == '__main__':
             resultado_loteria = sorted(list(resultado_loteria),
                                        key=lambda elem: (0, int(elem))
                                        if isinstance(elem, int) else (1, elem))
+
         # Calcula a quantidade de iterações por segundo para fins de métricas de desempenho
         iterations_per_second = concursos / (time.time() - start_time)
 
@@ -56,12 +59,8 @@ if __name__ == '__main__':
         print(f'Foram necessarios {concursos:,} concursos. ')
         print(f'Numeros sorteados: {resultado_loteria}')
         print(f'\nSorteios por segundo: {int(iterations_per_second):,}')
-        analise[stat] = concursos
-        concursos = 0
-        del resultado_loteria
 
-    with open("dados/stats_concursos.csv", "a") as arq_estatistica:
-        for i in analise.values():
-            arq_estatistica.writelines(modalidade + ',' + str(len(aposta1)) + ',' + str(i))
-            arq_estatistica.write('\n')
-        arq_estatistica.close()
+        analise['concursos'] = concursos
+        estatistica.grava_csv()
+        del estatistica
+        del resultado_loteria
