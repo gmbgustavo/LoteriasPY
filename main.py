@@ -21,8 +21,8 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 if __name__ == '__main__':
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
-    modalidade = 'Quina'
-    aposta1 = Quina(3, 11, 14, 26, 27, 35, 36, 40, 57, 65, 74, dezenas=11)   # (surpresinha automatica para faltantes)
+    modalidade = 'Diadesorte'
+    aposta1 = Diadesorte(1, 5, 6, 15, 22, 28, dezenas=8)   # (surpresinha automatica para faltantes)
     volante = [aposta1.jogo]
     concursos = 1                                     # Quantidade de concursos, comecando com o primeiro
     print(f'Suas apostas: {volante[0:2]} ...')   # Apresenta a aposta ao usuario
@@ -38,7 +38,7 @@ if __name__ == '__main__':
     # executando o método sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade jogo do ojbeto de aposta, Megasena, Quina...
     analise = {}
-    for stat in range(100):
+    for stat in range(10):
         resultado_loteria = concurso_loteria.sortear()    # Primeiro sorteio
         while True not in concurso_loteria.conferir(volante):
             resultado_loteria = concurso_loteria.sortear()    # Novo sorteio
@@ -60,8 +60,8 @@ if __name__ == '__main__':
         concursos = 0
         del resultado_loteria
 
-    with open("dados/stats_concursos.csv", "w") as arq_estatistica:
+    with open("dados/stats_concursos.csv", "a") as arq_estatistica:
         for i in analise.values():
-            arq_estatistica.write(str(i))
-            arq_estatistica.write(',\n')
+            arq_estatistica.writelines(modalidade + ',' + str(len(aposta1)) + ',' + str(i))
+            arq_estatistica.write('\n')
         arq_estatistica.close()
