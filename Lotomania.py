@@ -13,14 +13,14 @@ RANGEBET = range(MIN_NUM, MAX_NUM + 1)
 
 class Lotomania:
 
-    def __init__(self, *args):
+    def __init__(self, *args, dezenas=50,):
         """
         Cria um objeto do tipo Lotofacil.
         :param args: Se vazio, cria um jogo surpresinha com a 50 dezenas
         """
         assert self.__checkargs(args), f'Lotomania usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
-        self.__jogo = self.__surpresinha(args)
         self.__gira_globo = secrets.SystemRandom()
+        self.__jogo = self.__surpresinha(args)
 
     def __repr__(self):
         l_exib = list(self.__jogo)
@@ -44,7 +44,6 @@ class Lotomania:
         self.__gira_globo.shuffle(numeros)
         while len(retorno) < BET:
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
-            time.sleep(0.2)    # Aumenta a aleatoriedade
         return set(retorno)
 
     @staticmethod

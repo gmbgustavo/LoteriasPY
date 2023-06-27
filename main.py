@@ -22,8 +22,8 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 if __name__ == '__main__':
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
-    modalidade = 'Diadesorte'
-    aposta1 = Diadesorte(1, 5, 6, 15, 22, 28, dezenas=11)   # (surpresinha automatica para faltantes)
+    modalidade = 'Lotomania'
+    aposta1 = Lotomania(1, 5, 6, 15, 22, 28, dezenas=50)   # (surpresinha automatica para faltantes)
     volante = [aposta1.jogo]
     print(f'Suas apostas: {volante[0:2]} ...')   # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')
@@ -38,7 +38,7 @@ if __name__ == '__main__':
     # executando o método sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade jogo do ojbeto de aposta, Megasena, Quina...
     analise = {'modalidade': modalidade, 'dezenas': len(aposta1), 'concursos': 0}
-    for stat in range(100):
+    for stat in range(1):
         estatistica = Salvadados(dados=analise)
         concursos = 1
         resultado_loteria = concurso_loteria.sortear()    # Primeiro sorteio

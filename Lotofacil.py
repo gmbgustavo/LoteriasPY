@@ -49,9 +49,8 @@ class Lotofacil:
         numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsider fixos
         self.__gira_globo.shuffle(numeros)
         while len(retorno) < self.__dezenas:
-            time.sleep(0.3)
+            time.sleep(0.2)
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
-            time.sleep(0.2)    # Aumenta a aleatoriedade
         return set(retorno)
 
     @property
