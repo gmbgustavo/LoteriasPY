@@ -22,14 +22,14 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 if __name__ == '__main__':
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
-    modalidade = 'Lotomania'
-    aposta1 = Lotomania(1, 5, 6, 15, 22, 28, dezenas=50)   # (surpresinha automatica para faltantes)
+    modalidade = 'Lotofacil'
+    aposta1 = Lotofacil(1, 5, 6, 15, 22, dezenas=15)   # (surpresinha automatica para faltantes)
     volante = [aposta1.jogo]
     print(f'Suas apostas: {volante[0:2]} ...')   # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')
     print(f'Modalidade: {modalidade}')
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
-    time.sleep(0.5)
+    time.sleep(0.2)
 
     # Medição de desempenho
     start_time = time.time()
