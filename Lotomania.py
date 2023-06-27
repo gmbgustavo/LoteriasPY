@@ -18,6 +18,7 @@ class Lotomania:
         Cria um objeto do tipo Lotofacil.
         :param args: Se vazio, cria um jogo surpresinha com a 50 dezenas
         """
+        assert dezenas == 50, 'Aposta única de 50 dezenas'
         assert self.__checkargs(args), f'Lotomania usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         self.__gira_globo = secrets.SystemRandom()
         self.__jogo = self.__surpresinha(args)
