@@ -14,6 +14,7 @@ class Salvadados:
         with open(self.__arq, self.__modo) as arq_estatistica:
             arq_estatistica.writelines(str(self.__i['modalidade']) + ','
                                        + str(self.__i['dezenas']) + ','
-                                       + str(self.__i['concursos']))
+                                       + str(self.__i['concursos']) + ','
+                                       + str(self.__i['apostas']))
             arq_estatistica.write('\n')
             arq_estatistica.close()
