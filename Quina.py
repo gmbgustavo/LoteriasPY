@@ -49,7 +49,6 @@ class Quina:
         numeros = [x for x in RANGE_BET if x not in retorno]    # Generator desconsidera os fixos
         self.__gira_globo.shuffle(numeros)
         while len(retorno) < self.__dezenas:
-            time.sleep(0.3)
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
             time.sleep(0.2)    # Aumenta a aleatoriedade
         return set(retorno)
