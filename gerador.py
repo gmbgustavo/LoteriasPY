@@ -13,6 +13,7 @@ from Supersete import *
 from Timemania import *
 from Milionaria import *
 import locale
+import argparse
 
 # Configurações regionais
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
@@ -99,12 +100,14 @@ class Gerador:
     def get_name(self):
         return self.__modalidade
 
+# TODO: Add argparse
+
 
 if __name__ == '__main__':
     jogo = Gerador(modalidade='Diadesorte',
                    dezenas=7,
                    fixados=[],
-                   quantidade=5)
+                   quantidade=3)
     print(f'Jogo a gerar: {jogo.get_name} com {len(jogo)} dezenas.')
     print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...\n')
     jogo.gerajogo()

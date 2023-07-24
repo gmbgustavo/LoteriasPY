@@ -23,13 +23,13 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 if __name__ == '__main__':
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
-    modalidade = 'Megasena'
-    aposta1 = Megasena(1, 2, 4, 7, 38, 49, 52, dezenas=7)   # (surpresinha automatica para faltantes)
-    aposta2 = Megasena(10, 28, 41, 47, 50, 51, 53, dezenas=7)
-    aposta3 = Megasena(2, 18, 29, 31, 35, 50, 59, dezenas=7)
-    aposta4 = Megasena(10, 14, 18, 31, 34, 54, 60, dezenas=7)
+    modalidade = 'Diadesorte'
+    aposta1 = Diadesorte(11, 5, 6, 15, 22, 28, 29, dezenas=7)   # (surpresinha automatica para faltantes)
+    aposta2 = Diadesorte(dezenas=7)
+    aposta3 = Diadesorte(dezenas=7)
+    aposta4 = Diadesorte(dezenas=7)
     volante = [aposta1.jogo, aposta2.jogo, aposta3.jogo, aposta4.jogo]
-    print(f'Suas apostas: {volante[0:2]} ...')   # Apresenta a aposta ao usuario
+    # print(f'Suas apostas: {volante[0:2]} ...')   # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')
     print(f'Modalidade: {modalidade}')
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     # executando o método sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade jogo do ojbeto de aposta, Megasena, Quina...
     analise = {'modalidade': modalidade, 'dezenas': len(aposta1), 'concursos': 0, 'apostas': len(volante)}
-    for stat in range(20):
+    for stat in range(100):
         # Medição de desempenho
         start_time = time.time()
         estatistica = Salvadados(dados=analise)
