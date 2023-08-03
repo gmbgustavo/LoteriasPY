@@ -16,7 +16,7 @@ from Sorteio import *
 import time
 import locale
 import argparse
-import colorama
+from colorama import Fore
 
 # Configurações regionais
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
@@ -40,7 +40,7 @@ if __name__ == '__main__':
     # executando o método sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade jogo do ojbeto de aposta, Megasena, Quina...
     analise = {'modalidade': modalidade, 'dezenas': len(aposta1), 'concursos': 0, 'apostas': len(volante)}
-    for stat in range(1000):
+    for stat in range(1):
         # Medição de desempenho
         start_time = time.time()
         estatistica = Salvadados(dados=analise)
@@ -60,7 +60,7 @@ if __name__ == '__main__':
 
         # Apresenta os resultados finais
         print('\n_______________________________________________________')
-        print(f'Foram necessarios {concursos:,} concursos. ')
+        print(Fore.LIGHTYELLOW_EX + f'Foram necessarios {concursos:,} concursos. ' + Fore.RESET)
         print(f'Numeros sorteados: {resultado_loteria}')
         print(f'\nSorteios por segundo: {int(iterations_per_second):,}')
 
