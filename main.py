@@ -16,6 +16,7 @@ from Sorteio import *
 import time
 import locale
 import argparse
+import colorama
 
 # Configurações regionais
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
