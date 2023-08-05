@@ -60,7 +60,7 @@ class Megasena:
         self.__gira_globo.shuffle(numeros)
         while len(retorno) < self.__dezenas:
             retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
-            time.sleep(0.2)    # Aumenta a aleatoriedade
+            time.sleep(0.25)    # Aumenta a aleatoriedade
         return set(retorno)
 
     def sorteio(self):

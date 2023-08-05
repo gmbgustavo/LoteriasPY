@@ -14,6 +14,7 @@ from Timemania import *
 from Milionaria import *
 import locale
 import argparse
+from colorama import Fore
 
 # Configurações regionais
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
@@ -109,6 +110,6 @@ if __name__ == '__main__':
                    fixados=[],
                    quantidade=3)
     print(f'Jogo a gerar: {jogo.get_name} com {len(jogo)} dezenas.')
-    print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...\n')
+    print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...\n' + Fore.LIGHTYELLOW_EX)
     jogo.gerajogo()
     jogo.sugestoes()
