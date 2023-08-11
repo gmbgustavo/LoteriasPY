@@ -24,12 +24,18 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 if __name__ == '__main__':
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
-    modalidade = 'Diadesorte'
-    aposta1 = Diadesorte(1, 5, 6, 15, 22, 28, dezenas=7)   # (surpresinha automatica para faltantes)
-    aposta2 = Diadesorte(dezenas=7)
-    aposta3 = Diadesorte(dezenas=7)
-    aposta4 = Diadesorte(dezenas=7)
-    volante = [aposta1.jogo, aposta2.jogo, aposta3.jogo, aposta4.jogo]
+    modalidade = 'Megasena'
+    aposta1 = Megasena(dezenas=7)   # (surpresinha automatica para faltantes)
+    aposta2 = Megasena(dezenas=7)
+    aposta3 = Megasena(dezenas=7)
+    aposta4 = Megasena(dezenas=7)
+    aposta5 = Megasena(dezenas=7)
+    aposta6 = Megasena(dezenas=7)
+    aposta7 = Megasena(dezenas=7)
+    aposta8 = Megasena(dezenas=7)
+    volante = [aposta1.jogo, aposta2.jogo, aposta3.jogo,
+               aposta4.jogo, aposta5.jogo, aposta6.jogo,
+               aposta7.jogo, aposta8.jogo]
     print(f'Suas apostas: {volante[0:2]} ...')   # Apresenta a aposta ao usuario
     print(f'Quantidade de dezenas: {len(aposta1)}')
     print(f'Modalidade: {modalidade}')
@@ -40,7 +46,7 @@ if __name__ == '__main__':
     # executando o método sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade jogo do ojbeto de aposta, Megasena, Quina...
     analise = {'modalidade': modalidade, 'dezenas': len(aposta1), 'concursos': 0, 'apostas': len(volante)}
-    for stat in range(1):
+    for stat in range(100):
         # Medição de desempenho
         start_time = time.time()
         estatistica = Salvadados(dados=analise)
@@ -59,10 +65,10 @@ if __name__ == '__main__':
         iterations_per_second = concursos / (time.time() - start_time)
 
         # Apresenta os resultados finais
-        print('\n_______________________________________________________')
+        print('\n\n_______________________________________________________')
         print(Fore.LIGHTYELLOW_EX + f'Foram necessarios {concursos:,} concursos. ')
         print(Fore.GREEN + f'Numeros sorteados: {resultado_loteria}')
-        print(Fore.LIGHTBLUE_EX + f'\nSorteios por segundo: {int(iterations_per_second):,}' + Fore.RESET)
+        print(Fore.LIGHTBLUE_EX + f'\nSorteios por segundo: {int(iterations_per_second):,}\n\n' + Fore.RESET)
 
         analise['concursos'] = concursos
         estatistica.grava_csv()

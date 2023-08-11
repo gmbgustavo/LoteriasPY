@@ -19,7 +19,7 @@ class Supersete:
 
     def __init__(self, dezenas=7):
         """
-        Cria um objeto do tipo Megasena.
+        Cria um objeto do tipo Supersete.
         :param dezenas: Quantidade de dezenas da aposta (7-15)
         """
         assert MIN_BET <= dezenas <= MAX_BET and isinstance(dezenas, int), \
