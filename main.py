@@ -25,7 +25,7 @@ if __name__ == '__main__':
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
     modalidade = 'Diadesorte'
-    aposta1 = Megasena(1, 5, 6, 15, 22, 28, 19, dezenas=7)   # (surpresinha automatica para faltantes)
+    aposta1 = Megasena(1, 5, 6, 15, 22, 28, dezenas=7)   # (surpresinha automatica para faltantes)
     volante = [aposta1.jogo]
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
 
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     # executando o método sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade jogo do ojbeto de aposta, Megasena, Quina...
     analise = {'modalidade': modalidade, 'dezenas': len(aposta1), 'concursos': 0, 'apostas': len(volante)}
-    for stat in range(10000):
+    for stat in range(1):
         # Medição de desempenho
         start_time = time.time()
         estatistica = Salvadados(dados=analise)
