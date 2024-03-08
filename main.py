@@ -24,8 +24,8 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 if __name__ == '__main__':
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
-    modalidade = 'Diadesorte'
-    aposta1 = Megasena(1, 5, 6, 15, 22, 28, dezenas=7)   # (surpresinha automatica para faltantes)
+    modalidade = 'Duplasena'
+    aposta1 = Duplasena(1, 5, 6, 15, 22, 28, dezenas=8)   # (surpresinha automatica para faltantes)
     volante = [aposta1.jogo]
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
 

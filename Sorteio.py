@@ -96,7 +96,7 @@ class Sorteio:
     def __duplasena(self) -> list:
         """
         Executa o sorteio da Dupla sena (Dois sets de seis numeros)
-        :return: Um set com a uniao dos dos sorteis, ignorando dezenas repetidas
+        :return: Um set com a uniao dos dos sorteios, ignorando dezenas repetidas
         """
         self.__sorteado.clear()
         self.__res_duplasena1.clear()
