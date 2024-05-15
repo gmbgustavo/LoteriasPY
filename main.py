@@ -18,15 +18,15 @@ import locale
 import argparse
 from colorama import Fore
 
-# Configurações regionais
+# Configuração regional
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
-    modalidade = 'Duplasena'
-    aposta1 = Duplasena(1, 5, 6, 15, 22, 28, dezenas=8)   # (surpresinha automatica para faltantes)
-    volante = [aposta1.jogo]
+    modalidade = 'Timemania'
+    aposta1 = Timemania(1, 4, 29, 30, 34, 47, 61, 68, 71, 78)   # (surpresinha automatica para faltantes)
+    volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos por volante
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
 
     # Para chamar o método conferir da classe Sorteio, um objeto Sorteio deve ter sido instanciado previamente,

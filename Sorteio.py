@@ -5,7 +5,7 @@ Sorteia e retorna as dezenas de uma loteria especificada
 import secrets
 import random
 
-MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania',
+MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania',
                'Diadesorte', 'Duplasena', 'Supersete', 'Milionaria']
 
 
@@ -25,6 +25,8 @@ class Sorteio:
     SUPERSETE = 7
     MILIONARIA = 6
     MAX_MILIONARIA = 50
+    MAX_TIMEMANIA = 80
+    TIMEMANIA = 7
     MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
 
     def __init__(self, modalidade: str):
@@ -53,6 +55,14 @@ class Sorteio:
         while len(self.__sorteado) < self.QUINA:
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
             count -= 1
+        return self.__sorteado
+
+    def __timemania(self) -> set:
+        self.__sorteado.clear()
+        numeros = [x for x in range(1, self.MAX_TIMEMANIA + 1)]
+        self.__gira_globo(numeros)
+        while len(self.__sorteado) < self.TIMEMANIA:
+            self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return self.__sorteado
 
     def __lotofacil(self) -> set:
@@ -144,6 +154,7 @@ class Sorteio:
             'Diadesorte': self.__diadesorte,
             'Supersete': self.__supersete,
             'Milionaria': self.__milionaria,
+            'Timemania': self.__timemania
         }
         method = methods.get(self.__modalidade)
         if method:

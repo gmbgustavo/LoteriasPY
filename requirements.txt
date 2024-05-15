@@ -1,2 +1,2 @@
-numpy~=1.25.2
-colorama~=0.4.6
+numpy
+colorama

@@ -105,7 +105,7 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Duplasena',
+    jogo = Gerador(modalidade='Diadesorte',
                    dezenas=7,
                    fixados=[],
                    quantidade=3)
