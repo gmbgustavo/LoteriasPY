@@ -37,6 +37,7 @@ class Sorteio:
         self.__res_duplasena1 = set()
         self.__res_duplasena2 = set()
         self.__res_supersete = list()
+        self.__res_timemania = list()
         self.__gira_globo = random.shuffle    # Simula o 'embaralhamento' num globo com as bolas
 
     def __megasena(self) -> set:
@@ -95,7 +96,8 @@ class Sorteio:
         self.__gira_globo(numeros)
         while len(self.__sorteado) < self.LOTOMANIA:
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
-        return set(self.__sorteado)
+        self.__res_timemania = self.__sorteado
+        return set(self.__res_timemania)
 
     def __supersete(self) -> list:
         self.__res_supersete.clear()

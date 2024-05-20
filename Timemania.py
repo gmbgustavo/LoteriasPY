@@ -30,13 +30,12 @@ class Timemania:
             self.__timedocoracao = self.__listadetimes[secrets.randbelow(len(self.__listadetimes))]
         else:
             self.__timedocoracao = timedocoracao
-        assert self.__timedocoracao in self.__listadetimes, f'Time inválido - {timedocoracao}'
         self.__jogo = self.__surpresinha(args)
 
     @staticmethod
     def __carregatimes():
         with open(LISTA_TIMES, "r", encoding="utf8") as times:
-            reader = csv.reader(times, delimiter=',')
+            reader = csv.reader(times)
             retorno = list(reader)
             return retorno
 
