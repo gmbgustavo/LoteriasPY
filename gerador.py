@@ -49,7 +49,7 @@ class Gerador:
         modalidades = {
             'Quina': Quina,
             'Duplasena': Duplasena,
-            'Megasena': Megasena,
+            'Megasena': Quina,
             'Diadesorte': Diadesorte,
             'Lotomania': Lotomania,
             'Lotofacil': Lotofacil,
