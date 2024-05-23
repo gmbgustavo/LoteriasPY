@@ -22,19 +22,18 @@ from colorama import Fore
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
+    modalidade = 'Quina'
+    aposta1 = Quina(9, 17, 20, 79, 46, dezenas=10)   # (surpresinha automatica para faltantes)
+    volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
+    concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
-    modalidade = 'Quina'
-    aposta1 = Quina(7, 16, 59, 23, 46, 77, dezenas=10)   # (surpresinha automatica para faltantes)
-    aposta2 = Quina(9, 21, 32, 34, 35, 52, dezenas=10)
-    volante = [aposta1.jogo, aposta2.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
-    concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
 
     # Para chamar o método conferir da classe Sorteio, um objeto Sorteio deve ter sido instanciado previamente,
     # executando o método sortear()
-    # Deve ser informado o parametro ao metodo conferir() a propriedade jogo do ojbeto de aposta, Megasena, Quina...
+    # Deve ser informado o parametro ao metodo conferir() a propriedade 'jogo' do ojbeto de aposta, Megasena, Quina...
     analise = {'modalidade': modalidade, 'dezenas': len(aposta1), 'concursos': 0, 'apostas': len(volante)}
-    for stat in range(10000):
+    for stat in range(10):
         # Medição de desempenho
         start_time = time.time()
         estatistica = Salvadados(dados=analise)
