@@ -3,23 +3,20 @@ Gerador de apostas
 """
 
 import inspect
-import locale
 from Quina import *
 from Megasena import *
 from Lotofacil import *
 from Lotomania import *
 from Duplasena import *
 from Diadesorte import *
-from Supersete import *
 from Timemania import *
-from Milionaria import *
 from colorama import Fore
 
 # Configurações regionais
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania',
-               'Diadesorte', 'Duplasena', 'Supersete', 'Milionaria']
+               'Diadesorte', 'Duplasena']
 
 MAX_JOGOS = 10    # Limite de sugestões devido ao custo da API
 
@@ -48,13 +45,11 @@ class Gerador:
         modalidades = {
             'Quina': Quina,
             'Duplasena': Duplasena,
-            'Megasena': Quina,
+            'Megasena': Megasena,
             'Diadesorte': Diadesorte,
             'Lotomania': Lotomania,
             'Lotofacil': Lotofacil,
-            'Supersete': Supersete,
             'Timemania': Timemania,
-            'Milionaria': Milionaria
         }
 
         for i in range(1, self.__quantidade + 1):
@@ -73,20 +68,11 @@ class Gerador:
         print(f'\nSugestões para {self.__modalidade}:')
         print(f'-----------------------------------------------')
         self.__sugestoes.sort(key=lambda item: str(item))
-        if self.__modalidade != 'Supersete':    # Supersete a ordem importa
-            for aposta in self.__sugestoes:
-                aposta.sort(key=lambda item: (0, int(item)) if isinstance(item, int) else (1, item))
-                for dezena in aposta:
-                    print(f'{str(dezena).zfill(2)} ', end='')
-                print('\n')
-        else:
-            for aposta in self.__sugestoes:
-                count = 0
-                for dezena in aposta:
-                    print(f'{str(dezena)} ', end='')
-                    count += 1
-                    if count % 7 == 0:
-                        print('\n')
+        for aposta in self.__sugestoes:
+            aposta.sort(key=lambda item: (0, int(item)) if isinstance(item, int) else (1, item))
+            for dezena in aposta:
+                print(f'{str(dezena).zfill(2)} ', end='')
+            print('\n')
 
     def __repr__(self):
         l_exib = list(self.__sugestoes)
@@ -96,7 +82,6 @@ class Gerador:
     def __len__(self):
         return self.__dezenas
 
-    @property
     def get_name(self):
         return self.__modalidade
 
@@ -104,11 +89,11 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Quina',
-                   dezenas=9,
+    jogo = Gerador(modalidade='Megasena',
+                   dezenas=7,
                    fixados=[],
-                   quantidade=1)
-    print(f'Jogo a gerar: {jogo.get_name} com {len(jogo)} dezenas.')
+                   quantidade=3)
+    print(f'Jogo a gerar: {jogo.get_name()} com {len(jogo)} dezenas.')
     print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...\n' + Fore.LIGHTYELLOW_EX)
     jogo.gerajogo()
     jogo.sugestoes()

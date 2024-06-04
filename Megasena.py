@@ -2,9 +2,7 @@
 Classe da Mega-Sena
 """
 
-import secrets
-import time
-from loteria_api import get_numbers
+from API.loteria_api import get_numbers
 
 MAX_BET = 15
 MIN_BET = 6
@@ -27,7 +25,6 @@ class Megasena:
         assert len(args) <= dezenas, f'Quantidade de números informados incompativel com o argumento "dezenas"'
         assert self.__checkargs(args), f'Megasena usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         self.__dezenas = dezenas
-        self.__gira_globo = secrets.SystemRandom()
         self.__jogo = self.__surpresinha(set(args))
 
     def __repr__(self):

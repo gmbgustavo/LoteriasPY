@@ -8,8 +8,6 @@ from Lotofacil import *
 from Quina import *
 from Duplasena import *
 from Lotomania import *
-from Milionaria import *
-from Supersete import *
 from Timemania import *
 from Salvadados import *
 from Sorteio import *
@@ -22,8 +20,8 @@ from colorama import Fore
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
-    modalidade = 'Megasena'
-    aposta1 = Megasena(dezenas=6)   # (surpresinha automatica para faltantes)
+    modalidade = 'Quina'
+    aposta1 = Quina(dezenas=9)
     volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
