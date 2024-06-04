@@ -22,8 +22,8 @@ from colorama import Fore
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
-    modalidade = 'Quina'
-    aposta1 = Quina(9, 17, 20, 79, 46, dezenas=10)   # (surpresinha automatica para faltantes)
+    modalidade = 'Megasena'
+    aposta1 = Megasena(dezenas=6)   # (surpresinha automatica para faltantes)
     volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     # executando o método sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade 'jogo' do ojbeto de aposta, Megasena, Quina...
     analise = {'modalidade': modalidade, 'dezenas': len(aposta1), 'concursos': 0, 'apostas': len(volante)}
-    for stat in range(10):
+    for stat in range(1):
         # Medição de desempenho
         start_time = time.time()
         estatistica = Salvadados(dados=analise)

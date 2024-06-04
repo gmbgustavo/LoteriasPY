@@ -1,2 +1,4 @@
 numpy
 colorama
+requests
+python-dotenv

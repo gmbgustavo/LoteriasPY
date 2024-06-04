@@ -3,6 +3,7 @@ Gerador de apostas
 """
 
 import inspect
+import locale
 from Quina import *
 from Megasena import *
 from Lotofacil import *
@@ -12,8 +13,6 @@ from Diadesorte import *
 from Supersete import *
 from Timemania import *
 from Milionaria import *
-import locale
-import argparse
 from colorama import Fore
 
 # Configurações regionais
@@ -22,7 +21,7 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania',
                'Diadesorte', 'Duplasena', 'Supersete', 'Milionaria']
 
-MAX_JOGOS = 10    # Maximo 10 jogos para não extrapolar um tempo razoável na geração
+MAX_JOGOS = 10    # Limite de sugestões devido ao custo da API
 
 
 class Gerador:
@@ -105,10 +104,10 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Diadesorte',
-                   dezenas=7,
+    jogo = Gerador(modalidade='Quina',
+                   dezenas=9,
                    fixados=[],
-                   quantidade=3)
+                   quantidade=1)
     print(f'Jogo a gerar: {jogo.get_name} com {len(jogo)} dezenas.')
     print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...\n' + Fore.LIGHTYELLOW_EX)
     jogo.gerajogo()

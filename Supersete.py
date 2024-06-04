@@ -5,7 +5,7 @@ e os valores uma tupla, de tamanho 1 a 3, com cada uma contendo numeros de 0 a 9
 """
 
 import secrets
-import random
+import loteria_api
 import time
 
 MIN_NUM = 0

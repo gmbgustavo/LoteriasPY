@@ -2,8 +2,8 @@
 Sorteia e retorna as dezenas de uma loteria especificada
 """
 
-import secrets
 import random
+import secrets
 
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania',
                'Diadesorte', 'Duplasena', 'Supersete', 'Milionaria']
@@ -196,4 +196,4 @@ class Sorteio:
 
 
 if __name__ == '__main__':
-    print('Essa classe não deve ser usada diretamente.')
+    quit(3)

@@ -4,6 +4,7 @@ Classe da Mega-Sena
 
 import secrets
 import time
+from loteria_api import get_numbers
 
 MAX_BET = 15
 MIN_BET = 6
@@ -25,8 +26,8 @@ class Megasena:
             f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}. (Foi informado {dezenas})'
         assert len(args) <= dezenas, f'Quantidade de números informados incompativel com o argumento "dezenas"'
         assert self.__checkargs(args), f'Megasena usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
-        self.__gira_globo = secrets.SystemRandom()
         self.__dezenas = dezenas
+        self.__gira_globo = secrets.SystemRandom()
         self.__jogo = self.__surpresinha(set(args))
 
     def __repr__(self):
@@ -56,11 +57,10 @@ class Megasena:
         :return: set
         """
         retorno = set(fixos)
-        numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsidera fixos
-        self.__gira_globo.shuffle(numeros)
-        while len(retorno) < self.__dezenas:
-            retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
-            time.sleep(0.2)    # Aumenta a aleatoriedade
+        apicall = get_numbers(n=self.__dezenas, min_val=MIN_NUM, max_val=MAX_NUM, repeat=False)
+        numeros = [x for x in apicall if x not in retorno]    # Generator desconsidera fixos
+        for dez in numeros:
+            retorno.add(dez)
         return set(retorno)
 
     def sorteio(self):
@@ -72,4 +72,4 @@ class Megasena:
 
 
 if __name__ == '__main__':
-    print('Essa classe deve ser apenas instanciada internamente.')
+    quit(3)
