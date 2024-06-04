@@ -41,6 +41,4 @@ def get_numbers(n=5, min_val=1, max_val=60, repeat=False):
 
 
 if __name__ == '__main__':
-    # Exemplo de uso
-    random_integers = get_numbers(n=9, min_val=1, max_val=80, repeat=False)
-    print(random_integers)
+    quit(3)

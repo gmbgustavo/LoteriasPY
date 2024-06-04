@@ -20,8 +20,8 @@ from colorama import Fore
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
-    modalidade = 'Quina'
-    aposta1 = Quina(dezenas=9)
+    modalidade = 'Megasena'
+    aposta1 = Megasena(dezenas=7)
     volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
@@ -46,10 +46,6 @@ if __name__ == '__main__':
             resultado_loteria = concurso_loteria.sortear()    # Novo sorteio
             concursos += 1                                    # Controla o numero de concursos
             print(f'\rConcursos {concursos:,}', end='')
-        if modalidade != 'Supersete':
-            resultado_loteria = sorted(list(resultado_loteria),
-                                       key=lambda elem: (0, int(elem))
-                                       if isinstance(elem, int) else (1, elem))
 
         # Calcula a quantidade de iterações por segundo para fins de métricas de desempenho
         iterations_per_second = concursos / (time.time() - start_time)

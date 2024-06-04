@@ -6,7 +6,7 @@ import random
 import secrets
 
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania',
-               'Diadesorte', 'Duplasena', 'Supersete', 'Milionaria']
+               'Diadesorte', 'Duplasena']
 
 
 class Sorteio:
@@ -22,9 +22,6 @@ class Sorteio:
     MAX_DUPLASENA = 50
     DIADESORTE = 7
     MAX_DIADESORTE = 31
-    SUPERSETE = 7
-    MILIONARIA = 6
-    MAX_MILIONARIA = 50
     MAX_TIMEMANIA = 80
     TIMEMANIA = 7
     MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
@@ -82,14 +79,6 @@ class Sorteio:
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return set(self.__sorteado)
 
-    def __milionaria(self) -> set:
-        self.__sorteado.clear()
-        numeros = [x for x in range(1, self.MAX_MILIONARIA + 1)]
-        self.__gira_globo(numeros)
-        while len(self.__sorteado) < self.MILIONARIA:
-            self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
-        return self.__sorteado
-
     def __lotomania(self) -> set:
         self.__sorteado.clear()
         numeros = [x for x in range(1, self.MAX_LOTOMANIA + 1)]
@@ -98,12 +87,6 @@ class Sorteio:
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         self.__res_timemania = self.__sorteado
         return set(self.__res_timemania)
-
-    def __supersete(self) -> list:
-        self.__res_supersete.clear()
-        for i in range(self.SUPERSETE):
-            self.__res_supersete.append(secrets.randbelow(9))
-        return self.__res_supersete
 
     def __duplasena(self) -> list:
         """
@@ -142,8 +125,6 @@ class Sorteio:
             'Lotomania': self.LOTOMANIA,
             'Duplasena': self.DUPLASENA,
             'Diadesorte': self.DIADESORTE,
-            'Supersete': self.SUPERSETE,
-            'Milionaria': self.MILIONARIA
         }.get(self.__modalidade, AssertionError('Modalidade não implementada.'))
 
     def sortear(self):
@@ -154,8 +135,6 @@ class Sorteio:
             'Lotomania': self.__lotomania,
             'Duplasena': self.__duplasena,
             'Diadesorte': self.__diadesorte,
-            'Supersete': self.__supersete,
-            'Milionaria': self.__milionaria,
             'Timemania': self.__timemania
         }
         method = methods.get(self.__modalidade)
@@ -176,18 +155,6 @@ class Sorteio:
             for jogo in listadejogos:
                 pontos.append(self.__res_duplasena1.issubset(jogo))
                 pontos.append(self.__res_duplasena2.issubset(jogo))
-            return pontos
-
-        if self.__modalidade == 'Supersete':
-            for jogo in listadejogos:
-                acertos = 0
-                for i in range(self.SUPERSETE):
-                    if self.__res_supersete[i] in jogo[i]:
-                        acertos += 1
-                if acertos == 7:
-                    pontos.append(True)
-                else:
-                    pontos.append(False)
             return pontos
 
         for jogo in listadejogos:

@@ -54,7 +54,7 @@ class Megasena:
         :return: set
         """
         retorno = set(fixos)
-        apicall = get_numbers(n=self.__dezenas, min_val=MIN_NUM, max_val=MAX_NUM, repeat=False)
+        apicall = get_numbers(n=self.__dezenas - len(retorno), min_val=MIN_NUM, max_val=MAX_NUM, repeat=False)
         numeros = [x for x in apicall if x not in retorno]    # Generator desconsidera fixos
         for dez in numeros:
             retorno.add(dez)
