@@ -13,7 +13,6 @@ from Salvadados import *
 from Sorteio import *
 import time
 import locale
-import argparse
 from colorama import Fore
 
 # Configuração regional
@@ -21,7 +20,7 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
     modalidade = 'Megasena'
-    aposta1 = Megasena(dezenas=7)
+    aposta1 = Megasena(4, 17, 19, 30, 45, 55, dezenas=6)
     volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')

@@ -3,6 +3,7 @@ Gerador de apostas
 """
 
 import inspect
+import argparse
 from Quina import *
 from Megasena import *
 from Lotofacil import *
@@ -90,7 +91,7 @@ class Gerador:
 
 if __name__ == '__main__':
     jogo = Gerador(modalidade='Megasena',
-                   dezenas=7,
+                   dezenas=9,
                    fixados=[],
                    quantidade=3)
     print(f'Jogo a gerar: {jogo.get_name()} com {len(jogo)} dezenas.')
