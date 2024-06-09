@@ -2,3 +2,4 @@ numpy
 colorama
 requests
 python-dotenv
+pandas
