@@ -3,16 +3,18 @@
 import csv
 import pandas as pd
 
+SOURCE = './dados/megasena.csv'
+
 
 def load_csv():
-    with open('../dados/megasena.csv') as megasena:
+    with open(SOURCE) as megasena:
         reader = csv.reader(megasena)
         for linha in reader:
             yield linha
 
 
 def pandas_read_csv():
-    dataframe = pd.read_csv('../dados/megasena.csv')
+    dataframe = pd.read_csv(SOURCE)
     for row in dataframe:
         yield dataframe
 
@@ -39,6 +41,10 @@ def confere_mega_hist(aposta: set):
         elif pontos == 2:    # Há dois elementos diferente, então há 4 iguais (quadra). (elementos totais = 6)
             quadras += 1
     print(f'Senas: {senas} (concurso {vencedor_sena}),\nQuinas: {quinas},\nQuadras {quadras}.')
+
+
+def apostas_lote(qtde: int):
+    pass
 
 
 if __name__ == '__main__':
