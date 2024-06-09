@@ -2,19 +2,12 @@
 Modulo principal
 """
 
-import time
-import locale
 from Megasena import *
-from Diadesorte import *
-from Lotofacil import *
-from Quina import *
-from Duplasena import *
-from Lotomania import *
 from Timemania import *
 from Salvadados import *
 from Sorteio import *
 from colorama import Fore
-from helpers import confere_mega_hist
+from API.helpers import confere_mega_hist
 
 # Configuração regional
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')

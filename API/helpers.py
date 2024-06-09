@@ -5,14 +5,14 @@ import pandas as pd
 
 
 def load_csv():
-    with open('./dados/megasena.csv') as megasena:
+    with open('../dados/megasena.csv') as megasena:
         reader = csv.reader(megasena)
         for linha in reader:
             yield linha
 
 
 def pandas_read_csv():
-    dataframe = pd.read_csv('./dados/megasena.csv')
+    dataframe = pd.read_csv('../dados/megasena.csv')
     for row in dataframe:
         yield dataframe
 
