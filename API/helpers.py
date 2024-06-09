@@ -41,7 +41,6 @@ def apostas_lote(qtde: int):
 
 
 if __name__ == '__main__':
-    confere_mega_hist({5, 18, 23, 33, 42, 45})
     quit(3)
 
 

@@ -2,6 +2,7 @@
 Classe da Mega-Sena
 """
 
+import time
 from API.loteria_api import get_numbers
 
 MAX_BET = 15
@@ -57,8 +58,11 @@ class Megasena:
         qtde = self.__dezenas - len(retorno)
         if qtde <= 0:
             return set(retorno)
-        apicall = get_numbers(n=qtde, min_val=MIN_NUM, max_val=MAX_NUM, repeat=False)
-        numeros = [x for x in apicall if x not in retorno]    # Generator desconsidera fixos
+        numeros = []
+        while len(numeros) + len(retorno) < self.__dezenas:
+            apicall = get_numbers(n=qtde, min_val=MIN_NUM, max_val=MAX_NUM, repeat=False)
+            time.sleep(0.1)
+            numeros = [x for x in apicall if x not in retorno]    # Generator desconsidera fixos
         for dez in numeros:
             retorno.add(dez)
         return set(retorno)

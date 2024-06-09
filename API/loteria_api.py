@@ -17,7 +17,7 @@ def get_numbers(n=5, min_val=1, max_val=60, repeat=False):
     }
     payload = {
         "jsonrpc": "2.0",
-        "method": "generateIntegers",
+        "method": "generateIntegers",    # Gera apenas números inteiros. Para outros ver documentação.
         "params": {
             "apiKey": CHAVE_LOCA,
             "n": n,
