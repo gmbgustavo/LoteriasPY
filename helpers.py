@@ -13,7 +13,8 @@ def load_csv():
 
 def pandas_read_csv():
     dataframe = pd.read_csv('./dados/megasena.csv')
-    # TODO
+    for row in dataframe:
+        yield dataframe
 
 
 def confere_mega_hist(aposta: set):
@@ -27,8 +28,8 @@ def confere_mega_hist(aposta: set):
             cont = -1
             continue
         convertido = [eval(i) for i in sorteio[2:8]]
-        concurso = sorteio.pop(0)
         convertido = set(convertido)
+        concurso = sorteio[0]
         pontos = len(convertido.difference(aposta))
         if pontos == 0:    # Todos os elementos são iguais, logo acertou todas as 6 dezenas.
             senas += 1
@@ -41,5 +42,6 @@ def confere_mega_hist(aposta: set):
 
 
 if __name__ == '__main__':
-    confere_mega_hist({7, 8, 9, 11, 14, 16, 18, 31, 33, 42, 46, 47, 57})
+    quit(3)
+
 
