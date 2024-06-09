@@ -4,6 +4,7 @@ Classe da Lotomania
 
 import secrets
 import time
+from API.loteria_api import get_numbers
 
 BET = 50
 MIN_NUM = 1
@@ -41,11 +42,13 @@ class Lotomania:
         :return: set
         """
         retorno = set(fixos)
-        numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsidera os fixos
-        self.__gira_globo.shuffle(numeros)
-        time.sleep(0.5)
-        while len(retorno) < BET:
-            retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
+        qtde = BET - len(retorno)
+        if qtde <= 0:
+            return set(retorno)
+        apicall = get_numbers(n=qtde, min_val=MIN_NUM, max_val=MAX_NUM, repeat=False)
+        numeros = [x for x in apicall if x not in retorno]    # Generator desconsidera fixos
+        for dez in numeros:
+            retorno.add(dez)
         return set(retorno)
 
     @staticmethod

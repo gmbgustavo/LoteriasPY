@@ -1,9 +1,8 @@
 # Funções para uso comum
 
 import csv
-import pandas as pd
 
-SOURCE = './dados/megasena.csv'
+SOURCE = '../dados/megasena.csv'
 
 
 def load_csv():
@@ -11,12 +10,6 @@ def load_csv():
         reader = csv.reader(megasena)
         for linha in reader:
             yield linha
-
-
-def pandas_read_csv():
-    dataframe = pd.read_csv(SOURCE)
-    for row in dataframe:
-        yield dataframe
 
 
 def confere_mega_hist(aposta: set):
@@ -48,6 +41,7 @@ def apostas_lote(qtde: int):
 
 
 if __name__ == '__main__':
+    confere_mega_hist({5, 18, 23, 33, 42, 45})
     quit(3)
 
 
