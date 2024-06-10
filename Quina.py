@@ -2,8 +2,8 @@
 Classe da Quina
 """
 
-import secrets
 import time
+from API.loteria_api import get_numbers
 
 MAX_BET = 15
 MIN_BET = 5
@@ -25,7 +25,6 @@ class Quina:
             f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}. (Passadas {dezenas})'
         assert self.__checkargs(args), f'Quina usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         assert len(args) <= dezenas, f'Quantidade de números informados incompativel com o argumento "dezenas"'
-        self.__gira_globo = secrets.SystemRandom()
         self.__dezenas = dezenas
         self.__jogo = self.__surpresinha(set(args))
 
@@ -46,11 +45,17 @@ class Quina:
         :return: set
         """
         retorno = set(fixos)
-        numeros = [x for x in RANGE_BET if x not in retorno]    # Generator desconsidera os fixos
-        self.__gira_globo.shuffle(numeros)
-        while len(retorno) < self.__dezenas:
-            retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
-            time.sleep(0.2)    # Aumenta a aleatoriedade
+        qtde = self.__dezenas - len(retorno)
+        if qtde <= 0:
+            return set(retorno)
+        numeros = []
+        while len(numeros) + len(retorno) < self.__dezenas:
+            apicall = get_numbers(n=qtde, min_val=MIN_NUM, max_val=MAX_NUM, repeat=False)
+            time.sleep(0.1)
+            numeros = [x for x in apicall if x not in retorno]    # Generator desconsidera fixos
+            qtde -= len(numeros) + len(retorno)
+        for dez in numeros:
+            retorno.add(dez)
         return set(retorno)
 
     @property

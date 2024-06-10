@@ -15,8 +15,8 @@ from API.helpers import *
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
-    modalidade = 'Diadesorte'
-    aposta1 = Diadesorte(1, 5, 6, 15, 22, 28, dezenas=7)
+    modalidade = 'Quina'
+    aposta1 = Quina(1, dezenas=7)
     volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
@@ -50,8 +50,6 @@ if __name__ == '__main__':
         print(Fore.LIGHTYELLOW_EX + f'Foram necessarios {concursos:,} concursos. ')
         print(Fore.GREEN + f'Numeros sorteados: {resultado_loteria}')
         print(Fore.LIGHTBLUE_EX + f'\nSorteios por segundo: {int(iterations_per_second):,}\n' + Fore.RESET)
-        print(Fore.MAGENTA + f'Comparação com os sorteios históricos:')
-        confere_diadesorte_hist(aposta1.jogo)
 
         analise['concursos'] = concursos
         estatistica.grava_csv()
