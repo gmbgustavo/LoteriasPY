@@ -5,7 +5,7 @@ Grava informações dos sorteios e conferências em arquivo CSV
 
 class Salvadados:
 
-    def __init__(self, dados: dict, arquivo='dados/stats_concursos.csv', modo='a'):
+    def __init__(self, dados: dict, arquivo='../dados/stats_concursos.csv', modo='a'):
         self.__i = dados
         self.__arq = arquivo
         self.__modo = modo
