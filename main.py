@@ -5,17 +5,18 @@ Modulo principal
 from Megasena import *
 from Timemania import *
 from Quina import *
+from Diadesorte import *
 from API.Salvadados import *
 from Sorteio import *
 from colorama import Fore
-from API.helpers import confere_mega_hist
+from API.helpers import *
 
 # Configuração regional
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
-    modalidade = 'Megasena'
-    aposta1 = Megasena(1, dezenas=15)
+    modalidade = 'Diadesorte'
+    aposta1 = Diadesorte(1, 5, 6, 15, 22, 28, dezenas=7)
     volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
@@ -50,7 +51,7 @@ if __name__ == '__main__':
         print(Fore.GREEN + f'Numeros sorteados: {resultado_loteria}')
         print(Fore.LIGHTBLUE_EX + f'\nSorteios por segundo: {int(iterations_per_second):,}\n' + Fore.RESET)
         print(Fore.MAGENTA + f'Comparação com os sorteios históricos:')
-        confere_mega_hist(aposta1.jogo)
+        confere_diadesorte_hist(aposta1.jogo)
 
         analise['concursos'] = concursos
         estatistica.grava_csv()

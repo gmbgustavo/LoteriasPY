@@ -1,11 +1,12 @@
 """
 Grava informações dos sorteios e conferências em arquivo CSV
 """
+from pathlib import Path
 
 
 class Salvadados:
 
-    def __init__(self, dados: dict, arquivo='../dados/stats_concursos.csv', modo='a'):
+    def __init__(self, dados: dict, arquivo=Path(__file__).resolve().parent / '../dados/stats_concursos.csv', modo='a'):
         self.__i = dados
         self.__arq = arquivo
         self.__modo = modo
