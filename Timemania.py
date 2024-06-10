@@ -6,6 +6,7 @@ import secrets
 import time
 import csv
 import locale
+from pathlib import Path
 
 # Configuração regional
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
@@ -14,7 +15,7 @@ BET = 10
 MIN_NUM = 1
 MAX_NUM = 80
 RANGEBET = range(MIN_NUM, MAX_NUM + 1)
-LISTA_TIMES = './dados/times.csv'
+LISTA_TIMES = Path(__file__).resolve().parent / './dados/times.csv'
 
 
 class Timemania:
@@ -81,5 +82,4 @@ class Timemania:
 
 
 if __name__ == '__main__':
-    jogo = Timemania()
-    print(jogo)
+    quit(3)

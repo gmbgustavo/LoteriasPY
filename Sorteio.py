@@ -29,8 +29,6 @@ class Sorteio:
             f'Modalidade inválida: Válidas apenas {MODALIDADES}. Informado {modalidade}.'
         self.__modalidade = modalidade
         self.__sorteado = set()
-        self.__res_duplasena1 = set()
-        self.__res_duplasena2 = set()
         self.__res_supersete = list()
         self.__res_timemania = list()
         self.__gira_globo = random.shuffle    # Simula o 'embaralhamento' num globo com as bolas
