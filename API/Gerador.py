@@ -8,7 +8,6 @@ from Quina import *
 from Megasena import *
 from Lotofacil import *
 from Lotomania import *
-from Duplasena import *
 from Diadesorte import *
 from Timemania import *
 from colorama import Fore
@@ -17,7 +16,7 @@ from colorama import Fore
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania',
-               'Diadesorte', 'Duplasena']
+               'Diadesorte']
 
 MAX_JOGOS = 10    # Limite de sugestões devido ao custo da API
 
@@ -26,7 +25,7 @@ class Gerador:
 
     def __init__(self, modalidade: str, dezenas: int, fixados: list, quantidade=1):
         """
-        :param modalidade: Nome do jogo em string. (Quina, Megasena, Lotofacil, Lotomania, Diadesorte, Duplasena)
+        :param modalidade: Nome do jogo em string. (Quina, Megasena, Lotofacil, Lotomania, Diadesorte)
         :param dezenas: quantidade de dezenas para apostar (observar minimos e maximos)
         :param fixados: dezenas que obrigatoriamente estarao no jogo
         :param quantidade: numero de apostas para gerar
@@ -45,7 +44,6 @@ class Gerador:
     def gerajogo(self):
         modalidades = {
             'Quina': Quina,
-            'Duplasena': Duplasena,
             'Megasena': Megasena,
             'Diadesorte': Diadesorte,
             'Lotomania': Lotomania,

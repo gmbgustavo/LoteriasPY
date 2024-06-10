@@ -6,7 +6,7 @@ import random
 import secrets
 
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania',
-               'Diadesorte', 'Duplasena']
+               'Diadesorte']
 
 
 class Sorteio:
@@ -18,8 +18,6 @@ class Sorteio:
     MAX_LOTOFACIL = 25
     LOTOMANIA = 20
     MAX_LOTOMANIA = 100
-    DUPLASENA = 6
-    MAX_DUPLASENA = 50
     DIADESORTE = 7
     MAX_DIADESORTE = 31
     MAX_TIMEMANIA = 80
@@ -88,30 +86,6 @@ class Sorteio:
         self.__res_timemania = self.__sorteado
         return set(self.__res_timemania)
 
-    def __duplasena(self) -> list:
-        """
-        Executa o sorteio da Dupla sena (Dois sets de seis numeros)
-        :return: Um set com a uniao dos dos sorteios, ignorando dezenas repetidas
-        """
-        self.__sorteado.clear()
-        self.__res_duplasena1.clear()
-        self.__res_duplasena2.clear()
-        numeros = [x for x in range(1, self.MAX_DUPLASENA + 1)]
-        self.__gira_globo(numeros)
-        while len(self.__res_duplasena1) < self.DUPLASENA:
-            self.__res_duplasena1.add(numeros.pop(secrets.randbelow(len(numeros))))
-        del numeros
-
-        numeros = [x for x in range(1, self.MAX_DUPLASENA + 1)]
-        self.__gira_globo(numeros)
-        while len(self.__res_duplasena2) < self.DUPLASENA:
-            self.__res_duplasena2.add(numeros.pop(secrets.randbelow(len(numeros))))
-        return [self.__res_duplasena1, self.__res_duplasena2]
-
-    @property    # Propriedade para exibir os sorteios da Dupla sena de forma separada.
-    def sorteio_duplasena(self):
-        return [self.__res_duplasena1, self.__res_duplasena2]
-
     @property
     def modalidade(self):
         return self.__modalidade
@@ -123,7 +97,6 @@ class Sorteio:
             'Megasena': self.MEGASENA,
             'Lotofacil': self.LOTOFACIL,
             'Lotomania': self.LOTOMANIA,
-            'Duplasena': self.DUPLASENA,
             'Diadesorte': self.DIADESORTE,
         }.get(self.__modalidade, AssertionError('Modalidade não implementada.'))
 
@@ -133,7 +106,6 @@ class Sorteio:
             'Megasena': self.__megasena,
             'Lotofacil': self.__lotofacil,
             'Lotomania': self.__lotomania,
-            'Duplasena': self.__duplasena,
             'Diadesorte': self.__diadesorte,
             'Timemania': self.__timemania
         }
@@ -151,12 +123,6 @@ class Sorteio:
     def conferir(self, listadejogos) -> list:
         assert listadejogos is not None, f'É necessário informar um jogo para conferir'
         pontos = []
-        if self.__modalidade == 'Duplasena':
-            for jogo in listadejogos:
-                pontos.append(self.__res_duplasena1.issubset(jogo))
-                pontos.append(self.__res_duplasena2.issubset(jogo))
-            return pontos
-
         for jogo in listadejogos:
             pontos.append(self.__sorteado.issubset(jogo))
         return pontos
