@@ -7,6 +7,7 @@ from pathlib import Path
 MEGASENA = Path(__file__).resolve().parent / '../dados/megasena.csv'
 QUINA = Path(__file__).resolve().parent / '../dados/quina.csv'
 LOTOFACIL = Path(__file__).resolve().parent / '../dados/lotofacil.csv'
+DIADESORTE = Path(__file__).resolve().parent / '../dados/diadesorte.csv'
 
 
 def read_csv_lines(arquivo_csv):
@@ -83,12 +84,33 @@ def confere_lotofacil_hist(aposta: set):
     print(f'Quinze acertos: {quinze} (concurso {concurso_vencedor}),\nQuatorze acertos {quatorze}.')
 
 
+def confere_diadesorte_hist(aposta: set):
+    cont = 1
+    sete = 0
+    seis = 0
+    concurso_vencedor = -1
+    for sorteio in read_csv_lines(DIADESORTE):
+        if cont == 1:  # Remove o cabeçalho
+            cont = -1
+            continue
+        convertido = [eval(i) for i in sorteio[2:9]]
+        convertido = set(convertido)
+        concurso = sorteio[0]
+        pontos = len(convertido.difference(aposta))
+        if pontos == 0:  # Todos os elementos são iguais, logo, acertou tudo.
+            sete += 1
+            concurso_vencedor = concurso
+        elif pontos == 1:  # Há apenas um elemento diferente, então há 5 iguais (quina). (elementos totais = 6)
+            seis += 1
+    print(f'Sete acertos: {sete} (concurso {concurso_vencedor}),\nSeis acertos {seis}.')
+
+
 def apostas_lote(qtde: int):
     pass
 
 
 if __name__ == '__main__':
-    confere_lotofacil_hist({8, 22, 5, 14, 16, 9, 23, 11, 7, 2, 13, 25, 24, 18, 17})
+    confere_diadesorte_hist({1, 5, 6, 15, 19, 22, 28})
     quit(3)
 
 
