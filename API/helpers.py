@@ -3,7 +3,8 @@
 import csv
 from pathlib import Path
 
-SOURCE = Path('dados/megasena.csv')
+
+SOURCE = Path(__file__).resolve().parent / '../dados/megasena.csv'
 
 
 def load_csv():
@@ -42,6 +43,7 @@ def apostas_lote(qtde: int):
 
 
 if __name__ == '__main__':
+    confere_mega_hist({1, 5, 6, 15, 22, 28})
     quit(3)
 
 
