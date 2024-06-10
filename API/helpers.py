@@ -100,7 +100,7 @@ def confere_diadesorte_hist(aposta: set):
         if pontos == 0:  # Todos os elementos são iguais, logo, acertou tudo.
             sete += 1
             concurso_vencedor = concurso
-        elif pontos == 1:  # Há apenas um elemento diferente, então há 5 iguais (quina). (elementos totais = 6)
+        elif pontos == 1:
             seis += 1
     print(f'Sete acertos: {sete} (concurso {concurso_vencedor}),\nSeis acertos {seis}.')
 
