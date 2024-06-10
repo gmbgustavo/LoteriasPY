@@ -63,6 +63,7 @@ class Megasena:
             apicall = get_numbers(n=qtde, min_val=MIN_NUM, max_val=MAX_NUM, repeat=False)
             time.sleep(0.1)
             numeros = [x for x in apicall if x not in retorno]    # Generator desconsidera fixos
+            qtde -= len(numeros) + len(retorno)
         for dez in numeros:
             retorno.add(dez)
         return set(retorno)

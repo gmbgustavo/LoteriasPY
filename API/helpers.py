@@ -1,8 +1,9 @@
 # Funções para uso comum
 
 import csv
+from pathlib import Path
 
-SOURCE = '../dados/megasena.csv'
+SOURCE = Path('dados/megasena.csv')
 
 
 def load_csv():
