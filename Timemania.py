@@ -7,6 +7,7 @@ import time
 import csv
 import locale
 from pathlib import Path
+from API.loteria_api import get_numbers
 
 # Configuração regional
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
@@ -26,12 +27,14 @@ class Timemania:
         :param args: Se vazio, cria um jogo surpresinha com a 50 dezenas
         """
         assert self.__checkargs(args), f'Timemania usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
+        self.__dezenas = BET
         self.__listadetimes = self.__carregatimes()
         if timedocoracao == -1:
             self.__timedocoracao = self.__listadetimes[secrets.randbelow(len(self.__listadetimes))]
         else:
             self.__timedocoracao = timedocoracao
         self.__jogo = self.__surpresinha(args)
+
 
     @staticmethod
     def __carregatimes():
@@ -52,18 +55,24 @@ class Timemania:
     def __len__(self):
         return BET
 
-    @staticmethod
-    def __surpresinha(fixos=()):
+    def __surpresinha(self, fixos=()):
         """
         Retorna um conjunto(set) com numeros inteiros entre 1 e 100
         :param fixos: Numeros pre estabelecidos
         :return: set
         """
         retorno = set(fixos)
-        numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsidera os fixos
-        while len(retorno) < BET:
-            retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
-            time.sleep(0.1)    # Aumenta a aleatoriedade
+        qtde = self.__dezenas - len(retorno)
+        if qtde <= 0:
+            return set(retorno)
+        numeros = []
+        while len(numeros) + len(retorno) < self.__dezenas:
+            apicall = get_numbers(n=qtde, min_val=MIN_NUM, max_val=MAX_NUM, repeat=False)
+            time.sleep(0.1)
+            numeros = [x for x in apicall if x not in retorno]    # Generator desconsidera fixos
+            qtde -= len(numeros) + len(retorno)
+        for dez in numeros:
+            retorno.add(dez)
         return set(retorno)
 
     @staticmethod
