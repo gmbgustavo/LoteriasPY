@@ -3,8 +3,10 @@ Modulo principal
 """
 
 from Megasena import *
+from Lotofacil import *
 from Timemania import *
 from Quina import *
+from Lotomania import *
 from Diadesorte import *
 from API.Salvadados import *
 from Sorteio import *
@@ -15,8 +17,8 @@ from API.helpers import *
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
-    modalidade = 'Timemania'
-    aposta1 = Timemania(1, 5, 6, 15, 22, 28)
+    modalidade = 'Lotomania'
+    aposta1 = Lotomania(1, 5, 6, 15, 22, 28)
     volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')

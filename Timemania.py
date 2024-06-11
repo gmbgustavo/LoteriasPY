@@ -7,7 +7,7 @@ import time
 import csv
 import locale
 from pathlib import Path
-from API.loteria_api import get_numbers
+from API.random_api import get_numbers
 
 # Configuração regional
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
@@ -61,19 +61,20 @@ class Timemania:
         :param fixos: Numeros pre estabelecidos
         :return: set
         """
-        retorno = set(fixos)
-        qtde = self.__dezenas - len(retorno)
+        gerados = len(fixos)
+        qtde = self.__dezenas - len(fixos)
         if qtde <= 0:
-            return set(retorno)
-        numeros = []
-        while len(numeros) + len(retorno) < self.__dezenas:
-            apicall = get_numbers(n=qtde, min_val=MIN_NUM, max_val=MAX_NUM, repeat=False)
-            time.sleep(0.1)
-            numeros = [x for x in apicall if x not in retorno]    # Generator desconsidera fixos
-            qtde -= len(numeros) + len(retorno)
-        for dez in numeros:
-            retorno.add(dez)
-        return set(retorno)
+            return set(fixos)
+        time.sleep(0.2)
+        while len(fixos) < self.__dezenas:
+            if qtde >= 1:
+                apicall = get_numbers(n=qtde, min_val=MIN_NUM, max_val=MAX_NUM, repeat=False)
+                numeros = [x for x in apicall if x not in fixos]    # Generator desconsidera fixos
+                for dez in numeros:
+                    fixos.add(dez)
+                gerados = len(fixos)
+            qtde = self.__dezenas - gerados
+        return set(fixos)
 
     @staticmethod
     def __checkargs(numeros):

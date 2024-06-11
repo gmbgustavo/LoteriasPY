@@ -6,6 +6,7 @@ o mês é apenas para exibição e comparação pois é um prêmio pequeno indep
 
 import secrets
 import time
+from API.random_api import get_numbers
 
 MAX_BET = 15
 MIN_BET = 7
@@ -52,19 +53,25 @@ class Diadesorte:
         Retorna um conjunto(set) com numeros inteiros entre 1 e 31
         :return: set
         """
-        retorno = set(fixos)
-        numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsidera os fixos
-        self.__gira_globo.shuffle(numeros)
-        time.sleep(0.1)
-        while len(retorno) < self.__dezenas:
-            retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
-            time.sleep(0.2)    # Aumenta a aleatoriedade
+        gerados = len(fixos)
+        qtde = self.__dezenas - len(fixos)
+        if qtde <= 0:
+            return set(fixos)
+        time.sleep(0.2)
+        while len(fixos) < self.__dezenas:
+            if qtde >= 1:
+                apicall = get_numbers(n=qtde, min_val=MIN_NUM, max_val=MAX_NUM, repeat=False)
+                numeros = [x for x in apicall if x not in fixos]    # Generator desconsidera fixos
+                for dez in numeros:
+                    fixos.add(dez)
+                gerados = len(fixos)
+            qtde = self.__dezenas - gerados
         if self.__mes == 0:
             self.__mes = secrets.choice(range(0, len(MESES)))
-            retorno.add(MESES[self.__mes])
+            fixos.add(MESES[self.__mes])
         else:
-            retorno.add(MESES[self.__mes - 1])
-        return set(retorno)
+            fixos.add(MESES[self.__mes - 1])
+        return set(fixos)
 
     @staticmethod
     def __checkargs(numeros):

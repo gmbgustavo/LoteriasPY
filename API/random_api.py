@@ -35,9 +35,9 @@ def get_numbers(n=5, min_val=1, max_val=60, repeat=False):
         if "result" in result and "random" in result["result"]:
             return sorted(result["result"]["random"]["data"])
         else:
-            return "Erro: A chave 'random' não consta na string de resposta."
+            raise IndexError("Erro: A chave 'random' não consta na string de resposta.")
     else:
-        return f"Erro: Response status code {response.status_code}"
+        raise ConnectionError(f"Erro: Response status code {response.status_code}")
 
 
 if __name__ == '__main__':

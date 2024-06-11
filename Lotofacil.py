@@ -2,8 +2,8 @@
 Classe da Lotofacil
 """
 
-import secrets
 import time
+from API.random_api import get_numbers
 
 MAX_BET = 20
 MIN_BET = 15
@@ -25,9 +25,8 @@ class Lotofacil:
             f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}.'
         assert self.__checkargs(args), f'Lotofácil usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         assert len(args) <= dezenas, f'Quantidade de números informados incompativel com o argumento "dezenas"'
-        self.__gira_globo = secrets.SystemRandom()
         self.__dezenas = dezenas
-        self.__jogo = self.__surpresinha(set(args))
+        self.__jogo = self.__surpresinha(fixos=set(args))
 
     def __repr__(self):
         l_exib = list(self.__jogo)
@@ -40,18 +39,25 @@ class Lotofacil:
     def __len__(self):
         return self.__dezenas
 
-    def __surpresinha(self, fixos=()):
+    def __surpresinha(self, fixos: set):
         """
         Retorna um conjunto(set) com numeros inteiros entre 1 e 25
         :return: set
         """
-        retorno = set(fixos)
-        numeros = [x for x in RANGEBET if x not in retorno]    # Generator desconsider fixos
-        self.__gira_globo.shuffle(numeros)
-        while len(retorno) < self.__dezenas:
-            time.sleep(0.2)
-            retorno.add(numeros.pop(secrets.randbelow(len(numeros))))
-        return set(retorno)
+        gerados = len(fixos)
+        qtde = self.__dezenas - len(fixos)
+        if qtde <= 0:
+            return set(fixos)
+        time.sleep(0.2)
+        while len(fixos) < self.__dezenas:
+            if qtde >= 1:
+                apicall = get_numbers(n=qtde, min_val=MIN_NUM, max_val=MAX_NUM, repeat=False)
+                numeros = [x for x in apicall if x not in fixos]    # Generator desconsidera fixos
+                for dez in numeros:
+                    fixos.add(dez)
+                gerados = len(fixos)
+            qtde = self.__dezenas - gerados
+        return set(fixos)
 
     @property
     def jogo(self):
@@ -69,4 +75,4 @@ class Lotofacil:
 
 
 if __name__ == '__main__':
-    print('Essa classe deve ser apenas instanciada internamente.')
+    quit(3)
