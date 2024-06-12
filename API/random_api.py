@@ -9,7 +9,7 @@ dotenv.load_dotenv(encoding="UTF-8")
 CHAVE_LOCA = os.getenv("CHAVE_LOCA")
 
 
-def get_numbers(n=5, min_val=1, max_val=60, repeat=False):
+def get_numbers(n: int, min_val: int, max_val: int, repeat=False):
     time.sleep(0.2)
     url = "https://api.random.org/json-rpc/4/invoke"
     headers = {

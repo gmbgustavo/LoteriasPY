@@ -23,7 +23,7 @@ def confere_mega_hist(aposta: set):
     quinas = 0
     quadras = 0
     senas = 0
-    vencedor_sena = -1
+    vencedor = -1
     for sorteio in read_csv_lines(MEGASENA):
         if cont == 1:    # Remove o cabeçalho
             cont = -1
@@ -34,12 +34,12 @@ def confere_mega_hist(aposta: set):
         pontos = len(convertido.difference(aposta))
         if pontos == 0:    # Todos os elementos são iguais, logo acertou todas as 6 dezenas.
             senas += 1
-            vencedor_sena = concurso
+            vencedor = concurso
         elif pontos == 1:    # Há apenas um elemento diferente, então há 5 iguais (quina). (elementos totais = 6)
             quinas += 1
         elif pontos == 2:    # Há dois elementos diferente, então há 4 iguais (quadra). (elementos totais = 6)
             quadras += 1
-    print(f'Senas: {senas} (concurso {vencedor_sena}),\nQuinas: {quinas},\nQuadras {quadras}.')
+    print(f'Senas: {senas} (concurso {vencedor}),\nQuinas: {quinas},\nQuadras {quadras}.')
 
 
 def confere_quina_hist(aposta: set):
@@ -110,7 +110,7 @@ def apostas_lote(qtde: int):
 
 
 if __name__ == '__main__':
-    confere_diadesorte_hist({1, 5, 6, 15, 19, 22, 28})
+    confere_mega_hist(aposta={1, 5, 6, 15, 22, 28})
     quit(3)
 
 

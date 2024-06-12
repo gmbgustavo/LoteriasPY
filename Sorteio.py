@@ -122,6 +122,9 @@ class Sorteio:
         assert listadejogos is not None, f'É necessário informar um jogo para conferir'
         pontos = []
         for jogo in listadejogos:
+            if self.__modalidade == 'Lotomania' and self.__sorteado.difference(jogo) == 20:
+                pontos.append(True)
+                print('Debug Message: Acertou zero na Lotomania.')
             pontos.append(self.__sorteado.issubset(jogo))
         return pontos
 
