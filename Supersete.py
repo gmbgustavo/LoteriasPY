@@ -14,7 +14,7 @@ RANGEBET = range(MIN_NUM, MAX_NUM + 1)
 
 class Supersete:
 
-    def __init__(self, *args):
+    def __init__(self, dezenas=7, *args):
         self.__colunas = {1: -1, 2: -1, 3: -1, 4: -1, 5: -1, 6: -1, 7: -1}
         assert len(args) <= 7
         assert len(self.__colunas) == 7
@@ -44,12 +44,13 @@ class Supersete:
 
     @property
     def jogo(self):
-        return self.__jogo
+        return list(self.__jogo.values())
 
 
 if __name__ == '__main__':
     teste = Supersete()
     teste.sorteio()
+    print(teste.jogo)
 
 
 

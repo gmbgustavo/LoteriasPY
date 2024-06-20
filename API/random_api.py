@@ -1,3 +1,5 @@
+"""Codigo para chamadas API do serviço RANDOM.ORG"""
+
 import requests
 import json
 import time
@@ -6,7 +8,7 @@ import dotenv
 
 # API INIT
 dotenv.load_dotenv(encoding="UTF-8")
-CHAVE_LOCA = os.getenv("CHAVE_LOCA")
+CHAVE_API_RANDOM_ORG = os.getenv("CHAVE_LOCA")
 
 
 def get_numbers(n: int, min_val: int, max_val: int, repeat=False):
@@ -19,7 +21,7 @@ def get_numbers(n: int, min_val: int, max_val: int, repeat=False):
         "jsonrpc": "2.0",
         "method": "generateIntegers",    # Gera apenas números inteiros. Para outros ver documentação.
         "params": {
-            "apiKey": CHAVE_LOCA,
+            "apiKey": CHAVE_API_RANDOM_ORG,
             "n": n,
             "min": min_val,
             "max": max_val,

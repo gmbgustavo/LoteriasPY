@@ -5,6 +5,7 @@ Gerador de apostas
 import inspect
 import argparse
 from Quina import *
+from Supersete import *
 from Megasena import *
 from Lotofacil import *
 from Lotomania import *
@@ -16,7 +17,7 @@ from colorama import Fore
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania',
-               'Diadesorte']
+               'Diadesorte', 'Supersete']
 
 MAX_JOGOS = 10    # Limite de sugestões devido ao custo da API
 
@@ -49,6 +50,7 @@ class Gerador:
             'Lotomania': Lotomania,
             'Lotofacil': Lotofacil,
             'Timemania': Timemania,
+            'Supersete': Supersete
         }
 
         for i in range(1, self.__quantidade + 1):
@@ -70,7 +72,10 @@ class Gerador:
         for aposta in self.__sugestoes:
             aposta.sort(key=lambda item: (0, int(item)) if isinstance(item, int) else (1, item))
             for dezena in aposta:
-                print(f'{str(dezena).zfill(2)} ', end='')
+                if self.__modalidade != 'Supersete':
+                    print(f'{str(dezena).zfill(2)} ', end='')
+                else:
+                    print(f'{str(dezena)} ', end='')
             print('\n')
 
     def __repr__(self):
@@ -88,8 +93,8 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Quina',
-                   dezenas=9,
+    jogo = Gerador(modalidade='Supersete',
+                   dezenas=7,
                    fixados=[],
                    quantidade=3)
     print(f'Jogo a gerar: {jogo.get_name()} com {len(jogo)} dezenas.')
