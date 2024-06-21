@@ -14,7 +14,7 @@ RANGEBET = range(MIN_NUM, MAX_NUM + 1)
 
 class Supersete:
 
-    def __init__(self, dezenas=7, *args):
+    def __init__(self, *args):
         self.__colunas = {1: -1, 2: -1, 3: -1, 4: -1, 5: -1, 6: -1, 7: -1}
         assert len(args) <= 7
         assert len(self.__colunas) == 7
@@ -29,7 +29,7 @@ class Supersete:
     def __iter__(self):
         yield self.__jogo
 
-    def __surpresinha(self):
+    def __surpresinha(self) -> dict:
         time.sleep(0.2)    # Limita a consulta a API
         numeros = get_numbers(n=BET, min_val=MIN_NUM, max_val=MAX_NUM, repeat=True)    # Pode repetir os numeros
         assert len(numeros) == BET
@@ -39,9 +39,6 @@ class Supersete:
             coluna += 1
         return self.__colunas
 
-    def sorteio(self):
-        return self.__surpresinha()
-
     @property
     def jogo(self):
         return list(self.__jogo.values())
@@ -49,7 +46,6 @@ class Supersete:
 
 if __name__ == '__main__':
     teste = Supersete()
-    teste.sorteio()
     print(teste.jogo)
 
 

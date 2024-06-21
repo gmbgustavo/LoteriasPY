@@ -14,7 +14,7 @@ RANGEBET = range(MIN_NUM, MAX_NUM + 1)
 
 class Megasena:
 
-    def __init__(self, *args, dezenas):
+    def __init__(self, *args, dezenas=MIN_BET):
         """
         Cria um objeto do tipo Megasena.
         :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas(padrao=6)

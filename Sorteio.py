@@ -4,7 +4,7 @@ Sorteia e retorna as dezenas de uma loteria especificada
 
 import random
 import secrets
-
+from colorama import Fore
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania', 'Diadesorte', 'Supersete']
 
 
@@ -21,6 +21,7 @@ class Sorteio:
     MAX_DIADESORTE = 31
     MAX_TIMEMANIA = 80
     TIMEMANIA = 7
+    SUPERSETE = 7
     MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
 
     def __init__(self, modalidade: str):
@@ -28,8 +29,8 @@ class Sorteio:
             f'Modalidade inválida: Válidas apenas {MODALIDADES}. Informado {modalidade}.'
         self.__modalidade = modalidade
         self.__sorteado = set()
-        self.__res_supersete = list()
-        self.__res_timemania = list()
+        self.__res_supersete = []
+        self.__res_timemania = []
         self.__gira_globo = random.shuffle    # Simula o 'embaralhamento' num globo com as bolas
 
     def __megasena(self) -> set:
@@ -80,16 +81,13 @@ class Sorteio:
         self.__gira_globo(numeros)
         while len(self.__sorteado) < self.LOTOMANIA:
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
-        self.__res_timemania = self.__sorteado
-        return set(self.__res_timemania)
+        return self.__sorteado
 
     def __supersete(self) -> list:
-        self.__sorteado.clear()
-        numeros = [x for x in range(1, self.MAX_DIADESORTE + 1)]
-        self.__gira_globo(numeros)
-        while len(self.__sorteado) < self.DIADESORTE:
-            self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
-        return list(self.__sorteado)
+        self.__res_supersete.clear()
+        while len(self.__res_supersete) < self.SUPERSETE:
+            self.__res_supersete.append(secrets.randbelow(9))
+        return self.__res_supersete
 
     @property
     def modalidade(self):
@@ -132,8 +130,14 @@ class Sorteio:
         for jogo in listadejogos:
             if self.__modalidade == 'Lotomania' and self.__sorteado.difference(jogo) == 20:
                 pontos.append(True)
-                print('Debug Message: Acertou zero na Lotomania.')
-            pontos.append(self.__sorteado.issubset(jogo))
+                print(Fore.LIGHTRED_EX + 'Debug Message: Acertou zero na Lotomania.' + Fore.RESET)
+            elif self.__modalidade == 'Supersete':
+                acertos = 0
+                for x in range(1, 8):
+                    if
+                    pontos.append(True)
+            else:
+                pontos.append(self.__sorteado.issubset(jogo))
         return pontos
 
 
