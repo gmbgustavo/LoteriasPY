@@ -19,11 +19,11 @@ from API.helpers import *
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
-    modalidade = 'Supersete'
-    aposta1 = Supersete(dezenas=7)
+    modalidade = 'Quina'
+    aposta1 = Quina(1, 5, 6, 15, 22, 28, dezenas=6)
     volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
-    print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
+    print(f'\nCriando seus jogos, isto pode levar até 20 segundos dependendo da quantidade de apostas.')
     print(f'Inicialização de entropia...\n')
 
     # Para chamar o método conferir da classe Sorteio, um objeto Sorteio deve ter sido instanciado previamente,
