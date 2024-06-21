@@ -1,6 +1,7 @@
 """
 Modulo principal
 """
+import time
 
 from Megasena import *
 from Lotofacil import *
@@ -8,6 +9,7 @@ from Timemania import *
 from Quina import *
 from Lotomania import *
 from Diadesorte import *
+from Supersete import *
 from API.Salvadados import *
 from Sorteio import *
 from colorama import Fore
@@ -17,8 +19,8 @@ from API.helpers import *
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
-    modalidade = 'Lotomania'
-    aposta1 = Lotomania(1, 5, 6, 15, 22, 28)
+    modalidade = 'Supersete'
+    aposta1 = Supersete(dezenas=7)
     volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos a depender da quantidade de apostas.')
@@ -28,9 +30,10 @@ if __name__ == '__main__':
     # executando o método sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade 'jogo' do ojbeto de aposta, Megasena, Quina...
     analise = {'modalidade': modalidade, 'dezenas': len(aposta1), 'concursos': 0, 'apostas': len(volante)}
-    for stat in range(1):
+    for stat in range(3):
         # Medição de desempenho
         start_time = time.time()
+        time.sleep(1)
         estatistica = Salvadados(dados=analise)
         concursos = 1
         resultado_loteria = concurso_loteria.sortear()    # Primeiro sorteio

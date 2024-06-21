@@ -5,8 +5,7 @@ Sorteia e retorna as dezenas de uma loteria especificada
 import random
 import secrets
 
-MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania',
-               'Diadesorte']
+MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania', 'Diadesorte', 'Supersete']
 
 
 class Sorteio:
@@ -84,6 +83,14 @@ class Sorteio:
         self.__res_timemania = self.__sorteado
         return set(self.__res_timemania)
 
+    def __supersete(self) -> list:
+        self.__sorteado.clear()
+        numeros = [x for x in range(1, self.MAX_DIADESORTE + 1)]
+        self.__gira_globo(numeros)
+        while len(self.__sorteado) < self.DIADESORTE:
+            self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
+        return list(self.__sorteado)
+
     @property
     def modalidade(self):
         return self.__modalidade
@@ -105,7 +112,8 @@ class Sorteio:
             'Lotofacil': self.__lotofacil,
             'Lotomania': self.__lotomania,
             'Diadesorte': self.__diadesorte,
-            'Timemania': self.__timemania
+            'Timemania': self.__timemania,
+            'Supersete': self.__supersete
         }
         method = methods.get(self.__modalidade)
         if method:
@@ -116,7 +124,7 @@ class Sorteio:
                 l_exib.sort(key=lambda item: str(item))
                 return l_exib
             return result
-        return AttributeError("Objeto não reconhecida como um jogo válido")
+        return AttributeError("Objeto não reconhecido como um jogo válido")
 
     def conferir(self, listadejogos) -> list:
         assert listadejogos is not None, f'É necessário informar um jogo para conferir'
