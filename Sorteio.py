@@ -29,7 +29,7 @@ class Sorteio:
             f'Modalidade inválida: Válidas apenas {MODALIDADES}. Informado {modalidade}.'
         self.__modalidade = modalidade
         self.__sorteado = set()
-        self.__res_supersete = []
+        self.__res_supersete = {}
         self.__res_timemania = []
         self.__gira_globo = random.shuffle    # Simula o 'embaralhamento' num globo com as bolas
 
@@ -83,10 +83,12 @@ class Sorteio:
             self.__sorteado.add(numeros.pop(secrets.randbelow(len(numeros))))
         return self.__sorteado
 
-    def __supersete(self) -> list:
+    def __supersete(self) -> dict:
         self.__res_supersete.clear()
+        index = 1
         while len(self.__res_supersete) < self.SUPERSETE:
-            self.__res_supersete.append(secrets.randbelow(9))
+            self.__res_supersete[index] = secrets.randbelow(9)
+            index += 1
         return self.__res_supersete
 
     @property
@@ -121,6 +123,8 @@ class Sorteio:
                 l_exib.append(self.MESES[secrets.randbelow(len(self.MESES))])
                 l_exib.sort(key=lambda item: str(item))
                 return l_exib
+            if self.__modalidade == 'Supersete':
+                return result
             return result
         return AttributeError("Objeto não reconhecido como um jogo válido")
 
@@ -128,13 +132,15 @@ class Sorteio:
         assert listadejogos is not None, f'É necessário informar um jogo para conferir'
         pontos = []
         for jogo in listadejogos:
-            if self.__modalidade == 'Lotomania' and self.__sorteado.difference(jogo) == 20:
+            if self.__modalidade == 'Lotomania' and len(self.__sorteado.difference(jogo)) == 20:
                 pontos.append(True)
                 print(Fore.LIGHTRED_EX + 'Debug Message: Acertou zero na Lotomania.' + Fore.RESET)
             elif self.__modalidade == 'Supersete':
                 acertos = 0
                 for x in range(1, 8):
-                    pass
+                    if self.__res_supersete[x] == jogo[x]:
+                        acertos += 1
+                if acertos == 7:
                     pontos.append(True)
             else:
                 pontos.append(self.__sorteado.issubset(jogo))

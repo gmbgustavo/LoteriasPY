@@ -19,8 +19,8 @@ from API.helpers import *
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
-    modalidade = 'Quina'
-    aposta1 = Quina(21, 38, 60, 64, 70, dezenas=5)
+    modalidade = 'Supersete'
+    aposta1 = Supersete()
     volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos dependendo da quantidade de apostas.')
@@ -35,8 +35,11 @@ if __name__ == '__main__':
         estatistica = Salvadados(dados=analise)
         concursos = 1
         resultado_loteria = concurso_loteria.sortear()    # Primeiro sorteio
-        print(Fore.YELLOW + f'-----------------------INÍCIO-----------------------' + Fore.RESET)
-        print(f'Suas apostas: {sorted(volante[0:len(volante)])}')  # Apresenta a aposta ao usuario
+        print('\n' + Fore.YELLOW + f'------------------------INÍCIO------------------------' + Fore.RESET)
+        if modalidade == 'Supersete':
+            print(f'Suas apostas: {volante}')
+        else:
+            print(f'Suas apostas: {sorted(volante[0:len(volante)])}')  # Apresenta a aposta ao usuario
         print(f'Quantidade de dezenas: {len(aposta1)}')
         print(f'Modalidade: {modalidade}')
         print(Fore.RED + f'Iteração {stat + 1}' + Fore.RESET)
@@ -46,13 +49,13 @@ if __name__ == '__main__':
             print(f'\rConcursos {concursos:,}', end='')
 
         # Calcula a quantidade de iterações por segundo para fins de métricas de desempenho
-        iterations_per_second = concursos / (time.time() - start_time)
+        tempototal = time.time() - start_time
 
         # Apresenta os resultados finais
         print(f'\n\n-----------------------FIM-----------------------')
         print(Fore.LIGHTYELLOW_EX + f'Foram necessarios {concursos:,} concursos. ')
-        print(Fore.GREEN + f'Numeros sorteados: {resultado_loteria}')
-        print(Fore.LIGHTBLUE_EX + f'\nSorteios por segundo: {int(iterations_per_second):,}\n' + Fore.RESET)
+        print(Fore.RED + f'Numeros sorteados: {resultado_loteria}')
+        print(Fore.LIGHTBLUE_EX + f'\nTempo total: {tempototal:.2f} segundos\n' + Fore.RESET)
 
         analise['concursos'] = concursos
         estatistica.grava_csv()
