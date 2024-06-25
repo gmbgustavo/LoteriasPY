@@ -19,8 +19,8 @@ from API.helpers import *
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
-    modalidade = 'Supersete'
-    aposta1 = Supersete()
+    modalidade = 'Quina'
+    aposta1 = Quina(21, 38, 60, 64, 70, dezenas=5)
     volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos dependendo da quantidade de apostas.')

@@ -134,7 +134,7 @@ class Sorteio:
             elif self.__modalidade == 'Supersete':
                 acertos = 0
                 for x in range(1, 8):
-                    if
+                    pass
                     pontos.append(True)
             else:
                 pontos.append(self.__sorteado.issubset(jogo))
