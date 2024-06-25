@@ -134,13 +134,12 @@ class Sorteio:
         for jogo in listadejogos:
             if self.__modalidade == 'Lotomania' and len(self.__sorteado.difference(jogo)) == 20:
                 pontos.append(True)
-                print(Fore.LIGHTRED_EX + 'Debug Message: Acertou zero na Lotomania.' + Fore.RESET)
             elif self.__modalidade == 'Supersete':
                 acertos = 0
                 for x in range(1, 8):
                     if self.__res_supersete[x] == jogo[x]:
                         acertos += 1
-                if acertos == 7:
+                if acertos == self.SUPERSETE:
                     pontos.append(True)
             else:
                 pontos.append(self.__sorteado.issubset(jogo))
