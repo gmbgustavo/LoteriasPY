@@ -19,8 +19,8 @@ from API.helpers import *
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
-    modalidade = 'Lotomania'
-    aposta1 = Lotomania()
+    modalidade = 'Supersete'
+    aposta1 = Supersete()
     volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos dependendo da quantidade de apostas.')
@@ -35,7 +35,7 @@ if __name__ == '__main__':
         estatistica = Salvadados(dados=analise)
         concursos = 1
         resultado_loteria = concurso_loteria.sortear()    # Primeiro sorteio
-        print('\n' + Fore.YELLOW + f'------------------------INÍCIO------------------------' + Fore.RESET)
+        print('\n' + Fore.YELLOW + f'---------------------------INÍCIO---------------------------' + Fore.RESET)
         if modalidade == 'Supersete':
             print(f'Suas apostas: {volante}')
         else:

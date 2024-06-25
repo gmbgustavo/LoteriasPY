@@ -16,7 +16,7 @@ class Supersete:
 
     def __init__(self, *args):
         self.__colunas = {1: -1, 2: -1, 3: -1, 4: -1, 5: -1, 6: -1, 7: -1}
-        assert len(args) <= 7
+        assert len(args) == 7 or len(args) == 0
         assert len(self.__colunas) == 7
         self.__jogo = self.__surpresinha()
 

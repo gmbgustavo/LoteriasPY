@@ -139,7 +139,7 @@ class Sorteio:
                 for x in range(1, 8):
                     if self.__res_supersete[x] == jogo[x]:
                         acertos += 1
-                if acertos == self.SUPERSETE:
+                if acertos == 7:
                     pontos.append(True)
             else:
                 pontos.append(self.__sorteado.issubset(jogo))
