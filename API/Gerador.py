@@ -54,12 +54,16 @@ class Gerador:
         }
 
         for i in range(1, self.__quantidade + 1):
-            lf = modalidades[self.__modalidade](
-                *self.__fixados,
-                dezenas=self.__dezenas if 'dezenas' in inspect.signature(
-                    modalidades[self.__modalidade]).parameters else None
-            )
-            self.__sugestoes.append(list(lf.jogo))
+            if self.__modalidade == 'Supersete':
+                lf = Supersete()
+                self.__sugestoes.append(lf.jogo)
+            else:
+                lf = modalidades[self.__modalidade](
+                    *self.__fixados,
+                    dezenas=self.__dezenas if 'dezenas' in inspect.signature(
+                        modalidades[self.__modalidade]).parameters else None
+                    )
+                self.__sugestoes.append(list(lf.jogo))
             del lf
 
         return self.__sugestoes
@@ -76,7 +80,7 @@ class Gerador:
                 if self.__modalidade != 'Supersete':
                     print(f'{str(dezena).zfill(2)} ', end='')
                 else:
-                    print(f'{dezena.values} ', end='')
+                    print(f'{dezena} ', end='')
             print('\n')
 
     def __repr__(self):

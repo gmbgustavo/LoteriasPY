@@ -41,12 +41,12 @@ class Supersete:
 
     @property
     def jogo(self):
-        return self.__jogo
+        return self.__jogo.values()
 
 
 if __name__ == '__main__':
     teste = Supersete()
-    print(teste.jogo.values())
+    print(teste.jogo)
 
 
 
