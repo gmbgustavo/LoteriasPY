@@ -41,7 +41,7 @@ class Supersete:
 
     @property
     def jogo(self):
-        return self.__jogo.values()
+        return self.__jogo
 
 
 if __name__ == '__main__':

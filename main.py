@@ -19,8 +19,8 @@ from API.helpers import *
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
-    modalidade = 'Megasena'
-    aposta1 = Megasena(1, 2, 3, 4, 5, 6, dezenas=6)
+    modalidade = 'Supersete'
+    aposta1 = Supersete()
     volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
     print(f'\nCriando seus jogos, isto pode levar até 20 segundos dependendo da quantidade de apostas.')
@@ -52,7 +52,7 @@ if __name__ == '__main__':
         tempototal = time.time() - start_time
 
         # Apresenta os resultados finais
-        print(Fore.LIGHTYELLOW_EX + f'Foram necessarios {concursos:,} concursos. ')
+        print(Fore.LIGHTYELLOW_EX + f'\nForam necessarios {concursos:,} concursos. ')
         print(Fore.RED + f'Numeros sorteados: {resultado_loteria}')
         print(Fore.LIGHTBLUE_EX + f'\nTempo total: {tempototal:.2f} segundos\n' + Fore.RESET)
         print(f'\n\n-----------------------FIM-----------------------')

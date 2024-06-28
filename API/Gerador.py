@@ -56,7 +56,7 @@ class Gerador:
         for i in range(1, self.__quantidade + 1):
             if self.__modalidade == 'Supersete':
                 lf = Supersete()
-                self.__sugestoes.append(lf.jogo)
+                self.__sugestoes.append(lf.jogo.values())
             else:
                 lf = modalidades[self.__modalidade](
                     *self.__fixados,
@@ -72,7 +72,6 @@ class Gerador:
         assert len(self.__sugestoes) >= 1, 'Você deve gerar o jogo primeiro. Use o método gerajogo()'
         print(f'\nSugestões para {self.__modalidade}:')
         print(f'-----------------------------------------------')
-        # self.__sugestoes.sort(key=lambda item: str(item))
         for aposta in self.__sugestoes:
             if self.__modalidade != 'Supersete':
                 aposta.sort(key=lambda item: (0, int(item)) if isinstance(item, int) else (1, item))

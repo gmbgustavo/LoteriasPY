@@ -21,20 +21,20 @@ LISTA_TIMES = Path(__file__).resolve().parent / './dados/times.csv'
 
 class Timemania:
 
-    def __init__(self, *args, timedocoracao=-1):
+    def __init__(self, *args, timedocoracao=-1, dezenas=BET):
         """
         Cria um objeto do tipo Lotofacil.
         :param args: Se vazio, cria um jogo surpresinha com a 50 dezenas
         """
         assert self.__checkargs(args), f'Timemania usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
-        self.__dezenas = BET
+        assert dezenas == BET, f'Aposta única de {BET}'
+        self.__dezenas = dezenas
         self.__listadetimes = self.__carregatimes()
         if timedocoracao == -1:
             self.__timedocoracao = self.__listadetimes[secrets.randbelow(len(self.__listadetimes))]
         else:
             self.__timedocoracao = timedocoracao
-        self.__jogo = self.__surpresinha(args)
-
+        self.__jogo = self.__surpresinha(set(args))
 
     @staticmethod
     def __carregatimes():
@@ -55,7 +55,7 @@ class Timemania:
     def __len__(self):
         return BET
 
-    def __surpresinha(self, fixos=()):
+    def __surpresinha(self, fixos: set):
         """
         Retorna um conjunto(set) com numeros inteiros entre 1 e 100
         :param fixos: Numeros pre estabelecidos

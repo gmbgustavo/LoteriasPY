@@ -35,7 +35,7 @@ def get_numbers(n: int, min_val: int, max_val: int, repeat=False):
     if response.status_code == 200:
         result = response.json()
         if "result" in result and "random" in result["result"]:
-            return sorted(result["result"]["random"]["data"])
+            return result["result"]["random"]["data"]
         else:
             raise IndexError("Erro: A chave 'random' não consta na string de resposta.")
     else:
