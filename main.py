@@ -54,8 +54,8 @@ if __name__ == '__main__':
         # Apresenta os resultados finais
         print(Fore.LIGHTYELLOW_EX + f'\nForam necessarios {concursos:,} concursos. ')
         print(Fore.RED + f'Numeros sorteados: {resultado_loteria}')
-        print(Fore.LIGHTBLUE_EX + f'\nTempo total: {tempototal:.2f} segundos\n' + Fore.RESET)
-        print(f'\n\n-----------------------FIM-----------------------')
+        print(Fore.LIGHTBLUE_EX + f'\nTempo total: {tempototal:.2f} segundos' + Fore.RESET)
+        print(f'\n-----------------------FIM-----------------------')
 
         analise['concursos'] = concursos
         estatistica.grava_csv()

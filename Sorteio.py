@@ -87,7 +87,7 @@ class Sorteio:
         self.__res_supersete.clear()
         index = 1
         while len(self.__res_supersete) < self.SUPERSETE:
-            self.__res_supersete[index] = secrets.randbelow(9)
+            self.__res_supersete[index] = secrets.randbelow(10)
             index += 1
         return self.__res_supersete
 
@@ -137,7 +137,9 @@ class Sorteio:
             elif self.__modalidade == 'Supersete':
                 acertos = 0
                 for x in range(1, 8):
-                    if self.__res_supersete[x] == jogo[x]:
+                    if self.__res_supersete[x] != jogo[x]:
+                        break
+                    else:
                         acertos += 1
                 if acertos == 7:
                     pontos.append(True)
