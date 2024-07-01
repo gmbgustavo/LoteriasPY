@@ -16,9 +16,13 @@ class Supersete:
 
     def __init__(self, *args, dezenas=7):
         self.__colunas = {1: -1, 2: -1, 3: -1, 4: -1, 5: -1, 6: -1, 7: -1}
-        assert len(args) == 7 or len(args) == 0
+        assert len(args) == 7 or len(args) == 0, f'Deve-se informar 7 numeros ou nenhum.'
         self.__dezenas = dezenas
-        self.__jogo = self.__surpresinha()
+        self.__fixos = args
+        if len(self.__fixos) == 0:
+            self.__jogo = self.__surpresinha()
+        else:
+            self.__jogo = {i+1: args[i] for i in range(BET)}
 
     def __repr__(self):
         pass

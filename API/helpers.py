@@ -88,7 +88,7 @@ def confere_diadesorte_hist(aposta: set):
     cont = 1
     sete = 0
     seis = 0
-    concurso_vencedor = -1
+    concurso_vencedor = []
     for sorteio in read_csv_lines(DIADESORTE):
         if cont == 1:  # Remove o cabeçalho
             cont = -1
@@ -99,7 +99,7 @@ def confere_diadesorte_hist(aposta: set):
         pontos = len(convertido.difference(aposta))
         if pontos == 0:  # Todos os elementos são iguais, logo, acertou tudo.
             sete += 1
-            concurso_vencedor = concurso
+            concurso_vencedor.append(concurso)
         elif pontos == 1:
             seis += 1
     print(f'Sete acertos: {sete} (concurso {concurso_vencedor}),\nSeis acertos {seis}.')

@@ -141,7 +141,7 @@ class Sorteio:
                         break
                     else:
                         acertos += 1
-                if acertos == 7:
+                if acertos == self.SUPERSETE:
                     pontos.append(True)
             else:
                 pontos.append(self.__sorteado.issubset(jogo))
