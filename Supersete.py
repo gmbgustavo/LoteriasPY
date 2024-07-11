@@ -25,7 +25,7 @@ class Supersete:
             self.__jogo = {i+1: args[i] for i in range(BET)}
 
     def __repr__(self):
-        pass
+        return self.__jogo.values()
 
     def __len__(self):
         return BET
@@ -49,8 +49,7 @@ class Supersete:
 
 
 if __name__ == '__main__':
-    teste = Supersete()
-    print(teste.jogo)
+    quit(3)
 
 
 
