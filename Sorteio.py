@@ -4,7 +4,7 @@ Sorteia e retorna as dezenas de uma loteria especificada
 
 import random
 import secrets
-from colorama import Fore
+
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania', 'Diadesorte', 'Supersete']
 
 

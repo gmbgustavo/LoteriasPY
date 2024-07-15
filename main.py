@@ -37,7 +37,7 @@ if __name__ == '__main__':
         resultado_loteria = concurso_loteria.sortear()    # Primeiro sorteio
         print('\n' + Fore.YELLOW + f'---------------------------INÍCIO---------------------------' + Fore.RESET)
         if modalidade == 'Supersete':
-            print(f'Suas apostas: {volante}')
+            print(f'Suas apostas: {volante[0]}')
         else:
             print(f'Suas apostas: {sorted(volante[0:len(volante)])}')  # Apresenta a aposta ao usuario
         print(f'Quantidade de dezenas: {len(aposta1)}')
