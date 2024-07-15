@@ -25,7 +25,10 @@ class Supersete:
             self.__jogo = {i+1: args[i] for i in range(BET)}
 
     def __repr__(self):
-        return self.__jogo.values()
+        strout = ''
+        for n in self.__jogo.values():
+            strout += str(n) + ' - '
+        return strout
 
     def __len__(self):
         return BET
