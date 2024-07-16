@@ -93,12 +93,15 @@ class Gerador:
     def get_name(self):
         return self.__modalidade
 
+    def apostas_lote(self, qtde: int):
+        pass
+
 # TODO: Add argparse
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Supersete',
-                   dezenas=7,
+    jogo = Gerador(modalidade='Timemania',
+                   dezenas=10,
                    fixados=[],
                    quantidade=3)
     print(f'Jogo a gerar: {jogo.get_name()} com {len(jogo)} dezenas.')

@@ -105,10 +105,6 @@ def confere_diadesorte_hist(aposta: set):
     print(f'Sete acertos: {sete} (concurso {concurso_vencedor}),\nSeis acertos {seis}.')
 
 
-def apostas_lote(qtde: int):
-    pass
-
-
 if __name__ == '__main__':
     confere_mega_hist(aposta={1, 5, 6, 15, 22, 28})
     quit(3)
