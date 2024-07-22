@@ -79,7 +79,7 @@ class Gerador:
                 if self.__modalidade != 'Supersete':
                     print(f'{str(dezena).zfill(2)} ', end='')
                 else:
-                    print(f'{dezena} ', end='')
+                    print(f'{dezena} | ', end='')
             print('\n')
 
     def __repr__(self):
@@ -100,8 +100,8 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Timemania',
-                   dezenas=10,
+    jogo = Gerador(modalidade='Supersete',
+                   dezenas=7,
                    fixados=[],
                    quantidade=3)
     print(f'Jogo a gerar: {jogo.get_name()} com {len(jogo)} dezenas.')
