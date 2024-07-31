@@ -90,11 +90,12 @@ class Gerador:
     def __len__(self):
         return self.__dezenas
 
+    def __getitem__(self, item):
+        return self.__sugestoes
+
     def get_name(self):
         return self.__modalidade
 
-    def apostas_lote(self, qtde: int):
-        pass
 
 # TODO: Add argparse
 

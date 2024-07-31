@@ -14,21 +14,22 @@ from API.Salvadados import *
 from Sorteio import *
 from colorama import Fore
 from API.helpers import *
+from API.Gerador import *
 
 # Configuração regional
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
-    modalidade = 'Supersete'
-    aposta1 = Supersete()
-    volante = [aposta1.jogo]    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
+    modalidade = 'Lotofacil'
+    print(f'\nComunicando com a API Random.org, pode levar até 20 segundos dependendo da quantidade de apostas.')
+    apostas = Gerador(modalidade=modalidade, dezenas=17, quantidade=1, fixados=[])
+    volante = apostas.gerajogo()    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
-    print(f'\nCriando seus jogos, isto pode levar até 20 segundos dependendo da quantidade de apostas.')
 
     # Para chamar o método conferir da classe Sorteio, um objeto Sorteio deve ter sido instanciado previamente,
     # executando o método sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade 'jogo' do ojbeto de aposta, Megasena, Quina...
-    analise = {'modalidade': modalidade, 'dezenas': len(aposta1), 'concursos': 0, 'apostas': len(volante)}
+    analise = {'modalidade': modalidade, 'dezenas': len(apostas), 'concursos': 0, 'apostas': len(volante)}
     for stat in range(1):
         # Medição de desempenho
         start_time = time.time()
@@ -40,7 +41,7 @@ if __name__ == '__main__':
             print(f'Suas apostas: {volante[0]}')
         else:
             print(f'Suas apostas: {sorted(volante[0:len(volante)])}')  # Apresenta a aposta ao usuario
-        print(f'Quantidade de dezenas: {len(aposta1)}')
+        print(f'Quantidade de dezenas: {len(apostas[-1])}')
         print(f'Modalidade: {modalidade}')
         print(Fore.RED + f'Iteração {stat + 1}' + Fore.RESET)
         while True not in concurso_loteria.conferir(volante):
