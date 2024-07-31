@@ -22,7 +22,7 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 if __name__ == '__main__':
     modalidade = 'Lotofacil'
     print(f'\nComunicando com a API Random.org, pode levar até 20 segundos dependendo da quantidade de apostas.')
-    apostas = Gerador(modalidade=modalidade, dezenas=17, quantidade=1, fixados=[])
+    apostas = Gerador(modalidade=modalidade, dezenas=16, quantidade=9, fixados=[])
     volante = apostas.gerajogo()    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
 
@@ -36,11 +36,11 @@ if __name__ == '__main__':
         estatistica = Salvadados(dados=analise)
         concursos = 1
         resultado_loteria = concurso_loteria.sortear()    # Primeiro sorteio
-        print('\n' + Fore.YELLOW + f'---------------------------INÍCIO---------------------------' + Fore.RESET)
         if modalidade == 'Supersete':
             print(f'Suas apostas: {volante[0]}')
         else:
             print(f'Suas apostas: {sorted(volante[0:len(volante)])}')  # Apresenta a aposta ao usuario
+        print('\n' + Fore.YELLOW + f'---------------------------INÍCIO---------------------------' + Fore.RESET)
         print(f'Quantidade de dezenas: {len(apostas[-1])}')
         print(f'Modalidade: {modalidade}')
         print(Fore.RED + f'Iteração {stat + 1}' + Fore.RESET)
