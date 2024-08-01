@@ -22,6 +22,7 @@ class Sorteio:
     MAX_TIMEMANIA = 80
     TIMEMANIA = 7
     SUPERSETE = 7
+    SUPERSETE_RANGE = range(1, 8)
     MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
 
     def __init__(self, modalidade: str):
@@ -136,7 +137,7 @@ class Sorteio:
                 pontos.append(True)
             elif self.__modalidade == 'Supersete':
                 acertos = 0
-                for x in range(1, 8):
+                for x in self.SUPERSETE_RANGE:
                     if self.__res_supersete[x] != jogo[x]:
                         break
                     else:

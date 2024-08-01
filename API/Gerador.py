@@ -101,10 +101,10 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Supersete',
-                   dezenas=7,
+    jogo = Gerador(modalidade='Lotofacil',
+                   dezenas=16,
                    fixados=[],
-                   quantidade=3)
+                   quantidade=1)
     print(f'Jogo a gerar: {jogo.get_name()} com {len(jogo)} dezenas.')
     print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...\n' + Fore.LIGHTYELLOW_EX)
     jogo.gerajogo()
