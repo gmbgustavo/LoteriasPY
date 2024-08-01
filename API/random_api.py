@@ -37,7 +37,8 @@ def get_numbers(n: int, min_val: int, max_val: int, repeat=False):
         if "result" in result and "random" in result["result"]:
             return result["result"]["random"]["data"]
         else:
-            raise IndexError("Erro: A chave 'random' não consta na string de resposta.")
+            raise IndexError("Erro: A chave 'random' não consta na string de resposta.\nVerifique a"
+                             "disponibilidade da API ou limite de uso.")
     else:
         raise ConnectionError(f"Erro: Response status code {response.status_code}")
 
