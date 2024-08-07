@@ -56,7 +56,7 @@ class Gerador:
         for i in range(1, self.__quantidade + 1):
             if self.__modalidade == 'Supersete':
                 lf = Supersete()
-                self.__sugestoes.append(lf.jogo.values())
+                self.__sugestoes.append(lf.jogo)
             else:
                 lf = modalidades[self.__modalidade](
                     *self.__fixados,

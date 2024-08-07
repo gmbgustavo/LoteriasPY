@@ -20,9 +20,9 @@ from API.Gerador import *
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
-    modalidade = 'Lotofacil'
+    modalidade = 'Supersete'
     print(f'\nAcessando a API RANDOM.ORG, pode levar até 20 segundos dependendo da quantidade de apostas.')
-    apostas = Gerador(modalidade=modalidade, dezenas=16, quantidade=3, fixados=[1, 5, 6, 15, 22])
+    apostas = Gerador(modalidade=modalidade, dezenas=7, quantidade=1, fixados=[])
     volante = apostas.gerajogo()    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
 

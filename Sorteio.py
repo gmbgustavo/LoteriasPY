@@ -129,23 +129,25 @@ class Sorteio:
             return result
         return AttributeError("Objeto não reconhecido como um jogo válido")
 
-    def conferir(self, listadejogos) -> list:
+    def conferir(self, listadejogos: list) -> list:
         assert listadejogos is not None, f'É necessário informar um jogo para conferir'
         pontos = []
-        for jogo in listadejogos:
-            if self.__modalidade == 'Lotomania' and len(self.__sorteado.difference(jogo)) == 20:
-                pontos.append(True)
-            elif self.__modalidade == 'Supersete':
-                acertos = 0
+        if self.__modalidade == 'Supersete':
+            acertos = 0
+            for jogo in listadejogos:
                 for x in self.SUPERSETE_RANGE:
-                    if self.__res_supersete[x] != jogo[x]:
+                    if self.__res_supersete[x] != jogo[x-1]:
                         break
                     else:
                         acertos += 1
                 if acertos == self.SUPERSETE:
                     pontos.append(True)
-            else:
-                pontos.append(self.__sorteado.issubset(jogo))
+        else:
+            for jogo in listadejogos:
+                if self.__modalidade == 'Lotomania' and len(self.__sorteado.difference(jogo)) == 20:
+                    pontos.append(True)
+                else:
+                    pontos.append(self.__sorteado.issubset(jogo))
         return pontos
 
 
