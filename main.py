@@ -20,9 +20,9 @@ from API.Gerador import *
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 if __name__ == '__main__':
-    modalidade = 'Supersete'
+    modalidade = 'Lotofacil'
     print(f'\nAcessando a API RANDOM.ORG, pode levar até 20 segundos dependendo da quantidade de apostas.')
-    apostas = Gerador(modalidade=modalidade, dezenas=7, quantidade=1, fixados=[])
+    apostas = Gerador(modalidade=modalidade, dezenas=20, quantidade=3, fixados=[])
     volante = apostas.gerajogo()    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
 
@@ -30,18 +30,18 @@ if __name__ == '__main__':
     # executando o método sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade 'jogo' do ojbeto de aposta, Megasena, Quina...
     analise = {'modalidade': modalidade, 'dezenas': len(apostas), 'concursos': 0, 'apostas': len(volante)}
-    for stat in range(1):
+    for stat in range(1000):
         # Medição de desempenho
-        start_time = time.time()
+        start_time = time.time()        
         estatistica = Salvadados(dados=analise)
         concursos = 1
         resultado_loteria = concurso_loteria.sortear()    # Primeiro sorteio
         if modalidade == 'Supersete':
-            print(f'Suas apostas: {volante[0]}')
+            print(f'Suas apostas: {volante[0:]}')
         else:
             print(f'Suas apostas: {sorted(volante[0:len(volante)])}')  # Apresenta a aposta ao usuario
         print('\n' + Fore.YELLOW + f'---------------------------INÍCIO---------------------------' + Fore.RESET)
-        print(f'Quantidade de dezenas: {len(apostas[-1])}')
+        print(f'Quantidade de dezenas: {len(volante[0])}')
         print(f'Modalidade: {modalidade}')
         print(Fore.RED + f'Iteração {stat + 1}' + Fore.RESET)
         while True not in concurso_loteria.conferir(volante):
