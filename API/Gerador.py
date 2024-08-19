@@ -19,7 +19,7 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania',
                'Diadesorte', 'Supersete']
 
-MAX_JOGOS = 10    # Limite de sugestões devido ao custo da API
+MAX_JOGOS = 20    # Limite de sugestões devido ao custo da API
 
 
 class Gerador:
