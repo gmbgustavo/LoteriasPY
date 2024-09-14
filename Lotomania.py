@@ -13,7 +13,7 @@ RANGEBET = range(MIN_NUM, MAX_NUM + 1)
 
 class Lotomania:
 
-    def __init__(self, *args):
+    def __init__(self, dezenas=50, *args):
         """
         Cria um objeto do tipo Lotofacil.
         :param args: Se vazio, cria um jogo surpresinha com a 50 dezenas
