@@ -12,7 +12,7 @@ CHAVE_API_RANDOM_ORG = os.getenv("CHAVE_LOCA")
 
 
 def get_numbers(n: int, min_val: int, max_val: int, repeat=False):
-    time.sleep(0.2)
+    time.sleep(0.1)
     url = "https://api.random.org/json-rpc/4/invoke"
     headers = {
         'Content-Type': 'application/json'
