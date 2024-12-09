@@ -101,8 +101,8 @@ class Gerador:
 
 
 if __name__ == '__main__':
-    jogo = Gerador(modalidade='Lotofacil',
-                   dezenas=16,
+    jogo = Gerador(modalidade='Megasena',
+                   dezenas=7,
                    fixados=[],
                    quantidade=1)
     print(f'Jogo a gerar: {jogo.get_name()} com {len(jogo)} dezenas.')

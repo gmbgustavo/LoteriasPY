@@ -22,15 +22,15 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 if __name__ == '__main__':
     modalidade = 'Megasena'
     print(f'\nAcessando a API RANDOM.ORG, pode levar até 30 segundos dependendo da quantidade de apostas.')
-    apostas = Gerador(modalidade=modalidade, dezenas=6, quantidade=40, fixados=[])
-    volante = apostas.gerajogo()    # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
+    apostas = Megasena(4, 7, 10, 16, 23, 25, 30, 52, dezenas=20)
+    volante = [apostas.jogo]   # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
 
     # Para chamar o métod0 conferir da classe Sorteio, um objeto Sorteio deve ter sido instanciado previamente,
     # executando o métod0 sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade 'jogo' do ojbeto de aposta, Megasena, Quina...
     analise = {'modalidade': modalidade, 'dezenas': len(apostas), 'concursos': 0, 'apostas': len(volante)}
-    for stat in range(1):
+    for stat in range(100):
         # Medição de desempenho
         start_time = time.time()        
         estatistica = Salvadados(dados=analise)
@@ -41,7 +41,6 @@ if __name__ == '__main__':
         else:
             print(f'Suas apostas: {sorted(volante[0:len(volante)])}')  # Apresenta a aposta ao usuario
         print('\n' + Fore.YELLOW + f'---------------------------INÍCIO---------------------------' + Fore.RESET)
-        print(f'Quantidade de dezenas: {len(volante[0])}')
         print(f'Modalidade: {modalidade}')
         print(Fore.RED + f'Iteração {stat + 1}' + Fore.RESET)
         while True not in concurso_loteria.conferir(volante):

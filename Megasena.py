@@ -5,7 +5,7 @@ Classe da Mega-Sena
 import time
 from API.random_api import get_numbers
 
-MAX_BET = 15
+MAX_BET = 20
 MIN_BET = 6
 MIN_NUM = 1
 MAX_NUM = 60
