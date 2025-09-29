@@ -13,13 +13,13 @@ from Diadesorte import *
 from Timemania import *
 from colorama import Fore
 
-# Configurações regionais
+# Configurações regionais.
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 MODALIDADES = ['Quina', 'Megasena', 'Lotofacil', 'Lotomania', 'Timemania',
                'Diadesorte', 'Supersete']
 
-MAX_JOGOS = 20    # Limite de sugestões devido ao custo da API
+MAX_JOGOS = 20    # Limite de sugestões devido ao custo da API.
 
 
 class Gerador:
@@ -109,3 +109,4 @@ if __name__ == '__main__':
     print(f'Gerando, isso pode levar até 15 segundos dependendo da quantidade...\n' + Fore.LIGHTYELLOW_EX)
     jogo.gerajogo()
     jogo.sugestoes()
+
