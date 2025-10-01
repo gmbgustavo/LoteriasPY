@@ -9,6 +9,8 @@ import dotenv
 # API INIT
 dotenv.load_dotenv(encoding="UTF-8")
 CHAVE_API_RANDOM_ORG = os.getenv("CHAVE_LOCA")
+if not CHAVE_API_RANDOM_ORG:
+    raise ValueError("Chave da API não encontrada no .env!")
 
 
 def get_numbers(n: int, min_val: int, max_val: int, repeat=False):
@@ -30,7 +32,7 @@ def get_numbers(n: int, min_val: int, max_val: int, repeat=False):
         "id": 1
     }
 
-    response = requests.post(url, headers=headers, data=json.dumps(payload))
+    response = requests.post(url=url, headers=headers, json=payload)
 
     if response.status_code == 200:
         result = response.json()
