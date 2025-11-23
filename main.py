@@ -54,5 +54,8 @@ def loteria_caixa(dezenas: int, fixados: list, qtd: int, modalidade: str):
         del estatistica
         del resultado_loteria
 
+def bingo():
+    pass
+
 if __name__ == '__main__':
     loteria_caixa(dezenas=7, fixados=[], qtd=3, modalidade='Megasena')
