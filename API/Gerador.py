@@ -3,14 +3,13 @@ Gerador de apostas
 """
 
 import inspect
-import argparse
-from Quina import *
-from Supersete import *
-from Megasena import *
-from Lotofacil import *
-from Lotomania import *
-from Diadesorte import *
-from Timemania import *
+from caixa.Quina import *
+from caixa.Supersete import *
+from caixa.Megasena import *
+from caixa.Lotofacil import *
+from caixa.Lotomania import *
+from caixa.Diadesorte import *
+from caixa.Timemania import *
 from colorama import Fore
 
 # Configurações regionais.

@@ -1,31 +1,21 @@
 """
 Modulo principal
 """
-import time
 
-from Megasena import *
-from Lotofacil import *
-from Timemania import *
-from Quina import *
-from Lotomania import *
-from Diadesorte import *
-from Supersete import *
 from API.Salvadados import *
-from Sorteio import *
-from colorama import Fore
-from API.helpers import *
+from caixa.Sorteio import *
 from API.Gerador import *
 
 # Configuração regional
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
-if __name__ == '__main__':
+def loteria_caixa(dezenas: int, fixados: list, quantidade: int):
     modalidade = 'Supersete'
     print(f'\nAcessando a API RANDOM.ORG, pode levar até 30 segundos dependendo da quantidade de apostas.')
     apostas = Gerador(modalidade=modalidade,
-                   dezenas=7,
-                   fixados=[0, 8, 3, 4, 2, 2, 5],
-                   quantidade=1)
+                   dezenas=dezenas,
+                   fixados=fixados,
+                   quantidade=quantidade)
     volante = apostas.gerajogo()   # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
 
@@ -64,3 +54,6 @@ if __name__ == '__main__':
         estatistica.grava_csv()
         del estatistica
         del resultado_loteria
+
+if __name__ == '__main__':
+    loteria_caixa()
