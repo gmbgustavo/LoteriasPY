@@ -9,13 +9,12 @@ from API.Gerador import *
 # Configuração regional
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
-def loteria_caixa(dezenas: int, fixados: list, quantidade: int):
-    modalidade = 'Supersete'
+def loteria_caixa(dezenas: int, fixados: list, qtd: int, modalidade: str):
     print(f'\nAcessando a API RANDOM.ORG, pode levar até 30 segundos dependendo da quantidade de apostas.')
     apostas = Gerador(modalidade=modalidade,
-                   dezenas=dezenas,
-                   fixados=fixados,
-                   quantidade=quantidade)
+                      dezenas=dezenas,
+                      fixados=fixados,
+                      quantidade=qtd)
     volante = apostas.gerajogo()   # O volante é uma lista com todos os jogos instanciados, limite 10 jogos
     concurso_loteria = Sorteio(modalidade)            # Cria um objeto do tipo sorteio
 
@@ -56,4 +55,4 @@ def loteria_caixa(dezenas: int, fixados: list, quantidade: int):
         del resultado_loteria
 
 if __name__ == '__main__':
-    loteria_caixa()
+    loteria_caixa(dezenas=7, fixados=[], qtd=3, modalidade='Megasena')
