@@ -9,7 +9,7 @@ from API.Gerador import *
 # Configuração regional
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
-def loteria_caixa(dezenas: int, fixados: list, qtd: int, modalidade: str):
+def loteria_caixa(dezenas: int, fixados: list, qtd: int, modalidade: str, rep=1):
     print(f'\nAcessando a API RANDOM.ORG, pode levar até 30 segundos dependendo da quantidade de apostas.')
     apostas = Gerador(modalidade=modalidade,
                       dezenas=dezenas,
@@ -22,7 +22,7 @@ def loteria_caixa(dezenas: int, fixados: list, qtd: int, modalidade: str):
     # executando o métod0 sortear()
     # Deve ser informado o parametro ao metodo conferir() a propriedade 'jogo' do ojbeto de aposta, Megasena, Quina...
     analise = {'modalidade': modalidade, 'dezenas': len(apostas), 'concursos': 0, 'apostas': len(volante)}
-    for stat in range(1):
+    for stat in range(0, rep):
         # Medição de desempenho
         start_time = time.time()        
         estatistica = Salvadados(dados=analise)
@@ -58,4 +58,4 @@ def bingo():
     pass
 
 if __name__ == '__main__':
-    loteria_caixa(dezenas=7, fixados=[], qtd=3, modalidade='Megasena')
+    loteria_caixa(dezenas=20, fixados=[], qtd=1, modalidade='Megasena', rep=10)
