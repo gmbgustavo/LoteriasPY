@@ -39,24 +39,22 @@ class Lotofacil:
     def __len__(self):
         return self.__dezenas
 
-    def __surpresinha(self, fixos: set):
+    def __surpresinha(self, fixos =()):
         """
         Retorna um conjunto(set) com numeros inteiros entre 1 e 25
         :return: set
         """
-        gerados = len(fixos)
         qtde = self.__dezenas - len(fixos)
         if qtde <= 0:
             return set(fixos)
-        time.sleep(0.2)
-        while len(fixos) < self.__dezenas:
-            if qtde >= 1:
-                apicall = get_numbers(n=qtde, min_val=MIN_NUM, max_val=MAX_NUM, repeat=False)
-                numeros = [x for x in apicall if x not in fixos]    # Generator desconsidera fixos
-                for dez in numeros:
-                    fixos.add(dez)
-                gerados = len(fixos)
-            qtde = self.__dezenas - gerados
+        buffer_size = qtde + 5
+        apicall = get_numbers(n=buffer_size, min_val=MIN_NUM, max_val=MAX_NUM, repeat=False)
+        disponiveis = [num for num in apicall if num not in fixos]
+        for num in disponiveis:
+            if len(fixos) < self.__dezenas:
+                fixos.add(num)
+            else:
+                break
         return set(fixos)
 
     @property

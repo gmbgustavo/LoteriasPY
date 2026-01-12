@@ -2,5 +2,5 @@
 
 from API.random_api import *
 
-class Cartela:
+class Cumbuca:
     pass

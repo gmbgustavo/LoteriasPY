@@ -58,4 +58,4 @@ def bingo():
     pass
 
 if __name__ == '__main__':
-    loteria_caixa(dezenas=20, fixados=[], qtd=1, modalidade='Megasena', rep=10)
+    loteria_caixa(dezenas=15, fixados=[], qtd=1, modalidade='Megasena', rep=1)
