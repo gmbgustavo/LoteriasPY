@@ -3,3 +3,5 @@ colorama
 requests
 python-dotenv
 pandas
+
+matplotlib
