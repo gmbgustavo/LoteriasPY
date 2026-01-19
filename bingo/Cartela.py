@@ -80,16 +80,18 @@ class Cartela:
 
                 # Define margens e tamanho das células
                 left, right = 0.15, 0.85
-                top, bottom = 0.80, 0.20
+                top, bottom = 0.80, 0.15  # Ajusta bottom para garantir espaço para a última linha
                 cell_width = (right - left) / 5
-                cell_height = (top - bottom) / 5
+                cell_height = (top - bottom) / 7  # Reduz altura ainda mais usando 7 divisões
 
-                # Desenha as 6 linhas verticais
+                # Desenha as 6 linhas verticais (limitadas à altura real do grid)
+                grid_height = 6 * cell_height  # Altura real: header + 5 linhas de números
+                grid_bottom = top - grid_height
                 for j in range(6):
                     x = left + j * cell_width
-                    ax.vlines(x, bottom, top, colors='black', linewidth=2)
+                    ax.vlines(x, grid_bottom, top, colors='black', linewidth=2)
 
-                # Desenha as 6 linhas horizontais
+                # Desenha as 6 linhas horizontais (header + 5 linhas de números)
                 for j in range(6):
                     y = top - j * cell_height
                     ax.hlines(y, left, right, colors='black', linewidth=2)
@@ -110,8 +112,8 @@ class Cartela:
                         numero = self.cartela[i][indice]
 
                         x_centro = left + (coluna + 0.5) * cell_width
-                        # Centro da linha atual (começando da linha 1 da grade)
-                        y_centro = top - (linha + 1 + 0.5) * cell_height
+                        # Centro da linha atual (começando da linha 1 da grade, após o header)
+                        y_centro = top - (linha + 1.5) * cell_height
 
                         ax.text(x_centro, y_centro, f"{numero:2d}",
                                 ha='center', va='center',
@@ -123,7 +125,7 @@ class Cartela:
 
         print(f"{self.quantidade} cartela(s) salva(s) com sucesso em '{nome_arquivo}'!")
 
-teste = Cartela(tam_cartela=25, quantidade=3,num_max=75)
+teste = Cartela(tam_cartela=25, quantidade=2,num_max=75)
 teste.gerar_cartela()
 teste.print_cartela()
 teste.salvar_pdf(nome_arquivo="cartelas_bingo.pdf")
