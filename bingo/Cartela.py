@@ -68,33 +68,32 @@ class Cartela:
                 # Ordena a cartela atual
                 self.cartela[i].sort()
 
-                # Cria a figura
-                fig = plt.figure(figsize=(6, 8))
-                ax = fig.add_axes([0, 0, 1, 1])
+                # Cria a figura menor
+                fig = plt.figure(figsize=(4, 5))
+                ax = fig.add_axes((0, 0, 1, 1))
                 ax.axis('off')
                 fig.patch.set_facecolor('white')
 
                 # Título acima da cartela
-                ax.text(0.5, 0.93, f"CARTELA {i + 1}", ha='center', va='center',
-                        fontsize=20, fontweight='bold')
+                ax.text(0.5, 0.82, f"BINGO DA AMIZADE", ha='center', va='center',
+                        fontsize=12, fontweight='bold')
 
-                # Define margens e tamanho das células
-                left, right = 0.15, 0.85
-                top, bottom = 0.80, 0.15  # Ajusta bottom para garantir espaço para a última linha
+                # Define margens e tamanho das células - grid mais compacto
+                left, right = 0.20, 0.80
+                top, bottom = 0.77, 0.30  # Grid começa ~1.5cm abaixo do título e margem maior inferior
                 cell_width = (right - left) / 5
-                cell_height = (top - bottom) / 7  # Reduz altura ainda mais usando 7 divisões
+                cell_height = (top - bottom) / 7  # 7 linhas totais: header + 5 linhas de números + linha extra
 
-                # Desenha as 6 linhas verticais (limitadas à altura real do grid)
-                grid_height = 6 * cell_height  # Altura real: header + 5 linhas de números
-                grid_bottom = top - grid_height
-                for j in range(6):
-                    x = left + j * cell_width
-                    ax.vlines(x, grid_bottom, top, colors='black', linewidth=2)
-
-                # Desenha as 6 linhas horizontais (header + 5 linhas de números)
-                for j in range(6):
+                # Desenha as 7 linhas horizontais primeiro para definir a altura total
+                for j in range(7):
                     y = top - j * cell_height
                     ax.hlines(y, left, right, colors='black', linewidth=2)
+
+                # Desenha as 6 linhas verticais terminando exatamente na última linha horizontal
+                last_horizontal_y = top - 6 * cell_height  # Posição da 7ª linha horizontal (índice 6)
+                for j in range(6):
+                    x = left + j * cell_width
+                    ax.vlines(x, last_horizontal_y, top, colors='black', linewidth=2)
 
                 # Letras B I N G O na primeira linha (índice 0)
                 letras = ['B', 'I', 'N', 'G', 'O']
@@ -103,7 +102,7 @@ class Cartela:
                     y_centro = top - 0.5 * cell_height  # centro da primeira célula
                     ax.text(x_centro, y_centro, letra,
                             ha='center', va='center',
-                            fontsize=28, fontweight='bold', color='darkblue')
+                            fontsize=18, fontweight='bold', color='darkblue')
 
                 # Números nas linhas 1 a 5 da grade (índices 1 a 5)
                 for linha in range(5):  # linha 0..4 → corresponde às linhas 1..5 da grade
@@ -117,7 +116,7 @@ class Cartela:
 
                         ax.text(x_centro, y_centro, f"{numero:2d}",
                                 ha='center', va='center',
-                                fontsize=24, fontweight='bold')
+                                fontsize=16, fontweight='bold')
 
                 # Salva a página no PDF
                 pdf.savefig(fig, bbox_inches='tight', dpi=300)
