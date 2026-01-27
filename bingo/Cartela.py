@@ -15,7 +15,7 @@ class Cartela:
 
     def __cartela_random(self):
         cartela = get_numbers(n=self.tam_cartela, min_val=self.min, max_val=self.max, repeat=False)
-        return cartela
+        return list(cartela)
 
     def gerar_cartela(self):
         cartela=[]
@@ -123,12 +123,3 @@ class Cartela:
                 plt.close(fig)
 
         print(f"{self.quantidade} cartela(s) salva(s) com sucesso em '{nome_arquivo}'!")
-
-teste = Cartela(tam_cartela=25, quantidade=2,num_max=75)
-teste.gerar_cartela()
-teste.print_cartela()
-teste.salvar_pdf(nome_arquivo="cartelas_bingo.pdf")
-
-
-
-
