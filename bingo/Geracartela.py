@@ -33,7 +33,7 @@ class Geracartela:
 
                 # Título acima da cartela
                 ax.text(0.5, 0.82, titulo, ha='center', va='center',
-                        fontsize=12, fontweight='bold')
+                        fontsize=34, fontweight='bold')
 
                 # Define margens e tamanho das células - grid mais compacto
                 left, right = 0.20, 0.80
