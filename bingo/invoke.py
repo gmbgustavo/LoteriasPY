@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import sys
-sys.path.append('.')
+sys.path.append('..')
 from bingo.Cumbuca import *
 from bingo.Cartela import *
 from bingo.Geracartela import *

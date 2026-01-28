@@ -8,7 +8,7 @@ class Cartela:
         self.tam_cartela = tam_cartela
         self.min = 1
         self.max = num_max
-        self.quantidade = quantidade
+        self.quantidade = quantidade    
         self.cartela = self.gerar_cartela()
 
     def __cartela_random(self):

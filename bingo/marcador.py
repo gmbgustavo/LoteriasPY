@@ -20,11 +20,3 @@ def conferir(card):
             pontos += 1
         else:
             continue
-
-
-if __name__ == '__main__':
-    qtd = input('Quantos números na cartela? ')
-    cartela = cria_cartela(int(qtd))
-    conferir(cartela)
-
-
