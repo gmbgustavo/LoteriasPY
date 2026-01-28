@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
-from bingo.Cumbuca import Cumbuca
-from bingo.Cartela import Cartela
+import sys
+sys.path.append('.')
+from bingo.Cumbuca import *
+from bingo.Cartela import *
+from bingo.Geracartela import *
 
 def main():
     print("🎲 BINGO LOTERIASPY 🎲")
@@ -12,9 +15,10 @@ def main():
         print("1 - Sorteio Automático")
         print("2 - Conferência Manual")
         print("3 - Sorteio Apenas")
-        print("4 - Sair")
+        print("4 - Gerar Cartelas em PDF")
+        print("5 - Sair")
         
-        escolha = input("\nDigite sua opção (1-4): ").strip()
+        escolha = input("\nDigite sua opção (1-5): ").strip()
         
         if escolha == '1':
             modo_automatico()
@@ -26,6 +30,9 @@ def main():
             modo_sorteio_apenas()
             break
         elif escolha == '4':
+            modo_gerar_pdf()
+            break
+        elif escolha == '5':
             print("👋 Até logo!")
             break
         else:
@@ -105,7 +112,7 @@ def modo_manual():
     print("\n🎲 CARTELAS INICIAIS 🎲")
     cartelas.print_cartela()
     
-    # Chama o método de conferência manual
+    # Chama a conferência manual
     cumbuca.conferir_manual(cartelas.cartela)
 
 def modo_sorteio_apenas():
@@ -153,6 +160,40 @@ def modo_sorteio_apenas():
         print(f"\n📋 Total de números sorteados: {len(numeros_sorteados_global)}")
     else:
         print("\nNenhum número foi sorteado.")
+
+def modo_gerar_pdf():
+    print("\n📄 GERADOR DE CARTELAS EM PDF 📄")
+    print("=" * 40)
+    
+    # Solicita quantidade de cartelas
+    while True:
+        try:
+            quantidade = int(input("Quantas cartelas deseja gerar? (1-20): ").strip())
+            if 1 <= quantidade <= 20:
+                break
+            else:
+                print("❌ Quantidade deve estar entre 1 e 20!")
+        except ValueError:
+            print("❌ Digite um número válido!")
+    
+    # Solicita nome do arquivo
+    nome_arquivo = input("Nome do arquivo PDF (ex: cartelas.pdf): ").strip()
+    if not nome_arquivo.lower().endswith('.pdf'):
+        nome_arquivo += '.pdf'
+    
+    # Gera as cartelas
+    print(f"\n🎲 Gerando {quantidade} cartela(s)...")
+    cartelas = Cartela(tam_cartela=25, quantidade=quantidade, num_max=75)
+    
+    # Salva em PDF
+    from bingo.Geracartela import Geracartela
+    Geracartela.salva_pdf(cartelas.cartela, nome_arquivo)
+    
+    # Pergunta se deseja visualizar as cartelas
+    visualizar = input("\nDeseja visualizar as cartelas geradas? (S/N): ").strip().upper()
+    if visualizar == 'S':
+        print("\n🎲 CARTELAS GERADAS 🎲")
+        cartelas.print_cartela()
 
 if __name__ == "__main__":
     main()
