@@ -5,8 +5,6 @@ Modulo principal
 from API.Salvadados import *
 from caixa.Sorteio import *
 from API.Gerador import *
-from bingo.Cartela import *
-from bingo.Cumbuca import *
 
 # Configuração regional
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
@@ -56,19 +54,10 @@ def loteria_caixa(dezenas: int, fixados: list, qtd: int, modalidade: str, rep=1)
         del estatistica
         del resultado_loteria
 
-def bingo():
-    pass
-
 if __name__ == '__main__':
-    pass
-    # loteria_caixa(dezenas=10, fixados=[], qtd=1, modalidade='Megasena', rep=1)
 
-    # Teste do módulo de BINGO
-    cartela_teste = Cartela(tam_cartela=25, quantidade=2, num_max=75)
-    cartela_teste.gerar_cartela()
-    cartela_teste.print_cartela()
+    loteria_caixa(dezenas=10, fixados=[], qtd=1, modalidade='Megasena', rep=1)
 
-    globo = Cumbuca()
 
 
 
