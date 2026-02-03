@@ -103,7 +103,7 @@ def modo_automatico():
         
         # Exibe números sorteados em sequência
         numeros_ordenados = sorted(numeros_sorteados_global)
-        print(f"🎲 Números sorteados: {' - '.join(map(str, numeros_ordenados))}")
+        print(f"🎲 Histórico: {' - '.join(map(str, numeros_ordenados))}")
         
         print(f"📋 Total de números sorteados: {len(numeros_sorteados_global)}")
         print(f"📋 Números restantes: {len(cumbuca.numeros)}")
