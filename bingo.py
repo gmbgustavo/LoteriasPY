@@ -16,9 +16,10 @@ def main():
         print("2 - Conferência Manual")
         print("3 - Sorteio Apenas")
         print("4 - Gerar Cartelas em PDF")
-        print("5 - Sair")
+        print("5 - Criar Cartela Manualmente")
+        print("6 - Sair")
         
-        escolha = input("\nDigite sua opção (1-5): ").strip()
+        escolha = input("\nDigite sua opção (1-6): ").strip()
         
         if escolha == '1':
             modo_automatico()
@@ -33,6 +34,9 @@ def main():
             modo_gerar_pdf()
             break
         elif escolha == '5':
+            modo_cartela_manual()
+            break
+        elif escolha == '6':
             print("👋 Até logo!")
             break
         else:
@@ -171,6 +175,63 @@ def modo_sorteio_apenas():
         print(f"\n📋 Total de números sorteados: {len(numeros_sorteados_global)}")
     else:
         print("\nNenhum número foi sorteado.")
+
+def modo_cartela_manual():
+    print("\n📝 CRIAÇÃO DE CARTELAS MANUAIS 📝")
+    print("=" * 40)
+    
+    cartelas_criadas = []
+    
+    while True:
+        # Cria uma nova cartela manualmente
+        cartela = Cartela(tam_cartela=TAM_CARTELA, quantidade=1, num_max=75)
+        nova_cartela = cartela.criar_cartela_manual()
+        cartelas_criadas.append(nova_cartela)
+        
+        # Exibe a cartela criada
+        print(f"\n🎲 CARTELA {len(cartelas_criadas)} CRIADA 🎲")
+        
+        # Exibe a cartela no formato visual
+        print(f"         CARTELA {len(cartelas_criadas)}".center(30))
+        print("   ╔═══╦═══╦═══╦═══╦═══╗")
+        print("   ║ B ║ I ║ N ║ G ║ O ║")
+        print("   ╠═══╬═══╬═══╬═══╬═══╣")
+        
+        for linha in range(5):
+            print("   ║", end=' ')
+            for coluna in range(5):
+                indice = coluna * 5 + linha
+                numero = nova_cartela[indice]
+                print(f"{numero:2d}║", end=' ')
+            print()
+            
+            if linha < 4:
+                print("   ╠═══╬═══╬═══╬═══╬═══╣")
+        
+        print("   ╚═══╩═══╩═══╩═══╩═══╝")
+        
+        # Pergunta se deseja criar outra cartela
+        while True:
+            escolha = input("\nDeseja cadastrar outra cartela? (S/N): ").strip().upper()
+            if escolha in ['S', 'N']:
+                break
+            print("❌ Digite 'S' para sim ou 'N' para não!")
+        
+        if escolha == 'N':
+            break
+    
+    # Inicia a conferência das cartelas criadas
+    if cartelas_criadas:
+        print(f"\n🎯 INICIANDO CONFERÊNCIA DAS {len(cartelas_criadas)} CARTELAS 🎯")
+        print("=" * 60)
+        
+        # Instancia a Cumbuca para conferência
+        cumbuca = Cumbuca()
+        
+        # Usa o método de conferência manual
+        cumbuca.conferir_manual(cartelas_criadas)
+    else:
+        print("\nNenhuma cartela foi criada.")
 
 def modo_gerar_pdf():
     print("\n📄 GERADOR DE CARTELAS EM PDF 📄")

@@ -101,11 +101,49 @@ class Cumbuca:
                 print(f"✅ Número {numero} adicionado")
                 
                 # Verifica em quais cartelas o número aparece
+                cartela_completa_encontrada = False
                 for i, cartela in enumerate(cartelas):
                     cartela_atual = cartela.cartela[i] if hasattr(cartela, 'cartela') else cartela
                     if numero in cartela_atual:
                         numeros_por_cartela[i].add(numero)
                         print(f"🎯 Número {numero} encontrado na Cartela {i + 1}")
+                        
+                        # Verifica se esta cartela foi completada
+                        if len(numeros_por_cartela[i]) == 25:
+                            cartela_completa_encontrada = True
+                
+                # Mostra o progresso atualizado após cada número
+                print("\n📊 PROGRESSO ATUAL:")
+                for i, numeros_cartela in enumerate(numeros_por_cartela):
+                    acertos = len(numeros_cartela)
+                    percentual = (acertos / 25) * 100
+                    print(f"Cartela {i + 1}: {acertos}/25 números ({percentual:.1f}%)")
+                    
+                    if acertos == 25:
+                        print(f"🎊🎉 BINGO! CARTELA {i + 1} COMPLETA! 🎉🎊")
+                    elif acertos >= 20:
+                        print(f"🔥 Quase lá! Cartela {i + 1} está quase completa!")
+                    elif acertos >= 15:
+                        print(f"👍 Bom progresso! Cartela {i + 1} com {acertos} acertos!")
+                    elif acertos >= 10:
+                        print(f"📈 Cartela {i + 1} com {acertos} acertos parciais")
+                    elif acertos > 0:
+                        print(f"📍 Cartela {i + 1} com {acertos} acerto(s)")
+                
+                # Se alguma cartela foi completada, pergunta se deseja continuar
+                if cartela_completa_encontrada:
+                    print("\n" + "=" * 50)
+                    print("🎊 UMA OU MAIS CARTELAS FORAM COMPLETAS! 🎊")
+                    print("=" * 50)
+                    
+                    while True:
+                        continuar = input("\nDeseja continuar sorteando números? (S/N): ").strip().upper()
+                        if continuar in ['S', 'N']:
+                            break
+                        print("❌ Digite 'S' para sim ou 'N' para não!")
+                    
+                    if continuar == 'N':
+                        break
                 
             except ValueError:
                 print("❌ Entrada inválida! Digite um número ou 'fim'.")
@@ -121,10 +159,20 @@ class Cumbuca:
             print(f"\n📈 PONTUAÇÃO DAS CARTELAS:")
             
             for i, numeros_cartela in enumerate(numeros_por_cartela):
-                print(f"Cartela {i + 1}: {len(numeros_cartela)}/25 números")
+                acertos = len(numeros_cartela)
+                percentual = (acertos / 25) * 100
+                print(f"Cartela {i + 1}: {acertos}/25 números ({percentual:.1f}%)")
                 
-                if len(numeros_cartela) == 25:
+                if acertos == 25:
                     print(f"🎊🎉 BINGO! CARTELA {i + 1} COMPLETA! 🎉🎊")
+                elif acertos >= 20:
+                    print(f"🔥 Quase lá! Cartela {i + 1} está quase completa!")
+                elif acertos >= 15:
+                    print(f"👍 Bom progresso! Cartela {i + 1} com {acertos} acertos!")
+                elif acertos >= 10:
+                    print(f"📈 Cartela {i + 1} com {acertos} acertos parciais")
+                elif acertos > 0:
+                    print(f"📍 Cartela {i + 1} com {acertos} acerto(s)")
             
             print(f"\n📋 Total de números conferidos: {len(numeros_inseridos)}")
         else:
