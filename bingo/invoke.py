@@ -5,8 +5,10 @@ from bingo.Cumbuca import *
 from bingo.Cartela import *
 from bingo.Geracartela import *
 
+TAM_CARTELA = 25
+
 def main():
-    print("🎲 BINGO LOTERIASPY 🎲")
+    print("🎲 BINGO DA AMIZADE 🎲")
     print("=" * 40)
     
     # Menu de escolha
@@ -39,11 +41,16 @@ def main():
             print("❌ Opção inválida! Tente novamente.")
 
 def modo_automatico():
-    # Instancia a Cumbuca
+    # Instancia a Cumbuca1
     cumbuca = Cumbuca()
-    
-    # Instancia 3 cartelas de bingo
-    cartelas = Cartela(tam_cartela=25, quantidade=3, num_max=75)
+    qtde = -1
+    while qtde not in range(1, 100):
+        try:
+            qtde = int(input("Quantas cartelas? (1 - 99):  "))
+        except ValueError:
+            print("❌ Digite um número válido!")
+
+    cartelas = Cartela(tam_cartela=TAM_CARTELA, quantidade=qtde, num_max=75)
     
     # Exibe as cartelas iniciais
     print("\n🎲 CARTELAS INICIAIS 🎲")
@@ -104,9 +111,15 @@ def modo_automatico():
 def modo_manual():
     # Instancia a Cumbuca
     cumbuca = Cumbuca()
-    
-    # Instancia 3 cartelas de bingo
-    cartelas = Cartela(tam_cartela=25, quantidade=3, num_max=75)
+
+    qtde = -1
+    while qtde not in range(1, 100):
+        try:
+            qtde = int(input("Quantas cartelas? (1 - 99):  "))
+        except ValueError:
+            print("❌ Digite um número válido!")
+
+    cartelas = Cartela(tam_cartela=TAM_CARTELA, quantidade=qtde, num_max=75)
     
     # Exibe as cartelas iniciais
     print("\n🎲 CARTELAS INICIAIS 🎲")
@@ -168,11 +181,11 @@ def modo_gerar_pdf():
     # Solicita quantidade de cartelas
     while True:
         try:
-            quantidade = int(input("Quantas cartelas deseja gerar? (1-20): ").strip())
-            if 1 <= quantidade <= 20:
+            quantidade = int(input("Quantas cartelas deseja gerar? (1-99): ").strip())
+            if 1 <= quantidade <= 99:
                 break
             else:
-                print("❌ Quantidade deve estar entre 1 e 20!")
+                print("❌ Quantidade deve estar entre 1 e 99!")
         except ValueError:
             print("❌ Digite um número válido!")
     
