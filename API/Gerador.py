@@ -96,9 +96,6 @@ class Gerador:
         return self.__modalidade
 
 
-# TODO: Add argparse
-
-
 if __name__ == '__main__':
     jogo = Gerador(modalidade='Megasena',
                    dezenas=6,

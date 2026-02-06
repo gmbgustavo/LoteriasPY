@@ -228,7 +228,7 @@ def modo_cartela_manual():
         # Instancia a Cumbuca para conferência
         cumbuca = Cumbuca()
         
-        # Usa o método de conferência manual
+        # Conferência manual
         cumbuca.conferir_manual(cartelas_criadas)
     else:
         print("\nNenhuma cartela foi criada.")
