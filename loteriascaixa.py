@@ -2,8 +2,11 @@
 Modulo principal
 """
 
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from API.Salvadados import *
-from caixa.Sorteio import *
+from Caixa.Sorteio import *
 from API.Gerador import *
 
 # Configuração regional

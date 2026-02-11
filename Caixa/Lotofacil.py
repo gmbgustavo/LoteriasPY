@@ -1,27 +1,35 @@
 """
-Classe da Lotomania
+Classe da Lotofacil
 """
 
 import time
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from API.random_api import get_numbers
 
-BET = 50
+MAX_BET = 20
+MIN_BET = 15
 MIN_NUM = 1
-MAX_NUM = 100
+MAX_NUM = 25
 RANGEBET = range(MIN_NUM, MAX_NUM + 1)
 
 
-class Lotomania:
+class Lotofacil:
 
-    def __init__(self, dezenas=50, *args):
-        """
+    def __init__(self, *args, dezenas):
+        f"""
         Cria um objeto do tipo Lotofacil.
-        :param args: Se vazio, cria um jogo surpresinha com a 50 dezenas
+        :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas padrao ({MIN_BET})
+        :param dezenas: quantidade de dezenas a serem preenchidas
         """
-        assert len(args) <= 50, 'Aposta única de 50 dezenas'
-        assert self.__checkargs(args), f'Lotomania usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
-        self.__dezenas = BET
-        self.__jogo = self.__surpresinha(set(args))
+        assert len(args) <= MAX_BET, f'Esperado no máximo {MAX_BET} dezenas. (Passadas {len(args)})'
+        assert MIN_BET <= dezenas <= MAX_BET and isinstance(dezenas, int), \
+            f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}.'
+        assert self.__checkargs(args), f'Lotofácil usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
+        assert len(args) <= dezenas, f'Quantidade de números informados incompativel com o argumento "dezenas"'
+        self.__dezenas = dezenas
+        self.__jogo = self.__surpresinha(fixos=set(args))
 
     def __repr__(self):
         l_exib = list(self.__jogo)
@@ -32,11 +40,11 @@ class Lotomania:
         yield set(self.__jogo)
 
     def __len__(self):
-        return BET
+        return self.__dezenas
 
     def __surpresinha(self, fixos =()):
         """
-        Retorna um conjunto(set) com numeros inteiros entre 1 e 100
+        Retorna um conjunto(set) com numeros inteiros entre 1 e 25
         :return: set
         """
         qtde = self.__dezenas - len(fixos)
@@ -52,6 +60,10 @@ class Lotomania:
                 break
         return set(fixos)
 
+    @property
+    def jogo(self):
+        return set(self.__jogo)
+
     @staticmethod
     def __checkargs(numeros):
         if len(numeros) == 0:
@@ -62,10 +74,6 @@ class Lotomania:
                     return False
             return True
 
-    @property
-    def jogo(self):
-        return set(self.__jogo)
-
 
 if __name__ == '__main__':
-    print('Essa classe deve ser apenas instanciada internamente.')
+    quit(3)

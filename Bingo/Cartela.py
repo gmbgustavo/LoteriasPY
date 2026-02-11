@@ -1,6 +1,9 @@
 # CARTELA DE BINGO PADRÃO
 
 try:
+    import sys
+    import os
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     from API.random_api import *
 except ImportError:
     # Fallback para geração local de números aleatórios
@@ -85,7 +88,7 @@ class Cartela:
             # Imprime o título opcional da cartela (ex: Cartela 1, Cartela 2...)
             print(f"         CARTELA {i + 1}".center(30))
 
-            # Cabeçalho da caixa
+            # Cabeçalho da Caixa
             print("   ╔═══╦═══╦═══╦═══╦═══╗")
             print("   ║ B ║ I ║ N ║ G ║ O ║")
             print("   ╠═══╬═══╬═══╬═══╬═══╣")
@@ -103,7 +106,7 @@ class Cartela:
                 if linha < 4:
                     print("   ╠═══╬═══╬═══╬═══╬═══╣")
 
-            # Rodapé da caixa
+            # Rodapé da Caixa
             print("   ╚═══╩═══╩═══╩═══╩═══╝")
 
     def salvar_pdf(self, nome_arquivo="cartelas_bingo.pdf"):

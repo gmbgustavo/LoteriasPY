@@ -3,13 +3,16 @@ Gerador de apostas
 """
 
 import inspect
-from caixa.Quina import *
-from caixa.Supersete import *
-from caixa.Megasena import *
-from caixa.Lotofacil import *
-from caixa.Lotomania import *
-from caixa.Diadesorte import *
-from caixa.Timemania import *
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from Caixa.Quina import *
+from Caixa.Supersete import *
+from Caixa.Megasena import *
+from Caixa.Lotofacil import *
+from Caixa.Lotomania import *
+from Caixa.Diadesorte import *
+from Caixa.Timemania import *
 from colorama import Fore
 
 # Configurações regionais.

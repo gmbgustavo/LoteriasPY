@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import sys
-sys.path.append('')
-from bingo import *
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from Bingo import *
 
 TAM_CARTELA = 25
 
@@ -258,7 +259,7 @@ def modo_gerar_pdf():
     cartelas = Cartela(tam_cartela=25, quantidade=quantidade, num_max=75)
     
     # Salva em PDF
-    from bingo import Geracartela
+    from Bingo import Geracartela
     Geracartela.salva_pdf(cartelas.cartela, nome_arquivo)
     
     # Pergunta se deseja visualizar as cartelas

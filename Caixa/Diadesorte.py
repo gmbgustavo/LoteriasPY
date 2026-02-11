@@ -6,6 +6,9 @@ o mês é apenas para exibição e comparação pois é um prêmio pequeno indep
 
 import secrets
 import time
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from API.random_api import get_numbers
 
 MAX_BET = 15

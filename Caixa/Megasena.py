@@ -1,32 +1,35 @@
 """
-Classe da Lotofacil
+Classe da Mega-Sena
 """
 
 import time
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from API.random_api import get_numbers
 
 MAX_BET = 20
-MIN_BET = 15
+MIN_BET = 6
 MIN_NUM = 1
-MAX_NUM = 25
+MAX_NUM = 60
 RANGEBET = range(MIN_NUM, MAX_NUM + 1)
 
 
-class Lotofacil:
+class Megasena:
 
-    def __init__(self, *args, dezenas):
-        f"""
-        Cria um objeto do tipo Lotofacil.
-        :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas padrao ({MIN_BET})
-        :param dezenas: quantidade de dezenas a serem preenchidas
+    def __init__(self, *args, dezenas=MIN_BET):
+        """
+        Cria um objeto do tipo Megasena.
+        :param args: Se vazio, cria um jogo surpresinha com a quantidade de dezenas(padrao=6)
+        :param dezenas: Quantidade de dezenas da aposta (6-15)
         """
         assert len(args) <= MAX_BET, f'Esperado no máximo {MAX_BET} dezenas. (Passadas {len(args)})'
         assert MIN_BET <= dezenas <= MAX_BET and isinstance(dezenas, int), \
-            f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}.'
-        assert self.__checkargs(args), f'Lotofácil usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
+            f'Parametro dezenas deve ser inteiro entre {MIN_BET} e {MAX_BET}. (Foi informado {dezenas})'
         assert len(args) <= dezenas, f'Quantidade de números informados incompativel com o argumento "dezenas"'
+        assert self.__checkargs(args), f'Megasena usa números inteiros entre 0{MIN_NUM} e {MAX_NUM}'
         self.__dezenas = dezenas
-        self.__jogo = self.__surpresinha(fixos=set(args))
+        self.__jogo = self.__surpresinha(set(args))
 
     def __repr__(self):
         l_exib = list(self.__jogo)
@@ -39,9 +42,19 @@ class Lotofacil:
     def __len__(self):
         return self.__dezenas
 
+    @staticmethod
+    def __checkargs(numeros):
+        if len(numeros) == 0:
+            return True
+        else:
+            for i in numeros:
+                if i not in RANGEBET:
+                    return False
+            return True
+
     def __surpresinha(self, fixos =()):
         """
-        Retorna um conjunto(set) com numeros inteiros entre 1 e 25
+        Retorna um conjunto(set) com numeros inteiros entre 1 e 60
         :return: set
         """
         qtde = self.__dezenas - len(fixos)
@@ -57,19 +70,12 @@ class Lotofacil:
                 break
         return set(fixos)
 
+    def sorteio(self):
+        return self.__surpresinha()
+
     @property
     def jogo(self):
         return set(self.__jogo)
-
-    @staticmethod
-    def __checkargs(numeros):
-        if len(numeros) == 0:
-            return True
-        else:
-            for i in numeros:
-                if i not in RANGEBET:
-                    return False
-            return True
 
 
 if __name__ == '__main__':

@@ -7,6 +7,9 @@ import time
 import csv
 import locale
 from pathlib import Path
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from API.random_api import get_numbers
 
 # Configuração regional
