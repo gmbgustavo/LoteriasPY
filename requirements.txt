@@ -4,3 +4,5 @@ requests
 python-dotenv
 pandas
 matplotlib
+fpdf2
+pikepdf

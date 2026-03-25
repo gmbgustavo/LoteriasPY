@@ -65,10 +65,10 @@ def formatar_apostas(volante: list, modalidade: str):
                 mes_nome = meses[aposta._Diadesorte__mes] if aposta._Diadesorte__mes < len(meses) else 'desconhecido'
                 print(f'   Mês da sorte: {mes_nome}')
             if hasattr(aposta, '_Diadesorte__jogo'):
-                numeros = sorted(aposta._Diadesorte__jogo)
+                numeros = sorted(n for n in aposta._Diadesorte__jogo if isinstance(n, int))
                 print(f'   Números: {formatar_lista(numeros)}')
             else:
-                print(f'   Números: {sorted(aposta)}')
+                print(f'   Números: {sorted(n for n in aposta if isinstance(n, int))}')
         else:
             # Modalidades padrão (Mega-Sena, Quina, Lotofácil, Lotomania)
             try:

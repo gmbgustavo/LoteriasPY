@@ -140,11 +140,13 @@ class Sorteio:
                 pontos.append(acertos == self.SUPERSETE)
         else:
             if self.__modalidade == 'Lotomania':
-                pontos.extend(len(self.__sorteado.difference(jogo)) == 20
-                              for jogo in listadejogos)
-            else:
-                pontos.extend(self.__sorteado.issubset(jogo)
-                              for jogo in listadejogos)
+                if pontos.extend(len(self.__sorteado.difference(jogo)) == 20
+                              for jogo in listadejogos):
+                    return pontos
+                else:
+                    pontos.extend(self.__sorteado.issubset(jogo)
+                                for jogo in listadejogos)
+                    return pontos
 
         return pontos
 
