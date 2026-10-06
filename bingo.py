@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-import sys
 import os
+import sys
+
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from Bingo import *
+
+from Bingo import Cartela, Cumbuca, Geracartela
 
 TAM_CARTELA = 25
 
@@ -90,13 +92,13 @@ def modo_automatico():
         
         # Verifica se alguma cartela está completa
         for i, numeros_sorteados in enumerate(numeros_sorteados_por_cartela):
-            if len(numeros_sorteados) == 25:
+            if len(numeros_sorteados) == TAM_CARTELA:
                 print(f"\n🎊🎉 BINGO! CARTELA {i + 1} COMPLETA! 🎉🎊")
                 print(f"Parabéns! Todos os números da Cartela {i + 1} foram sorteados!")
                 
-                # Exibe a cartela vencedora
+                # Exibe apenas a cartela vencedora
                 print(f"\n🏆 CARTELA VENCEDORA {i + 1}")
-                cartelas.print_cartela()
+                cartelas.print_cartela(indice=i)
                 return
         
         # Mostra estatísticas
@@ -184,8 +186,9 @@ def modo_cartela_manual():
     cartelas_criadas = []
     
     while True:
-        # Cria uma nova cartela manualmente
-        cartela = Cartela(tam_cartela=TAM_CARTELA, quantidade=1, num_max=75)
+        # Cria uma nova cartela manualmente (gerar=False evita sortear uma
+        # cartela aleatória que seria descartada)
+        cartela = Cartela(tam_cartela=TAM_CARTELA, quantidade=1, num_max=75, gerar=False)
         nova_cartela = cartela.criar_cartela_manual()
         cartelas_criadas.append(nova_cartela)
         
@@ -199,11 +202,11 @@ def modo_cartela_manual():
         print("   ╠═══╬═══╬═══╬═══╬═══╣")
         
         for linha in range(5):
-            print("   ║", end=' ')
+            print("   ║", end='')
             for coluna in range(5):
                 indice = coluna * 5 + linha
                 numero = nova_cartela[indice]
-                print(f"{numero:2d}║", end=' ')
+                print(f"{numero:3d}║", end='')
             print()
             
             if linha < 4:
@@ -250,20 +253,23 @@ def modo_gerar_pdf():
             print("❌ Digite um número válido!")
     
     # Solicita nome do arquivo
-    nome_arquivo = input("Nome do arquivo PDF (ex: cartelas.pdf): ").strip()
-    if not nome_arquivo.lower().endswith('.pdf'):
+    nome_arquivo = input("Nome do arquivo PDF (Enter para 'cartelas_bingo.pdf'): ").strip()
+    if not nome_arquivo:
+        nome_arquivo = 'cartelas_bingo.pdf'
+    elif not nome_arquivo.lower().endswith('.pdf'):
         nome_arquivo += '.pdf'
     
     # Gera as cartelas
     print(f"\n🎲 Gerando {quantidade} cartela(s)...")
-    cartelas = Cartela(tam_cartela=25, quantidade=quantidade, num_max=75)
+    cartelas = Cartela(tam_cartela=TAM_CARTELA, quantidade=quantidade, num_max=75)
     
     # Salva em PDF
-    from Bingo import Geracartela
-    Geracartela.salva_pdf(cartelas.cartela, nome_arquivo)
+    arquivo = Geracartela.salva_pdf(cartelas.cartela, nome_arquivo)
+    if arquivo:
+        print(f"📄 Arquivo: {os.path.abspath(arquivo)}")
     
     # Pergunta se deseja visualizar as cartelas
-    visualizar = input("\nDeseja visualizar as cartelas geradas? (S/N): ").strip().upper()
+    visualizar = input("\nDeseja visualizar as cartelas no terminal? (S/N): ").strip().upper()
     if visualizar == 'S':
         print("\n🎲 CARTELAS GERADAS 🎲")
         cartelas.print_cartela()

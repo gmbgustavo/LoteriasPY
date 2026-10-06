@@ -41,7 +41,9 @@ class Cumbuca:
         """
         for i, cartela_obj in enumerate(cartelas):
             cartela_atual = cartela_obj.cartela[i] if hasattr(cartela_obj, 'cartela') else cartela_obj
-            cartela_ordenada = sorted(cartela_atual)
+            # a cartela já vem na ordem coluna a coluna; ordenar a lista inteira
+            # embaralharia as colunas B/I/N/G/O
+            cartela_ordenada = list(cartela_atual)
             
             print(f"\n         CARTELA {i + 1}".center(30))
             print("   ╔═══╦═══╦═══╦═══╦═══╗")
@@ -49,15 +51,15 @@ class Cumbuca:
             print("   ╠═══╬═══╬═══╬═══╬═══╣")
             
             for linha in range(5):
-                print("   ║", end=' ')
+                print("   ║", end='')
                 for coluna in range(5):
                     indice = coluna * 5 + linha
                     numero = cartela_ordenada[indice]
                     
                     if numero == numero_sorteado:
-                        print(f"\033[91m{numero:2d}\033[0m║", end=' ')  # Vermelho
+                        print(f"\033[91m{numero:3d}\033[0m║", end='')  # Vermelho
                     else:
-                        print(f"{numero:2d}║", end=' ')
+                        print(f"{numero:3d}║", end='')
                 print()
                 
                 if linha < 4:
