@@ -19,7 +19,7 @@ BET = 10
 MIN_NUM = 1
 MAX_NUM = 80
 RANGEBET = range(MIN_NUM, MAX_NUM + 1)
-LISTA_TIMES = Path(__file__).resolve().parent / './dados/times.csv'
+LISTA_TIMES = Path(__file__).resolve().parent.parent / 'dados/times.csv'
 
 
 class Timemania:

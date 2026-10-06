@@ -98,13 +98,19 @@ class Sorteio:
 
     @property    # Propriedade para saber a quantidade de acertos necessarios de cada modalidad
     def sorteio_len(self):
-        return {
+        """Quantidade de dezenas sorteadas: acertos necessários para o prêmio principal."""
+        acertos_necessarios = {
             'Quina': self.QUINA,
             'Megasena': self.MEGASENA,
             'Lotofacil': self.LOTOFACIL,
             'Lotomania': self.LOTOMANIA,
+            'Timemania': self.TIMEMANIA,
             'Diadesorte': self.DIADESORTE,
-        }.get(self.__modalidade, AssertionError('Modalidade não implementada.'))
+            'Supersete': self.SUPERSETE,
+        }
+        if self.__modalidade not in acertos_necessarios:
+            raise AssertionError(f'Modalidade não implementada: {self.__modalidade}.')
+        return acertos_necessarios[self.__modalidade]
 
     def sortear(self):
         methods = {
@@ -129,26 +135,34 @@ class Sorteio:
             return result
         return AttributeError("Objeto não reconhecido como um jogo válido")
 
-    def conferir(self, listadejogos: list) -> list:
+    def acertos(self, listadejogos: list) -> list:
+        """Número de acertos de cada jogo em relação ao último sorteio realizado.
+
+        O jogo pode ser um conjunto/lista de dezenas (Megasena, Quina, Lotofacil,
+        Lotomania, Timemania, Diadesorte) ou a sequência de colunas do Supersete.
+        """
         assert listadejogos is not None, 'É necessário informar um jogo para conferir'
-        pontos = []
 
         if self.__modalidade == 'Supersete':
-            for jogo in listadejogos:
-                acertos = sum(1 for x in self.SUPERSETE_RANGE
-                              if self.__res_supersete[x] == jogo[x - 1])
-                pontos.append(acertos == self.SUPERSETE)
-        else:
-            if self.__modalidade == 'Lotomania':
-                if pontos.extend(len(self.__sorteado.difference(jogo)) == 20
-                              for jogo in listadejogos):
-                    return pontos
-                else:
-                    pontos.extend(self.__sorteado.issubset(jogo)
-                                for jogo in listadejogos)
-                    return pontos
+            return [sum(1 for indice, coluna in enumerate(self.SUPERSETE_RANGE)
+                        if self.__res_supersete[coluna] == self.__coluna_supersete(jogo, indice))
+                    for jogo in listadejogos]
 
-        return pontos
+        return [len(self.__sorteado.intersection(jogo)) for jogo in listadejogos]
+
+    @staticmethod
+    def __coluna_supersete(jogo, indice):
+        """Aceita tanto a lista de 7 colunas quanto o dicionário {1..7: dígito}."""
+        if isinstance(jogo, dict):
+            return jogo.get(indice + 1)
+        try:
+            return jogo[indice]
+        except (IndexError, TypeError):
+            return None
+
+    def conferir(self, listadejogos: list) -> list:
+        """Uma lista de booleanos: True para cada jogo que acertou o prêmio principal."""
+        return [acertos == self.sorteio_len for acertos in self.acertos(listadejogos)]
 
 
 if __name__ == '__main__':

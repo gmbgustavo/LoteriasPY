@@ -8,6 +8,9 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from API.Salvadados import *
 from Caixa.Sorteio import *
 from API.Gerador import *
+from API.helpers import (MODALIDADES as MODALIDADES_HISTORICO,
+                         confere_aposta, descreve_aposta, frase_resultado,
+                         normaliza_aposta, relatorio_texto)
 
 # Configuração regional
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
@@ -189,7 +192,7 @@ def obter_dados_modalidade(modalidade):
             'dezena_fixa': True
         },
         'Timemania': {
-            'min_dezenas': 7,
+            'min_dezenas': 10,
             'max_dezenas': 10,
             'min_num': 1,
             'max_num': 80,
@@ -271,7 +274,11 @@ def validar_lista_numeros(mensagem, qtd_numeros, min_val, max_val):
             if len(set(numeros)) != len(numeros):
                 print("❌ Não pode repetir números!")
                 continue
-                
+
+            if qtd_numeros and len(numeros) != qtd_numeros:
+                print(f"❌ Informe exatamente {qtd_numeros} número(s) (você informou {len(numeros)}).")
+                continue
+
             return numeros
             
         except ValueError:
@@ -325,11 +332,14 @@ def gerar_numeros():
     # Dezenas da aposta
     dezenas = dados['min_dezenas']
     if not dados.get('dezena_fixa', False):
-        dezenas = validar_numero_inteiro(
-            f"Quantidade de dezenas por aposta ({dados['min_dezenas']}-{dados['max_dezenas']}): ",
-            dados['min_dezenas'],
-            dados['max_dezenas']
-        )
+        if dados['min_dezenas'] == dados['max_dezenas']:
+            print(f"📊 Dezenas por aposta: {dezenas} (aposta única desta modalidade)")
+        else:
+            dezenas = validar_numero_inteiro(
+                f"Quantidade de dezenas por aposta ({dados['min_dezenas']}-{dados['max_dezenas']}): ",
+                dados['min_dezenas'],
+                dados['max_dezenas']
+            )
     
     # Parâmetro extra para Timemania (time do coração)
     kwargs = {}
@@ -393,11 +403,14 @@ def loop_ate_vencer():
     # Dezenas da aposta
     dezenas = dados['min_dezenas']
     if not dados.get('dezena_fixa', False):
-        dezenas = validar_numero_inteiro(
-            f"Quantidade de dezenas por aposta ({dados['min_dezenas']}-{dados['max_dezenas']}): ",
-            dados['min_dezenas'],
-            dados['max_dezenas']
-        )
+        if dados['min_dezenas'] == dados['max_dezenas']:
+            print(f"📊 Dezenas por aposta: {dezenas} (aposta única desta modalidade)")
+        else:
+            dezenas = validar_numero_inteiro(
+                f"Quantidade de dezenas por aposta ({dados['min_dezenas']}-{dados['max_dezenas']}): ",
+                dados['min_dezenas'],
+                dados['max_dezenas']
+            )
     
     # Número de repetições do loop
     repeticoes = validar_numero_inteiro("\nQuantas repetições do loop deseja fazer? (1-1000): ", 1, 1000)
@@ -420,6 +433,124 @@ def loop_ate_vencer():
     # Chama a função principal com o número de repetições
     loteria_caixa(dezenas=dezenas, fixados=fixados, qtd=qtd_apostas, modalidade=modalidade, rep=repeticoes)
 
+def menu_modalidades_historico(nomes: list):
+    """
+    Exibe o menu das modalidades que possuem histórico em dados/
+    """
+    print("\n🎰 MODALIDADES COM HISTÓRICO DE RESULTADOS 🎰")
+    print("=" * 66)
+    for indice, nome in enumerate(nomes, 1):
+        configuracao = MODALIDADES_HISTORICO[nome]
+        print(f"{indice:>2} - {nome:<14} {configuracao['descricao']}")
+    print("=" * 66)
+
+def ler_numeros_aposta(mensagem, quantidade, minimo, maximo, permite_repetir=False):
+    """
+    Lê uma lista de números validando quantidade, faixa e repetição
+    """
+    while True:
+        entrada = input(mensagem).strip()
+        if not entrada:
+            print("❌ Informe os números separados por vírgula.")
+            continue
+        try:
+            numeros = [int(parte) for parte in entrada.replace(';', ' ').replace(',', ' ').split()]
+        except ValueError:
+            print("❌ Digite apenas números separados por vírgula (ex: 1,2,3,4,5,6).")
+            continue
+        if len(numeros) != quantidade:
+            print(f"❌ São necessários exatamente {quantidade} números (você informou {len(numeros)}).")
+            continue
+        fora_da_faixa = [numero for numero in numeros if numero < minimo or numero > maximo]
+        if fora_da_faixa:
+            print(f"❌ {fora_da_faixa} fora da faixa permitida ({minimo} a {maximo}).")
+            continue
+        if not permite_repetir and len(set(numeros)) != len(numeros):
+            print("❌ Não pode repetir números.")
+            continue
+        return numeros
+
+def ler_aposta_usuario(modalidade: str):
+    """
+    Pergunta ao usuário a aposta simples (tamanho padrão) de uma modalidade
+    e devolve a aposta já normalizada para conferência.
+    """
+    configuracao = MODALIDADES_HISTORICO[modalidade]
+    tipo = configuracao['tipo']
+
+    if tipo == 'bilhete':
+        while True:
+            try:
+                return normaliza_aposta(modalidade, input("Bilhete (6 dígitos, ex: 005349): ").strip())
+            except ValueError as erro:
+                print(f"❌ {erro}")
+
+    if modalidade == 'Loteca':
+        print("\nPara cada um dos 14 jogos informe a coluna: 1, 2 ou M (do meio).")
+        print("Exemplo: 1 2 M 1 1 2 M 1 2 1 1 M 2 1")
+        while True:
+            partes = [parte for parte in input("Colunas: ").strip().replace(',', ' ').split() if parte]
+            if len(partes) != configuracao['aposta']:
+                print(f"❌ São necessárias {configuracao['aposta']} colunas (você informou {len(partes)}).")
+                continue
+            try:
+                return normaliza_aposta(modalidade, partes)
+            except ValueError as erro:
+                print(f"❌ {erro}")
+
+    minimo, maximo = configuracao['faixa']
+    if modalidade == 'Maismilionaria':
+        print(f"\n📌 +Milionária: {configuracao['aposta']} dezenas de {minimo} a {maximo} "
+              f"+ {configuracao['trevos']} trevos de 1 a 6")
+        dezenas = ler_numeros_aposta(f"Dezenas ({configuracao['aposta']} números): ",
+                                     configuracao['aposta'], minimo, maximo)
+        trevos = ler_numeros_aposta("Trevos (2 números de 1 a 6): ", 2, 1, 6)
+        valores = dezenas + trevos
+    else:
+        valores = ler_numeros_aposta(
+            f"Dezenas ({configuracao['aposta']} números de {minimo} a {maximo}): ",
+            configuracao['aposta'], minimo, maximo,
+            configuracao.get('permite_repetir', False))
+
+    return normaliza_aposta(modalidade, valores)
+
+def conferir_aposta_reais():
+    """
+    Confere uma aposta simples informada pelo usuário contra o histórico real
+    (CSV) da modalidade escolhida: informa se a aposta já teria sido ganhadora
+    e qual o melhor número de acertos já ocorrido.
+    """
+    print("\n🔍 CONFERIR APOSTA COM OS RESULTADOS REAIS 🔍")
+
+    nomes = list(MODALIDADES_HISTORICO)
+    menu_modalidades_historico(nomes)
+    escolha = validar_numero_inteiro(f"\nEscolha a modalidade (1-{len(nomes)}): ", 1, len(nomes))
+    modalidade = nomes[escolha - 1]
+
+    print(f"\n📋 {modalidade} — {MODALIDADES_HISTORICO[modalidade]['descricao']}")
+    print("ℹ️  Aposta simples, com a quantidade de dezenas padrão da modalidade.")
+
+    aposta = ler_aposta_usuario(modalidade)
+    print(f"\n🎫 Aposta: {descreve_aposta(modalidade, aposta)}")
+    print(f"🔎 Conferindo contra o histórico de {modalidade}...")
+
+    relatorio = confere_aposta(modalidade, aposta)
+
+    print("\n" + "=" * 66)
+    for linha in relatorio_texto(relatorio):
+        print(linha)
+    print("=" * 66)
+
+    configuracao = MODALIDADES_HISTORICO[modalidade]
+    cor = Fore.LIGHTGREEN_EX if relatorio['premiado'] else Fore.YELLOW
+    icone = '🏆' if relatorio['premiado'] else '😕'
+    print(cor + f"{icone} {frase_resultado(relatorio)}" + Fore.RESET)
+    unidade = configuracao.get('unidade', 'acerto')
+    rotulo = unidade if relatorio['melhor'] == 1 else unidade + 's'
+    print(f"🎯 Melhor resultado registrado: {relatorio['melhor']} {rotulo}.")
+    print(f"📚 Fonte: dados/{configuracao['arquivo'].name} "
+          f"({relatorio['concursos']:,} concursos conferidos).")
+
 def menu_principal():
     """
     Menu principal do programa
@@ -428,11 +559,12 @@ def menu_principal():
     print("=" * 50)
     print("1 - Gerar números")
     print("2 - Loop até vencer")
-    print("3 - Sair")
+    print("3 - Conferir aposta com os resultados reais")
+    print("4 - Sair")
     print("=" * 50)
     
     while True:
-        escolha = validar_numero_inteiro("\nEscolha uma opção (1-3): ", 1, 3)
+        escolha = validar_numero_inteiro("\nEscolha uma opção (1-4): ", 1, 4)
         
         if escolha == 1:
             gerar_numeros()
@@ -441,6 +573,9 @@ def menu_principal():
             loop_ate_vencer()
             break
         elif escolha == 3:
+            conferir_aposta_reais()
+            break
+        elif escolha == 4:
             print("👋 Até logo!")
             break
 
