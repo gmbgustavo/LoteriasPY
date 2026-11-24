@@ -64,7 +64,7 @@ DIR_BULK = CACHE / "oficial_bulk"
 DIR_API = CACHE / "api_cache"
 DIR_BACKUP = CACHE / "backup"
 
-BASE_API = "https://servicebus2.caixa.gov.br/portaldeloterias/api"
+BASE_API = "https://servicebus3.caixa.gov.br/portaldeloterias/api"
 URL_DOWNLOAD = BASE_API + "/resultados/download"
 CABECALHO_HTTP = {
     "User-Agent": (
@@ -155,7 +155,7 @@ MODALIDADES: dict[str, dict] = {
     "supersete": dict(
         arquivo="supersete.csv",
         api="supersete",
-        xlsx="SUPER_SETE",
+        xlsx="SUPER_7",
         cabecalho=["Concurso", "Data"] + [f"coluna {i}" for i in range(1, 8)],
         bom=False,
         xlsx_bolas=range(3, 10),
