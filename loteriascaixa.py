@@ -555,26 +555,23 @@ def menu_principal():
     """
     Menu principal do programa
     """
-    print("\n🎰 LOTERIAS CAIXA 🎰")
-    print("=" * 50)
-    print("1 - Gerar números")
-    print("2 - Loop até vencer")
-    print("3 - Conferir aposta com os resultados reais")
-    print("4 - Sair")
-    print("=" * 50)
-    
     while True:
+        print("\n🎰 LOTERIAS CAIXA 🎰")
+        print("=" * 50)
+        print("1 - Gerar números")
+        print("2 - Loop até vencer")
+        print("3 - Conferir aposta com os resultados reais")
+        print("4 - Sair")
+        print("=" * 50)
         escolha = validar_numero_inteiro("\nEscolha uma opção (1-4): ", 1, 4)
         
         if escolha == 1:
             gerar_numeros()
-            break
         elif escolha == 2:
             loop_ate_vencer()
             break
         elif escolha == 3:
             conferir_aposta_reais()
-            break
         elif escolha == 4:
             print("👋 Até logo!")
             break
